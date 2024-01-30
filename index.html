@@ -1,65 +1,94 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome To Pustabooks</title>
     <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="/assets/js/FirstVendor.js"></script>
     <script src="/assets/js/main.js"></script>
     <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
 </head>
+
 <body>
-    <header>
-        <div>
-            <img src="/assets/img/icon.png" alt="">
-            <div>
+    <header class="container header">
+        <div class="container-logo-header">
+            <img class="logo" src="/assets/img/icon.png" alt="">
+            <div class="logo_title">
                 Pusta<span>books</span>
             </div>
         </div>
-
-        <div>
-            <nav>
+        <div class="container-navbar">
+            <nav class="navbar">
                 <ul>
-                    <li>
-                        Beranda
-                    </li>
-                    <li>
-                        
-                    </li>
-                    <li>
-
-                    </li>
+                    <a href="#beranda">
+                        <li>
+                            Beranda
+                        </li>
+                    </a>
+                    <a href="#DaftarBuku">
+                        <li>
+                            Daftar Buku
+                        </li>
+                    </a>
+                    <a href="#Kontak">
+                        <li>
+                            Kontak
+                        </li>
+                    </a>
+                    <a href="#TentangKami">
+                        <li>
+                            Tentang Kami
+                        </li>
+                    </a>
+                    <a class="button" href="#SignIn">
+                        <li>
+                            Sign In
+                        </li>
+                    </a>
                 </ul>
             </nav>
+
         </div>
     </header>
     <main>
         <section>
-            <div>
-                <div>
+            <div class="container container-section greet">
+                <div class="container-greet">
                     <div>
-                        <h1>Pentingnya Membaca Buku dan Menuntut Ilmu</h1>
+                        <h1>Pentingnya Membaca Buku dan Menuntut Ilmu!</h1>
                     </div>
                     <div>
-                        <article>
-                            Tahukah kamu bahwa membaca buku secara teratur dapat meningkatkan daya kognitif dan mengurangi risiko penyakit Alzheimer? Aktivitas membaca tidak hanya memberikan pengetahuan baru, tetapi juga merangsang otak untuk tetap aktif dan sehat. Jadi, jangan ragu untuk menyediakan waktu membaca dalam rutinitas harianmu, karena itu adalah investasi berharga untuk masa depan kesehatan mental dan pengetahuanmu!
+                        <article style="text-align: justify;">
+                            Tau nggak? Membaca buku itu, bukan cuma nambah pengetahuan, tapi juga bikin otak stay on
+                            point dan ngurangin risiko Alzheimer. Jadi, jangan lupa sisihin waktu buat baca-baca di
+                            tengah rutinitas harian, karena itu investasi penting buat kesehatan otak dan pengetahuan
+                            kamu ke depannya! 📚✨
                         </article>
                     </div>
-                    <div>
-                        <a href="#">
-                            Menuju Aplikasi
+                    <div class="container-greet-button">
+                        <a class="button" href="#">
+                            Menuju Aplikasi <img src="/assets/icons/arrow-open-right.svg"
+                                style="margin-left: 0.5rem; display: inline-block; width: 1rem; color: var(--main-color);"
+                                alt="">
                         </a>
-                        <a href="#">Fakta Menarik Tentang Pustabooks</a>
+                        <a style="display: flex; align-items: center; " href="#"> <img
+                                src="/assets/icons/play-button.svg"
+                                style="margin-right: 0.5rem; display: inline-block; width: 3rem; color: var(--first-color);"
+                                alt=""> Apa itu Pustabooks?</a>
                     </div>
                 </div>
-                <div>
+                <div class="container-hero">
                     <img src="/assets/img/Bapak_Pandha2.png" alt="">
                 </div>
             </div>
+            
         </section>
     </main>
     <footer>
 
     </footer>
 </body>
+
 </html>

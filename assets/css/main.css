@@ -1,6 +1,208 @@
+@import url(/assets/css/Import_Font.css);
+
 :root {
     --main-color: #DCF2F1;
     --secondary-color: #7FC7D9;
     --third-color: #365486;
     --fourth-color: #0F1035;
-  }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--secondary-color);
+}
+
+body>.container {
+    padding: 1rem 5%;
+}
+
+.header {
+    position: sticky;
+    top: 1rem;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.5rem;
+    background-color: var(--main-color);
+    box-shadow: 0 0px 8px rgba(85, 97, 110, 0.9);
+    border-radius: 1rem;
+    margin: 2rem;
+}
+
+header .container-logo-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .logo {
+    width: 3.5rem;
+}
+
+header .logo_title {
+    font-size: 2rem;
+    font-weight: 800;
+    vertical-align: middle;
+    color: var(--third-color);
+}
+
+header .logo_title span {
+    color: black;
+}
+
+header .container-navbar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-end;
+}
+
+header .navbar {
+    width: 75%;
+}
+
+header .navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+header .navbar ul a:hover:not(:last-child) {
+    color: var(--third-color) !important;
+    border-bottom: .2rem solid var(--third-color);
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
+@media (min-width: 1700px) {
+    .container {
+        max-width: 1512px;
+    }
+}
+
+/* Section */
+
+main .container-section {
+    background-color: var(--main-color);
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 1px 4px rgba(146, 161, 176, .3);
+}
+
+main .container-greet {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+}
+
+main .greet {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+}
+
+main .container-hero {
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+main .container-hero img {
+    width: 75%;
+}
+
+main .container-greet div {
+    margin: 0.5rem 0;
+}
+
+main .container-greet article {
+    font-size: 14px;
+}
+main .container-greet h1 {
+    font-size: 36px;
+}
+
+main .container-greet-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button {
+    background-color: var(--third-color);
+    color: var(--main-color) !important;
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    display: flex;
+}
+
+.button:hover {
+    color: var(--main-color) !important;
+    background-color: #1b2d4c;
+}
