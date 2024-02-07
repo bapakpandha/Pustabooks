@@ -7,7 +7,7 @@
     --secondary-color: #7FC7D9;
     --third-color: #365486;
     --fourth-color: #0F1035;
-    --background-clr: linear-gradient(150deg, rgba(180,198,197,1) 3%, rgba(193,205,205,1) 33%, rgba(220,242,241,1) 63%, rgba(255,255,255,1) 93%);
+    --background-clr: linear-gradient(150deg, rgba(180, 198, 197, 1) 3%, rgba(193, 205, 205, 1) 33%, rgba(220, 242, 241, 1) 63%, rgba(255, 255, 255, 1) 93%);
 }
 
 * {
@@ -52,7 +52,7 @@ section {
     background-color: var(--main-color);
     box-shadow: 0 0px 8px rgba(85, 97, 110, 0.9);
     border-radius: 1rem;
-    margin: 2rem;
+    margin: 2rem auto;
 }
 
 header .container-logo-header {
@@ -111,6 +111,7 @@ main .container-section {
     padding: 1rem;
     border-radius: 1rem;
     box-shadow: 0 0px 8px rgba(85, 97, 110, 0.9);
+    position: relative;
 }
 
 main .container-section {
@@ -154,6 +155,7 @@ main .container-greet div {
 main .container-greet article {
     font-size: 14px;
 }
+
 main .container-greet h1 {
     font-size: 36px;
 }
@@ -177,6 +179,7 @@ main .container-greet-button {
     color: var(--main-color) !important;
     background-color: #1b2d4c;
 }
+
 .container-service {
     flex: 0 0 100%;
     display: flex;
@@ -187,10 +190,11 @@ main .container-greet-button {
     flex-wrap: wrap;
     margin: 5rem auto;
 }
+
 .service-title {
     display: flex;
     justify-content: center;
-    margin: 1% auto 0.5rem auto;
+    margin: 1rem auto 0.5rem auto;
 }
 
 .button-layanan {
@@ -229,7 +233,7 @@ main .container-greet-button {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-.list-service .item img{
+.list-service .item img {
     width: 100px;
     height: 100px;
 }
@@ -245,4 +249,62 @@ main .container-greet-button {
     margin: 1rem;
     font-weight: 400;
     text-align: center;
+}
+
+.list-book {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: stretch;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: hidden;
+    margin: auto 50px;
+}
+
+.list-book .item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    flex-grow: 0;
+    width: 22rem;
+    flex-shrink: 0;
+    margin: 1rem;
+    border-radius: 2rem;
+    background-color: white;
+    padding: 2rem;
+}
+
+.scale_hover:hover {
+    transform: scale(1.1);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.list-book .item img {
+    width: 300px;
+    height: 450px;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.arrow-left {
+    left: 10px;
+}
+
+.arrow-right {
+    right: 10px;
 }
