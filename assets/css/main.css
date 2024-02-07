@@ -1,10 +1,13 @@
 @import url(/assets/css/Import_Font.css);
+@import url(/assets/css/keyframe_animation.css);
+@import url(/assets/css/container.css);
 
 :root {
     --main-color: #DCF2F1;
     --secondary-color: #7FC7D9;
     --third-color: #365486;
     --fourth-color: #0F1035;
+    --background-clr: linear-gradient(150deg, rgba(180,198,197,1) 3%, rgba(193,205,205,1) 33%, rgba(220,242,241,1) 63%, rgba(255,255,255,1) 93%);
 }
 
 * {
@@ -30,6 +33,10 @@ body {
 
 body>.container {
     padding: 1rem 5%;
+}
+
+section {
+    margin: 3rem auto;
 }
 
 .header {
@@ -97,57 +104,21 @@ header .navbar ul a:hover:not(:last-child) {
     border-bottom: .2rem solid var(--third-color);
 }
 
-.container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-@media (min-width: 576px) {
-    .container {
-        max-width: 540px;
-    }
-}
-
-@media (min-width: 768px) {
-    .container {
-        max-width: 720px;
-    }
-}
-
-@media (min-width: 992px) {
-    .container {
-        max-width: 960px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1140px;
-    }
-}
-
-@media (min-width: 1400px) {
-    .container {
-        max-width: 1320px;
-    }
-}
-
-@media (min-width: 1700px) {
-    .container {
-        max-width: 1512px;
-    }
-}
-
 /* Section */
 
 main .container-section {
-    background-color: var(--main-color);
+    /* background-color: var(--main-color); */
     padding: 1rem;
     border-radius: 1rem;
-    box-shadow: 0 1px 4px rgba(146, 161, 176, .3);
+    box-shadow: 0 0px 8px rgba(85, 97, 110, 0.9);
+}
+
+main .container-section {
+    background: linear-gradient(270deg, #e6eceb, #dcf2f1, #aecdc5);
+    background-size: 600% 600%;
+    -webkit-animation: gradien_background 9s ease infinite;
+    -moz-animation: gradien_background 9s ease infinite;
+    animation: gradien_background 9s ease infinite;
 }
 
 main .container-greet {
@@ -205,4 +176,73 @@ main .container-greet-button {
 .button:hover {
     color: var(--main-color) !important;
     background-color: #1b2d4c;
+}
+.container-service {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 5rem auto;
+}
+.service-title {
+    display: flex;
+    justify-content: center;
+    margin: 1% auto 0.5rem auto;
+}
+
+.button-layanan {
+    width: max-content;
+}
+
+.service-greet {
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+    font-size: 1.2rem;
+    max-width: 60%;
+    text-align: center;
+}
+
+.list-service {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.list-service .item {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 2.5rem 0rem;
+    border-radius: 2rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.list-service .item img{
+    width: 100px;
+    height: 100px;
+}
+
+.list-service .item h2 {
+    line-height: 3;
+    text-align: center;
+}
+
+.list-service .item h3 {
+    height: 5.5rem;
+    display: block;
+    margin: 1rem;
+    font-weight: 400;
+    text-align: center;
 }

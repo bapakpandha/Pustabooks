@@ -1,0 +1,37 @@
+{
+    "layanan": [
+      {
+        "logo": "/assets/icons/layanan-article.svg",
+        "judul": "Artikel",
+        "subjudul": "Jelajahi Informasi Menarik Seputar Dunia Buku dan Literasi",
+        "linkTitle": "Link Title 1",
+        "linkRef": "#page1"
+      },
+      {
+        "logo": "/assets/icons/layanan-upload.svg",
+        "judul": "Unggah Buku",
+        "subjudul": " Bagikan Karya Anda dengan Mengunggah Buku ke Pustabooks",
+        "linkTitle": "Link Title 2",
+        "linkRef": "#page2"
+      },
+      {
+        "logo": "/assets/icons/layanan-books.svg",
+        "judul": "Buku Cetak",
+        "subjudul": "Temukan Koleksi Buku Cetak Terbaru dan Terpopuler",
+        "linkTitle": "Link Title 3",
+        "linkRef": "#page3"
+      },
+      {
+        "logo": "/assets/icons/layanan-kemitraan.svg",
+        "judul": "Kemitraan",
+        "subjudul": "Bergabunglah dengan Kami untuk Membangun Kemitraan",
+        "linkTitle": "Link Title 4",
+        "linkRef": "#page4"
+      }
+    ],
+
+    "dataLain": [
+
+    ]
+  }
+  
