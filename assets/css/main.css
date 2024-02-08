@@ -1,5 +1,5 @@
 @import url(/assets/css/Import_Font.css);
-@import url(/assets/css/keyframe_animation.css);
+/* @import url(/assets/css/keyframe_animation.css); */
 @import url(/assets/css/container.css);
 
 :root {
@@ -191,7 +191,7 @@ main .container-greet-button {
     margin: 5rem auto;
 }
 
-.service-title {
+.section-title {
     display: flex;
     justify-content: center;
     margin: 1rem auto 0.5rem auto;
