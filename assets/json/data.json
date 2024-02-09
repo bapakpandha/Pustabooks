@@ -1,4 +1,10 @@
 {
+  "hero":[
+    {
+      "title":"Pentingnya Membaca Buku dan Menuntut Ilmu!",
+      "subtitle":"Tau nggak? Membaca buku itu, bukan cuma nambah pengetahuan, tapi juga bikin otak stay on point dan ngurangin risiko Alzheimer. Jadi, jangan lupa sisihin waktu buat baca-baca di tengah rutinitas harian, karena itu investasi penting buat kesehatan otak dan pengetahuan kamu ke depannya! 📚✨"      
+    }
+  ],
   "layanan": [
     {
       "logo": "/assets/icons/layanan-article.svg",
@@ -71,6 +77,13 @@
       "url_gambar": "https://jamesclear.com/wp-content/uploads/2023/05/atomic-habits-dots.png",
       "sinopsis": "Atomic Habits adalah buku karya James Clear yang mendapat banyak rekomendasi dari pembaca. Buku ini membahas tentang kebiasaan-kebiasaan kecil yang berdampak besar dalam kehidupan seseorang. James Clear memaparkan pandangannya tentang perubahan nyata yang berasal dari keputusan-keputusan kecil yang kita ambil setiap hari. Buku ini memberikan panduan praktis untuk membangun dan mempertahankan kebiasaan baik serta mengubah kebiasaan buruk. Dengan kisah-kisah inspiratif dan tips sederhana, Atomic Habits menjadi solusi bagi mereka yang ingin mengubah hidup menjadi lebih positif dan bermakna.",
       "link_buku": "#book6"
+    }
+  ],
+  "about_us": [
+    {
+      "title": "Tentang Kami",
+      "img_src": "/assets/img/founder.png",
+      "description": " didirikan oleh Ahmad Rifqi Maulana atau yang akrab disapa Mas Rifqi, merupakan sebuah platform daring yang bertujuan untuk memperluas akses literasi bagi semua orang. Berawal dari semangatnya yang tulus untuk menyediakan akses mudah dan gratis ke buku elektronik berkualitas, Mas Rifqi ingin membantu mengatasi kendala akses terhadap bahan bacaan yang berkualitas, terutama bagi mereka yang kurang mampu secara finansial. Dengan komitmennya untuk mendukung literasi dan pendidikan, Pustabooks berusaha menjadi sumber bacaan yang dapat dinikmati oleh semua kalangan, tanpa memandang latar belakang sosial atau finansial. <br><br>Pustabooks bukan hanya sekadar sebuah platform, tetapi juga sebuah komitmen untuk membuka pintu literasi bagi semua orang. Dengan semangat yang menggebu-gebu, Ahmad Rifqi Maulana dan tim Pustabooks bergerak maju, menjadikan literasi sebagai hak yang dapat dinikmati oleh semua kalangan."
     }
   ]
 }

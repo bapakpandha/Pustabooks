@@ -308,3 +308,53 @@ main .container-greet-button {
 .arrow-right {
     right: 10px;
 }
+
+.container-about_us {
+    margin: 2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.container-about_us aside {
+    display: flex;
+    align-content: center;
+    max-width: 33%;
+    margin-left: 1rem;
+    justify-content: center;
+}
+#about_us aside img {
+    width: 360px;
+    height: 450px;
+    border-radius: 15%;
+    filter: grayscale(1);
+    padding: 1rem;
+    object-fit: cover;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+#about_us article {
+    text-align: justify;
+    font-size: 1.4rem;
+    max-width: 66%;
+    margin-right: 10%;
+}
+
+#about_us article span div {
+    white-space:nowrap;
+    display: inline;
+}
+
+#about_us .logo_title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--third-color);
+}
+
+#about_us .logo_title span {
+    color: black;
+}

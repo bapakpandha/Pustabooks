@@ -1,81 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Card Gallery with jQuery</title>
-<style>
-  .card-container {
-    display: flex;
-    overflow-x: hidden; /* Mengatur overflow-x ke hidden untuk menyembunyikan kartu tambahan */
-    position: relative;
-  }
-
-  .card {
-    width: 200px;
-    margin: 0 10px;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Tombol navigasi */
-  .arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  .arrow-left {
-    left: 10px;
-  }
-
-  .arrow-right {
-    right: 10px;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
 </head>
+
 <body>
 
-<div class="card-container">
-  <div class="card">Card 1</div>
-  <div class="card">Card 2</div>
-  <div class="card">Card 3</div>
-  <div class="card">Card 4</div>
-  <div class="card">Card 5</div>
-  <div class="card">Card 6</div>
-  <div class="card">Card 7</div>
-  <div class="card">Card 8</div>
-  <div class="card">Card 9</div>
-</div>
+  <!-- <div class="container-about_us">
+    <article style="font-size: 1.5rem; text-align: justify;">
+      <span class="pustabooks-logo">
+        <div class="logo_title">
+          Pusta<span>books</span>
+        </div>
+      </span>
+      Pustabooks, didirikan oleh Ahmad Rifqi Maulana atau yang akrab disapa Mas Rifqi, merupakan sebuah platform daring
+      yang bertujuan untuk memperluas akses literasi bagi semua orang. Berawal dari semangatnya yang tulus untuk
+      menyediakan akses mudah dan gratis ke buku elektronik berkualitas, Mas Rifqi ingin membantu mengatasi kendala
+      akses terhadap bahan bacaan yang berkualitas, terutama bagi mereka yang kurang mampu secara finansial. Dengan
+      komitmennya untuk mendukung literasi dan pendidikan, Pustabooks berusaha menjadi sumber bacaan yang dapat
+      dinikmati oleh semua kalangan, tanpa memandang latar belakang sosial atau finansial.
+    </article>
+    <aside>
+      <img src="/assets/img/founder.png" alt="founder"
+        style="filter: grayscale(1); border-radius: 11rem; width: 16rem; float: right;">
+    </aside>
+  </div>
+  <div>
+    <style>
+      .oval {
+        width: 400px;
+        height: 250px;
+        color: #111;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 90px;
+        float: left;
+        shape-outside: ellipse();
+        padding: 10px;
+        background-color: MediumPurple;
+        background-clip: content-box;
+      }
 
-<button class="arrow arrow-left">&#10094;</button>
-<button class="arrow arrow-right">&#10095;</button>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('.arrow-left').click(function() {
-      $('.card-container').animate({
-        scrollLeft: '-=250' // Sesuaikan dengan lebar kartu
-      }, 'slow');
-    });
-
-    $('.arrow-right').click(function() {
-      $('.card-container').animate({
-        scrollLeft: '+=250' // Sesuaikan dengan lebar kartu
-      }, 'slow');
-    });
-  });
-</script>
-
+      span {
+        padding-top: 70px;
+        display: inline-block;
+      }
+    </style>
+    <div class="oval"><span><img src="/assets/img/founder.png" alt=""></span>
+    </div>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has
+      survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
+      recently with desktop publishing
+      software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing
+      and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+      unknown printer took a galley
+      of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+      into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+      Letraset sheets containing
+      Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+      of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+      industry's standard dummy
+      text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+      book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+      essentially unchanged. It was popularised
+      in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  </div> -->
+  <div>
+    <aside class="oval"><span><img src="/assets/img/founder.png" alt="" style="
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      filter: grayscale(1);
+  "></span>
+    </aside>
+    <article style="
+      text-align: justify;
+  ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has
+      survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
+      recently with desktop publishing
+      software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing
+      and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+      unknown printer took a galley
+      of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+      into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+      Letraset sheets containing
+      Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+      of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+      industry's standard dummy
+      text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+      book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+      essentially unchanged. It was popularised
+      in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem Ipsum.</article>
+  </div>
 </body>
+
 </html>
