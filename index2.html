@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To Pustabooks</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="/assets/js/FirstVendor.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <!-- Tombol untuk memicu penggantian dokumen -->
+    <button id="replaceDocumentBtn">Ganti Dokumen</button>
+
+    <script>
+
+        // Fungsi untuk menangani klik pada tautan
+        function handleLinkClick(event) {
+            // Cegah perilaku bawaan dari tautan (navigasi ke halaman baru)
+            event.preventDefault();
+
+            // Ambil URL dari tautan yang diklik
+            var url = event.target.href;
+
+            // Lakukan pengambilan konten baru atau dokumen baru sesuai dengan URL
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    // Buat dokumen baru dari konten yang dimuat
+                    var newDocument = createNewDocument(html);
+
+                    // Ganti dokumen saat ini dengan dokumen baru
+                    replaceCurrentDocument(newDocument);
+                })
+                .catch(error => console.error('Error loading content:', error));
+        }
+
+        // Tambahkan event listener untuk menangani klik pada semua tautan di dalam dokumen
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', handleLinkClick);
+        });
+
+
+        // Fungsi untuk menambahkan ulang skrip JavaScript ke dalam dokumen baru
+        function reloadScripts() {
+            // Dapatkan elemen script dari dokumen asli (yang sedang dijalankan)
+            var originalScripts = document.querySelectorAll('script');
+
+            // Iterasi melalui semua elemen script
+            originalScripts.forEach(function (originalScript) {
+                // Buat elemen script baru
+                var newScript = document.createElement('script');
+
+                // Salin atribut src dan innerHTML dari script yang ada
+                if (originalScript.src) {
+                    newScript.src = originalScript.src; // Jika ada atribut src
+                } else {
+                    newScript.innerHTML = originalScript.innerHTML; // Jika tidak, salin konten skrip
+                }
+
+                // Tambahkan skrip baru ke dalam dokumen baru
+                document.head.appendChild(newScript);
+            });
+        }
+        // Fungsi untuk memuat konten dari file dokumen yang sudah ada
+        function loadExistingDocumentContent(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Panggil kembali dengan konten dari file dokumen yang sudah ada
+                    callback(xhr.responseText);
+                }
+            };
+            xhr.open('GET', url, true);
+            xhr.send();
+        }
+
+        // Fungsi untuk membuat salinan elemen head yang sudah ada
+        function cloneHead() {
+            // Dapatkan elemen head yang sudah ada
+            var currentHead = document.head;
+
+            // Buat elemen head baru
+            var newHead = document.createElement('head');
+
+            // Salin semua elemen anak dari head yang sudah ada
+            for (var i = 0; i < currentHead.children.length; i++) {
+                var child = currentHead.children[i];
+                var newChild = child.cloneNode(true); // Salin elemen dan kontennya
+                newHead.appendChild(newChild); // Tambahkan ke head baru
+            }
+
+            return newHead;
+        }
+
+        // Fungsi untuk membuat dokumen baru dari konten yang dimuat
+        function createNewDocument(content) {
+            // Buat elemen-elemen baru
+            var newHtml = document.createElement('html');
+            var newHead = cloneHead(); // Dapatkan salinan head yang sudah ada
+            var newBody = document.createElement('body');
+
+            // Tambahkan konten yang dimuat ke dalam elemen body baru
+            newBody.innerHTML = content;
+
+            // Susun elemen-elemen baru dalam dokumen baru
+            newHtml.appendChild(newHead);
+            newHtml.appendChild(newBody);
+            reloadScripts()
+
+            return newHtml;
+        }
+
+
+        // Fungsi untuk mengganti dokumen saat tombol diklik
+        document.getElementById('replaceDocumentBtn').addEventListener('click', function () {
+            // URL file dokumen yang sudah ada
+            var existingDocumentUrl = 'index.html';
+
+            // Memuat konten dari file dokumen yang sudah ada
+            loadExistingDocumentContent(existingDocumentUrl, function (content) {
+                // Buat dokumen baru dari konten yang dimuat
+                var newDocument = createNewDocument(content);
+                // Mengganti dokumen saat ini dengan dokumen baru
+                document.replaceChild(newDocument, document.documentElement);
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

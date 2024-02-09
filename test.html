@@ -4,105 +4,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us</title>
+  <title>Document Replacement Example</title>
 </head>
 
 <body>
 
-  <!-- <div class="container-about_us">
-    <article style="font-size: 1.5rem; text-align: justify;">
-      <span class="pustabooks-logo">
-        <div class="logo_title">
-          Pusta<span>books</span>
-        </div>
-      </span>
-      Pustabooks, didirikan oleh Ahmad Rifqi Maulana atau yang akrab disapa Mas Rifqi, merupakan sebuah platform daring
-      yang bertujuan untuk memperluas akses literasi bagi semua orang. Berawal dari semangatnya yang tulus untuk
-      menyediakan akses mudah dan gratis ke buku elektronik berkualitas, Mas Rifqi ingin membantu mengatasi kendala
-      akses terhadap bahan bacaan yang berkualitas, terutama bagi mereka yang kurang mampu secara finansial. Dengan
-      komitmennya untuk mendukung literasi dan pendidikan, Pustabooks berusaha menjadi sumber bacaan yang dapat
-      dinikmati oleh semua kalangan, tanpa memandang latar belakang sosial atau finansial.
-    </article>
-    <aside>
-      <img src="/assets/img/founder.png" alt="founder"
-        style="filter: grayscale(1); border-radius: 11rem; width: 16rem; float: right;">
-    </aside>
-  </div>
-  <div>
-    <style>
-      .oval {
-        width: 400px;
-        height: 250px;
-        color: #111;
-        border-radius: 50%;
-        text-align: center;
-        font-size: 90px;
-        float: left;
-        shape-outside: ellipse();
-        padding: 10px;
-        background-color: MediumPurple;
-        background-clip: content-box;
-      }
+  <!-- Tombol untuk memicu penggantian dokumen -->
+  <button id="replaceDocumentBtn">Ganti Dokumen</button>
 
-      span {
-        padding-top: 70px;
-        display: inline-block;
-      }
-    </style>
-    <div class="oval"><span><img src="/assets/img/founder.png" alt=""></span>
-    </div>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-      type specimen book. It has
-      survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-      It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
-      recently with desktop publishing
-      software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing
-      and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-      unknown printer took a galley
-      of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-      into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-      Letraset sheets containing
-      Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-      of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-      industry's standard dummy
-      text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-      book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
-      essentially unchanged. It was popularised
-      in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-      publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-  </div> -->
-  <div>
-    <aside class="oval"><span><img src="/assets/img/founder.png" alt="" style="
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      filter: grayscale(1);
-  "></span>
-    </aside>
-    <article style="
-      text-align: justify;
-  ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-      type specimen book. It has
-      survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-      It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
-      recently with desktop publishing
-      software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing
-      and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-      unknown printer took a galley
-      of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-      into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-      Letraset sheets containing
-      Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-      of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-      industry's standard dummy
-      text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-      book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
-      essentially unchanged. It was popularised
-      in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-      publishing software like Aldus PageMaker including versions of Lorem Ipsum.</article>
-  </div>
+  <script>
+    // Fungsi untuk memuat konten dari file dokumen yang sudah ada
+    function loadExistingDocumentContent(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Panggil kembali dengan konten dari file dokumen yang sudah ada
+          callback(xhr.responseText);
+        }
+      };
+      xhr.open('GET', url, true);
+      xhr.send();
+    }
+
+    // Fungsi untuk membuat dokumen baru dari konten yang dimuat
+    function createNewDocument(content) {
+      // Buat elemen-elemen baru
+      var newHtml = document.createElement('html');
+      var newHead = document.createElement('head');
+      var newTitle = document.createElement('title');
+      newTitle.textContent = 'Dokumen Baru';
+      var newBody = document.createElement('body');
+
+      // Tambahkan konten yang dimuat ke dalam elemen body baru
+      newBody.innerHTML = content;
+
+      // Susun elemen-elemen baru dalam dokumen baru
+      newHead.appendChild(newTitle);
+      newHtml.appendChild(newHead);
+      newHtml.appendChild(newBody);
+
+      return newHtml;
+    }
+
+    // Fungsi untuk mengganti dokumen saat tombol diklik
+    document.getElementById('replaceDocumentBtn').addEventListener('click', function () {
+      // URL file dokumen yang sudah ada
+      var existingDocumentUrl = 'index.html';
+
+      // Memuat konten dari file dokumen yang sudah ada
+      loadExistingDocumentContent(existingDocumentUrl, function (content) {
+        // Buat dokumen baru dari konten yang dimuat
+        var newDocument = createNewDocument(content);
+        // Mengganti dokumen saat ini dengan dokumen baru
+        document.replaceChild(newDocument, document.documentElement);
+      });
+    });
+
+  </script>
+
 </body>
 
 </html>
