@@ -1,16 +1,7 @@
-$(window).resize(function () {
-  if (window.matchMedia('(max-width: 1200px)').matches) {
-    $(".header").css({ "backgroundColor": "black", "color": "white" });
-  }
-  else {
-    $(".header").css({ "backgroundColor": "", "color": "" });
-  }
-});
-
 $(document).ready(function () {
   // Handle JSON data
   $.getJSON('/assets/json/data.json', function (data) {
-    
+
     // START - Handle fetch hero JSON
     // ============================================
     var hero = data.hero;
@@ -22,9 +13,9 @@ $(document).ready(function () {
     });
     // ============================================
     // FINISH - Handle fetch hero JSON
-    
 
-    
+
+
     // START - Handle fetch layanan JSON
     // ============================================
     var layanan = data.layanan;
@@ -36,9 +27,9 @@ $(document).ready(function () {
     });
     // ============================================
     // FINISH - Handle fetch layanan JSON
-    
 
-    
+
+
     // START - Handle fetch buku populer JSON
     // ============================================
     var buku_populer = data.daftar_buku_populer;
@@ -58,7 +49,7 @@ $(document).ready(function () {
       var newElement = `
         <div class="item scale_hover">
             <img src="${item.url_gambar}" alt="Logo">
-            <h2>${item.judul}</h2>
+            <h4>${item.judul}</h4>
             <a href="${item.link_buku}" title="Lihat">Baca</a>
         </div>
     `;
@@ -78,7 +69,7 @@ $(document).ready(function () {
     });
     // ============================================
     // FINISH - Handle fetch buku populer JSON
-    
+
 
 
     // START - Handle section About Us
@@ -100,6 +91,8 @@ $(document).ready(function () {
     // elements += '</ul></div>';
     // $('body').append(elements);
     // FINISH - Animation Background
+
+
   });
 
   // START - img tooltip
@@ -111,4 +104,106 @@ $(document).ready(function () {
   });
   // ============================================
   // FINISH - img tooltip
+
+  // START - Header Nav mobile
+  // ============================================
+  function checkWindowWidth() {
+    if (window.matchMedia('(min-width: 992px) and (max-width: 1200px)').matches) {
+      $('.header').css({ 'flex-direction': 'column', 'height': 'auto' });
+      $('.header .container-navbar').css('justify-content', 'center')
+      $('.header .navbar').css('width', '100%')
+    } else {
+      $('.header').css({ 'flex-direction': '' });
+      $('.header .container-navbar').css('justify-content', '')
+      $('.header .navbar').css('width', '')
+    }
+    if (window.matchMedia('(max-width: 992px)').matches) {
+      $('.menu').css('display', 'block');
+      $('.header').addClass('mobile');
+    }
+    else {
+      $('.menu').css('display', 'none');
+      $('.header').removeClass('mobile');
+    }
+  }
+  checkWindowWidth();
+  $(window).resize(checkWindowWidth)
+
+  $('.menu').click(function () {
+    $(this).toggleClass('cancel');
+    $('.header').toggleClass('active');
+    $('#menu_svg')
+  });
+  // ============================================
+  // FINISH - Header Nav mobile
+
+
+  // START - Scroll Header sticky
+  // =============================================
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 99) {
+      $('.header').addClass('scrolled full');
+    }
+    else {
+      $('.header').removeClass('scrolled full');
+    }
+  })
+  // =============================================
+  // FINISH - Scroll Header sticky
+
+
+
+
+
+  // =============================================
+  // START - Change property value
+  function changeFontSize(factor, element, property) {
+    var viewportWidth = $(window).width();
+    var scaleFactor = viewportWidth / 1440;
+    if (property == 'font-size') {
+      var rootFontSize = parseFloat($('html').css('font-size'));
+      var fontSize = parseFloat(element.css(property));
+      var newFontSize = rootFontSize * factor * scaleFactor;
+      var remNewFontSize = newFontSize / rootFontSize
+      element.css('font-size', remNewFontSize + 'rem');
+      console.log(fontSize);
+    }
+    else if (property == 'width') {
+      var newHeight = (scaleFactor * 10) + factor
+      element.css(property, newHeight + '%')
+    }
+
+  }
+
+  var targetFonts = $('.scale_font');
+  var targetWidth = $('.scale_width');
+
+  $(window).resize(function () {
+    if (window.matchMedia('(min-width: 1200px) and (max-width: 1400px)').matches) {
+      targetFonts.each(function () {
+        changeFontSize(1.25, $(this), 'font-size');
+      });
+      targetWidth.each(function () {
+        changeFontSize(80, $(this), 'width')
+      })
+    }
+    else if (window.matchMedia('(min-width: 1400px)').matches) {
+      targetFonts.each(function () {
+        $(this).css('font-size', '1.25rem')
+      });
+      targetWidth.each(function () {
+        $(this).css('width', '')
+      })
+    }
+  });
+
+
 });
+
+
+
+
+
+
+
+

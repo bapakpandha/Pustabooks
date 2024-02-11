@@ -1,67 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document Replacement Example</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scroll Reveal Animation</title>
+<style>
+  /* Styling for the animated elements */
+  .reveal {
+    margin-top: 200vh;
+    opacity: 0;
+    transform: translateY(20px); /* Initial position, adjust as needed */
+    transition: opacity 0.5s, transform 0.5s;
+  }
+</style>
 </head>
+<body style="height: 200vh;">
+<!-- Elements to reveal -->
+<div class="reveal">Element 1</div>
+<div class="reveal">Element 2</div>
+<div class="reveal">Element 3</div>
 
-<body>
+<script>
+// Function to handle scroll event
+function handleScroll() {
+  // Get all elements with the class 'reveal'
+  const elements = document.querySelectorAll('.reveal');
 
-  <!-- Tombol untuk memicu penggantian dokumen -->
-  <button id="replaceDocumentBtn">Ganti Dokumen</button>
+  // Loop through each element
+  elements.forEach(element => {
+    // Get the position of the element relative to the viewport
+    const bounding = element.getBoundingClientRect();
 
-  <script>
-    // Fungsi untuk memuat konten dari file dokumen yang sudah ada
-    function loadExistingDocumentContent(url, callback) {
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          // Panggil kembali dengan konten dari file dokumen yang sudah ada
-          callback(xhr.responseText);
+    // Check if the element is in the viewport
+    if (bounding.top >= 0 && bounding.bottom <= window.innerHeight) {
+      // Apply the reveal animation
+      element.style.opacity = 1;
+      element.style.transform = 'translateY(0)';
+    }
+  });
+}
+
+// Add scroll event listener
+window.addEventListener('scroll', handleScroll);
+
+// Initial call to handleScroll to reveal elements on page load
+handleScroll();
+</script>
+
+<script>
+  function scrollTrigger(selector, options = {}){
+    let els = document.querySelectorAll(selector)
+    els = Array.from(els)
+    els.forEach(el => {
+        addObserver(el, options)
+    })
+}
+
+function addObserver(el, options){
+    if(!('IntersectionObserver' in window)){
+        if(options.cb){
+            options.cb(el)
+        }else{
+            entry.target.classList.add('active')
         }
-      };
-      xhr.open('GET', url, true);
-      xhr.send();
+        return
     }
+    let observer = new IntersectionObserver((entries, observer) => { //this takes a callback function which receives two arguments: the elemts list and the observer instance
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                if(options.cb){
+                    options.cb(el)
+                }else{
+                    entry.target.classList.add('active')
+                }
+                observer.unobserve(entry.target)
+            }
+        })
+    }, options)
+    observer.observe(el)
+}
+// Example usages:
+scrollTrigger('.intro-text')
 
-    // Fungsi untuk membuat dokumen baru dari konten yang dimuat
-    function createNewDocument(content) {
-      // Buat elemen-elemen baru
-      var newHtml = document.createElement('html');
-      var newHead = document.createElement('head');
-      var newTitle = document.createElement('title');
-      newTitle.textContent = 'Dokumen Baru';
-      var newBody = document.createElement('body');
+scrollTrigger('.scroll-reveal', {
+    rootMargin: '-200px',
+})
 
-      // Tambahkan konten yang dimuat ke dalam elemen body baru
-      newBody.innerHTML = content;
-
-      // Susun elemen-elemen baru dalam dokumen baru
-      newHead.appendChild(newTitle);
-      newHtml.appendChild(newHead);
-      newHtml.appendChild(newBody);
-
-      return newHtml;
+scrollTrigger('.loader', {
+    rootMargin: '-200px',
+    cb: function(el){
+        el.innerText = 'Loading...'
+        setTimeout(() => {
+            el.innerText = 'Task Complete!'
+        }, 1000)
     }
-
-    // Fungsi untuk mengganti dokumen saat tombol diklik
-    document.getElementById('replaceDocumentBtn').addEventListener('click', function () {
-      // URL file dokumen yang sudah ada
-      var existingDocumentUrl = 'index.html';
-
-      // Memuat konten dari file dokumen yang sudah ada
-      loadExistingDocumentContent(existingDocumentUrl, function (content) {
-        // Buat dokumen baru dari konten yang dimuat
-        var newDocument = createNewDocument(content);
-        // Mengganti dokumen saat ini dengan dokumen baru
-        document.replaceChild(newDocument, document.documentElement);
-      });
-    });
-
-  </script>
-
+})
+</script>
 </body>
-
 </html>

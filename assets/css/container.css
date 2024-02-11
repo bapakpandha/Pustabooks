@@ -41,3 +41,7 @@
         max-width: 1512px;
     }
 }
+
+.container.full {
+    max-width: 100%;
+}
