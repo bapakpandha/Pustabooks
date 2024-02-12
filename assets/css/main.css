@@ -1,5 +1,5 @@
 @import url(/assets/css/Import_Font.css);
-/* @import url(/assets/css/keyframe_animation.css); */
+@import url(/assets/css/keyframe_animation.css);
 @import url(/assets/css/container.css);
 
 :root {
@@ -18,8 +18,10 @@
     outline: none;
     border: none;
     text-transform: capitalize;
-    transition: all .2s linear;
+    transition: all .4s ease-in-out;
+    animation: opacity_fade_in 0.2s;
 }
+
 
 a {
     color: inherit !important;
@@ -53,7 +55,10 @@ section {
     box-shadow: 0 0px 8px rgba(85, 97, 110, 0.9);
     border-radius: 1rem;
     margin: 2rem auto;
+    transition: all 2s ease;
+    opacity: 1;
 }
+
 
 .header.container.header.scrolled {
     position: fixed;
@@ -107,6 +112,10 @@ header .container-navbar {
 header .navbar {
     width: 80%;
     font-size: 1.25rem;
+}
+
+.header.mobile.active .navbar {
+    width: 100%;
 }
 
 header .navbar ul {
@@ -167,6 +176,10 @@ main .container-hero {
     display: flex;
     align-items: center;
     justify-content: space-around;
+}
+
+.greet.mobile .container-hero {
+    width: 100%;
 }
 
 main .container-hero img {
@@ -401,6 +414,7 @@ footer .container {
     background-color: var(--fourth-color);
     color: var(--main-color);
     padding: 3rem 2rem;
+    overflow-x: hidden;
 }
 
 .container-footer-logo {
@@ -573,6 +587,12 @@ header.container.mobile {
     cursor: pointer;
     width: 2rem;
     height: 2rem;
+    top: 2rem;
+}
+
+.header.scrolled .menu {
+    color: var(--main-color);
+    fill: var(--main-color);
 }
 
 .header.mobile .container-navbar,
@@ -606,7 +626,52 @@ header.container.mobile {
     text-align: center;
     padding: 0.5rem 0;
 }
-/* 
-.menu.cancel svg path {
-    d: path('M 25 2 C 12.309534 2 2 12.309534 2 25 C 2 37.690466 12.309534 48 25 48 C 37.690466 48 48 37.690466 48 25 C 48 12.309534 37.690466 2 25 2 z M 25 4 C 36.609534 4 46 13.390466 46 25 C 46 36.609534 36.609534 46 25 46 C 13.390466 46 4 36.609534 4 25 C 4 13.390466 13.390466 4 25 4 z M 32.990234 15.986328 A 1.0001 1.0001 0 0 0 32.292969 16.292969 L 25 23.585938 L 17.707031 16.292969 A 1.0001 1.0001 0 0 0 16.990234 15.990234 A 1.0001 1.0001 0 0 0 16.292969 17.707031 L 23.585938 25 L 16.292969 32.292969 A 1.0001 1.0001 0 1 0 17.707031 33.707031 L 25 26.414062 L 32.292969 33.707031 A 1.0001 1.0001 0 1 0 33.707031 32.292969 L 26.414062 25 L 33.707031 17.707031 A 1.0001 1.0001 0 0 0 32.990234 15.986328 z');
-} */
+
+.container.header.mobile.active.scrolled.full {
+    flex-direction: column;
+}
+
+.header.mobile.scrolled.active .container-navbar {
+    background-color: inherit;
+}
+
+/* MAIN */
+.container.container-section.greet.mobile {
+    flex-direction: column;
+}
+
+.greet.mobile .container-greet {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    text-align: center;
+}
+
+.greet.mobile .container-greet-button {
+    column-gap: 2rem;
+}
+
+.greet.mobile .button {
+        font-size: 0.8rem;
+        padding: 1rem;
+}
+
+.greet.mobile a:last-child {
+        display: flex;
+        align-items: center;
+        font-size: 0.8rem;
+        border: 1px solid;
+        padding: 0.5rem;
+        border-radius: 1rem;
+}
+
+.greet.mobile>div:nth-child(1) {
+    order: 2;
+}
+
+.greet.mobile>div:nth-child(2) {
+    order: 1;
+}
+.greet.mobile>div:nth-child(3) {
+    order: 3;
+}

@@ -7,10 +7,12 @@ $(document).ready(function () {
     var hero = data.hero;
     $.each(hero, function (index, item) {
       var Element = `
-      <div class="container-greet"><div><h1>${item.title}</h1></div><div><article style="text-align: justify;">${item.subtitle}</article></div><div class="container-greet-button"><a class="button" href="#">Menuju Aplikasi <img src="/assets/icons/arrow-open-right.svg" style="margin-left: 0.5rem; display: inline-block; width: 1rem; color: var(--main-color);" alt=""></a><a style="display: flex; align-items: center; " href="#"> <img src="/assets/icons/play-button.svg" style="margin-right: 0.5rem; display: inline-block; width: 3rem; color: var(--first-color);" alt=""> Apa itu Pustabooks?</a></div></div><div class="container-hero"><img src="/assets/img/Bapak_Pandha2.png" alt=""></div>
+      <div class="container-greet"><div><h1>${item.title}</h1></div><div><article style="text-align: justify;">${item.subtitle}</article></div><div class="container-greet-button"><a class="button" href="#">Menuju Aplikasi <img src="/assets/icons/arrow-open-right.svg" style="margin-left: 0.5rem; display: inline-block; width: 1rem; color: var(--main-color);" alt=""></a><a style="display: flex; align-items: center; " href="#"> <img src="/assets/icons/play-button.svg" style="margin-right: 0.5rem; display: inline-block; width: 3rem; color: var(--first-color);" alt=""> Apa itu Pustabooks?</a></div></div><div class="container-hero"><img src="/assets/img/Book-lover-bro.svg" alt=""></div>
         `;
       $('.greet .container-service').before(Element);
+      console.log(hero);
     });
+    
     // ============================================
     // FINISH - Handle fetch hero JSON
 
@@ -24,6 +26,7 @@ $(document).ready(function () {
       <div class="item"><img src="${item.logo}" alt="Logo"><h2>${item.judul}</h2><h3>${item.subjudul}</h3><a href="${item.linkRef}" title="${item.linkTitle}">${item.linkTitle}</a></div>
         `;
       $('.list-service').append(newElement);
+      console.log(layanan);
     });
     // ============================================
     // FINISH - Handle fetch layanan JSON
@@ -67,6 +70,7 @@ $(document).ready(function () {
         scrollLeft: '+=250'
       }, 'slow');
     });
+    console.log("buku executed")
     // ============================================
     // FINISH - Handle fetch buku populer JSON
 
@@ -80,6 +84,7 @@ $(document).ready(function () {
       <div class="container container-section"><div class="section-title"><div class="button button-layanan"><h3>${item.title}</h3></div></div><div class="container-about_us"><article><span class="pustabooks-logo"><div class="logo_title">Pusta<span>books</span></div></span>${item.description}</article><aside><img src="${item.img_src}" alt="founder" class="founder_img"></aside></div></div>
         `;
       $('#about_us').append(Element);
+      console.log(about_us)
     });
     // ============================================
     // FINISH - Handle About Us
@@ -120,10 +125,12 @@ $(document).ready(function () {
     if (window.matchMedia('(max-width: 992px)').matches) {
       $('.menu').css('display', 'block');
       $('.header').addClass('mobile');
+      $('.greet').addClass('mobile');
     }
     else {
       $('.menu').css('display', 'none');
       $('.header').removeClass('mobile');
+      $('.greet').removeClass('mobile');
     }
   }
   checkWindowWidth();
@@ -132,7 +139,12 @@ $(document).ready(function () {
   $('.menu').click(function () {
     $(this).toggleClass('cancel');
     $('.header').toggleClass('active');
-    $('#menu_svg')
+    if ($('.menu').hasClass('cancel')) {
+      $('.menu').html('<svg fill="currentColor" height="100%" width="100%" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M165,0C74.019,0,0,74.019,0,165s74.019,165,165,165c90.982,0,165-74.019,165-165S255.982,0,165,0z M165,300 c-74.439,0-135-60.561-135-135S90.561,30,165,30c74.439,0,135,60.561,135,135S239.439,300,165,300z"></path> <path d="M239.247,90.754c-5.857-5.858-15.355-5.858-21.213,0l-53.033,53.033l-53.033-53.033c-5.857-5.858-15.355-5.858-21.213,0 c-5.858,5.858-5.858,15.355,0,21.213L143.788,165l-53.033,53.033c-5.858,5.858-5.858,15.355,0,21.213 c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.606-4.394l53.033-53.033l53.033,53.033 c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L186.214,165 l53.033-53.033C245.105,106.109,245.105,96.612,239.247,90.754z"></path> </g> </g></svg>')
+    } else {
+      console.log("it has'nt cancel class")
+      $('.menu').html('<svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>')
+    }
   });
   // ============================================
   // FINISH - Header Nav mobile
@@ -150,10 +162,6 @@ $(document).ready(function () {
   })
   // =============================================
   // FINISH - Scroll Header sticky
-
-
-
-
 
   // =============================================
   // START - Change property value
@@ -197,10 +205,7 @@ $(document).ready(function () {
     }
   });
 
-
 });
-
-
 
 
 

@@ -1,100 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scroll Reveal Animation</title>
-<style>
-  /* Styling for the animated elements */
-  .reveal {
-    margin-top: 200vh;
-    opacity: 0;
-    transform: translateY(20px); /* Initial position, adjust as needed */
-    transition: opacity 0.5s, transform 0.5s;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styled HTML</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body style="height: 200vh;">
-<!-- Elements to reveal -->
-<div class="reveal">Element 1</div>
-<div class="reveal">Element 2</div>
-<div class="reveal">Element 3</div>
 
-<script>
-// Function to handle scroll event
-function handleScroll() {
-  // Get all elements with the class 'reveal'
-  const elements = document.querySelectorAll('.reveal');
+<body>
+  <div class="container container-section greet mobile">
+    <div class="container-greet">
+      <h1>Welcome</h1>
+      <p>This is a mobile-friendly greeting message.</p>
+    </div>
+    <div class="container-about_us">
+      <p>About Us Content</p>
+    </div>
+    <div class="container-greet-button">
+      <button class="button">Button 1</button>
+      <button class="button">Button 2</button>
+      <a href="#" class="button">Learn More</a>
+    </div>
+  </div>
 
-  // Loop through each element
-  elements.forEach(element => {
-    // Get the position of the element relative to the viewport
-    const bounding = element.getBoundingClientRect();
+  <script>
+    // Converted CSS styles
+    const converted = {
+      ".container.container-section.greet.mobile": { flexDirection: "column" },
+      ".greet.mobile .container-greet": {
+        display: "flex",
+        width: "80%",
+        flexDirection: "column",
+        textAlign: "center"
+      },
+      ".greet.mobile .container-greet-button": { columnGap: "2rem" },
+      ".greet.mobile .button": { fontSize: "0.8rem", padding: "1rem" },
+      ".greet.mobile a:last-child": {
+        display: "flex",
+        alignItems: "center",
+        fontSize: "0.8rem",
+        border: "1px solid",
+        padding: "0.5rem",
+        borderRadius: "1rem"
+      },
+      ".greet.mobile>div:nth-child(1)": { order: 2 },
+      ".greet.mobile>div:nth-child(2)": { order: 1 },
+      ".greet.mobile>div:nth-child(3)": { order: 3 }
+    };
 
-    // Check if the element is in the viewport
-    if (bounding.top >= 0 && bounding.bottom <= window.innerHeight) {
-      // Apply the reveal animation
-      element.style.opacity = 1;
-      element.style.transform = 'translateY(0)';
+    // Loop through the converted CSS object
+    Object.keys(converted).forEach(selector => {
+      // Get the CSS properties for the current selector
+      const properties = converted[selector];
+
+      // Check if the selector contains multiple classes
+      const classes = selector.split(".");
+
+      // Select elements with the specified classes
+      let elements = document.querySelectorAll(selector);
+
+      // Loop through the classes and apply styles
+      classes.forEach(className => {
+        elements.forEach(element => applyStyles(element, properties));
+      });
+    });
+
+    // Function to apply styles to an element
+    function applyStyles(element, properties) {
+      // Loop through the properties and set them on the element's style object
+      Object.keys(properties).forEach(property => {
+        element.style[property] = properties[property];
+      });
     }
-  });
-}
 
-// Add scroll event listener
-window.addEventListener('scroll', handleScroll);
-
-// Initial call to handleScroll to reveal elements on page load
-handleScroll();
-</script>
-
-<script>
-  function scrollTrigger(selector, options = {}){
-    let els = document.querySelectorAll(selector)
-    els = Array.from(els)
-    els.forEach(el => {
-        addObserver(el, options)
-    })
-}
-
-function addObserver(el, options){
-    if(!('IntersectionObserver' in window)){
-        if(options.cb){
-            options.cb(el)
-        }else{
-            entry.target.classList.add('active')
-        }
-        return
-    }
-    let observer = new IntersectionObserver((entries, observer) => { //this takes a callback function which receives two arguments: the elemts list and the observer instance
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                if(options.cb){
-                    options.cb(el)
-                }else{
-                    entry.target.classList.add('active')
-                }
-                observer.unobserve(entry.target)
-            }
-        })
-    }, options)
-    observer.observe(el)
-}
-// Example usages:
-scrollTrigger('.intro-text')
-
-scrollTrigger('.scroll-reveal', {
-    rootMargin: '-200px',
-})
-
-scrollTrigger('.loader', {
-    rootMargin: '-200px',
-    cb: function(el){
-        el.innerText = 'Loading...'
-        setTimeout(() => {
-            el.innerText = 'Task Complete!'
-        }, 1000)
-    }
-})
-</script>
+  </script>
 </body>
+
 </html>
