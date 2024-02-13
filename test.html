@@ -5,74 +5,301 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Styled HTML</title>
-  <link rel="stylesheet" href="styles.css">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <script src="/assets/js/main2.js"></script>
 </head>
 
-<body>
-  <div class="container container-section greet mobile">
-    <div class="container-greet">
-      <h1>Welcome</h1>
-      <p>This is a mobile-friendly greeting message.</p>
-    </div>
-    <div class="container-about_us">
-      <p>About Us Content</p>
-    </div>
-    <div class="container-greet-button">
-      <button class="button">Button 1</button>
-      <button class="button">Button 2</button>
-      <a href="#" class="button">Learn More</a>
-    </div>
+<!-- <body>
+  <h1 class="intro-text">Scroll Down To Reveal Stuff!</h1>
+
+  <div class="scroll-reveal box left">
+    I came from left
+  </div>
+  <div class="scroll-reveal box right">
+    I came from right
+  </div>
+  <div class="scroll-reveal box top">
+    I came from top rotating
   </div>
 
-  <script>
-    // Converted CSS styles
-    const converted = {
-      ".container.container-section.greet.mobile": { flexDirection: "column" },
-      ".greet.mobile .container-greet": {
-        display: "flex",
-        width: "80%",
-        flexDirection: "column",
-        textAlign: "center"
-      },
-      ".greet.mobile .container-greet-button": { columnGap: "2rem" },
-      ".greet.mobile .button": { fontSize: "0.8rem", padding: "1rem" },
-      ".greet.mobile a:last-child": {
-        display: "flex",
-        alignItems: "center",
-        fontSize: "0.8rem",
-        border: "1px solid",
-        padding: "0.5rem",
-        borderRadius: "1rem"
-      },
-      ".greet.mobile>div:nth-child(1)": { order: 2 },
-      ".greet.mobile>div:nth-child(2)": { order: 1 },
-      ".greet.mobile>div:nth-child(3)": { order: 3 }
-    };
+  <h1 class="loader">hello</h1>
 
-    // Loop through the converted CSS object
-    Object.keys(converted).forEach(selector => {
-      // Get the CSS properties for the current selector
-      const properties = converted[selector];
+  <div class="scroll-reveal box bottom">
+    I came from bottom scaled
+  </div>
+</body>
 
-      // Check if the selector contains multiple classes
-      const classes = selector.split(".");
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-      // Select elements with the specified classes
-      let elements = document.querySelectorAll(selector);
+  body {
+    font-family: 'Roboto', sans-serif;
+    padding: 1em;
+  }
 
-      // Loop through the classes and apply styles
-      classes.forEach(className => {
-        elements.forEach(element => applyStyles(element, properties));
-      });
-    });
+  .intro-text {
+    text-align: center;
+    font-size: 3em;
+    width: 0ch;
+    overflow: hidden;
+    margin: 0 auto;
+    white-space: nowrap;
+    background-image: linear-gradient(155deg, #fb7419, #bc1429, #319197);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
 
-    // Function to apply styles to an element
-    function applyStyles(element, properties) {
-      // Loop through the properties and set them on the element's style object
-      Object.keys(properties).forEach(property => {
-        element.style[property] = properties[property];
-      });
+  .intro-text.active {
+    animation: typeIn 2s steps(28) forwards;
+  }
+
+  @keyframes typeIn {
+    to {
+      width: 28ch;
     }
+  }
+
+  .box {
+    width: 200px;
+    height: 200px;
+    background-color: #64B6AC;
+    text-align: center;
+    line-height: 200px;
+    margin: 50em 0;
+    margin-left: calc(50% - 100px);
+    transition: transform 0.5s, opacity 0.5s;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .box.left {
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+
+  .box.right {
+    transform: translateX(200px);
+    opacity: 0;
+    background-color: #473BF0;
+  }
+
+  .box.top {
+    transform: translateY(-200px) rotate(360deg);
+    opacity: 0;
+    background-color: #3D2645;
+  }
+
+  .box.bottom {
+    transform: translateY(200px) scaleX(3);
+    opacity: 0;
+    background: #EDE580;
+  }
+
+  .box.active {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .loader {
+    text-align: center;
+  }
+</style>
+
+<script>
+  function scrollTrigger(selector, options = {}) {
+    let els = document.querySelectorAll(selector)
+    els = Array.from(els)
+    els.forEach(el => {
+      addObserver(el, options)
+    })
+  }
+
+  function addObserver(el, options) {
+    if (!('IntersectionObserver' in window)) {
+      if (options.cb) {
+        options.cb(el)
+      } else {
+        entry.target.classList.add('active')
+      }
+      console.log("intersection tidak ada")
+      return
+    } else {
+      console.log("intersection adA")
+    }
+    let observer = new IntersectionObserver((entries, observer) => { //this takes a callback function which receives two arguments: the elemts list and the observer instance
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (options.cb) {
+            options.cb(el)
+          } else {
+            entry.target.classList.add('active')
+          }
+          observer.unobserve(entry.target)
+        } else { entry.target.classList.remove('active') }
+      })
+    }, options)
+    observer.observe(el)
+  }
+  // Example usages:
+  function scrolling() {
+    scrollTrigger('.intro-text')
+
+    scrollTrigger('.scroll-reveal', {
+      rootMargin: '-200px',
+    })
+
+    scrollTrigger('.loader', {
+      rootMargin: '-200px',
+      cb: function (el) {
+        el.innerText = 'Loading...'
+        setTimeout(() => {
+          el.innerText = 'Task Complete!'
+        }, 1000)
+      }
+    })
+  }
+  window.addEventListener("scroll", scrolling())
+</script> -->
+
+<body>
+  <div class="container">
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+    <section class="demo">
+      <h2>Title</h2>
+    </section>
+
+  </div>
+
+  <div id="revealPoint">Reveal Point</div>
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #d1d1d1;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+        Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      transition: background-color 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+    }
+
+    section {
+      height: 300px;
+      width: 60%;
+      max-width: 600px;
+      position: relative;
+      top: 20px;
+      background-color: #fff;
+      margin: 45px auto;
+      padding: 10px 30px;
+      text-align: center;
+      border-radius: 6px;
+      text-align: left;
+      color: #333;
+      scale: 0.94;
+      opacity: 0;
+      transition: 0.9s;
+      transition-timing-function: cubic-bezier(0.5, 0, 0, 1);
+    }
+
+    .reveal {
+      opacity: 1;
+      top: 0;
+      scale: 1;
+    }
+
+    #revealPoint {
+      position: fixed;
+      height: 20px;
+      width: 100%;
+      left: 0;
+      bottom: 150px;
+      color: red;
+      padding: 7px;
+      margin: 0;
+      border-bottom: 1px solid red;
+    }
+  </style>
+
+  <script>
+    function scrollReveal() {
+      var revealPoint = 200;
+      var revealElement = document.querySelectorAll(".demo");
+      for (var i = 0; i < revealElement.length; i++) {
+        var windowHeight = window.innerHeight;
+        var revealTop = revealElement[i].getBoundingClientRect().top;
+        if (revealTop < windowHeight - revealPoint) {
+          revealElement[i].classList.add("reveal");
+        } else {
+          revealElement[i].classList.remove("reveal");
+        }
+      }
+    }
+
+    window.addEventListener("scroll", scrollReveal);
 
   </script>
 </body>

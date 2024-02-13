@@ -293,6 +293,12 @@ main .container-greet-button {
     text-align: center;
 }
 
+.greet:not(.mobile) .list-service .item>a {
+    position: relative;
+    bottom: -1rem;
+    margin-top: 1rem;
+}
+
 .list-book {
     display: flex;
     flex-wrap: nowrap;
