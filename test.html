@@ -1,307 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Styled HTML</title>
-  <!-- <link rel="stylesheet" href="styles.css"> -->
-  <script src="/assets/js/main2.js"></script>
-</head>
-
-<!-- <body>
-  <h1 class="intro-text">Scroll Down To Reveal Stuff!</h1>
-
-  <div class="scroll-reveal box left">
-    I came from left
-  </div>
-  <div class="scroll-reveal box right">
-    I came from right
-  </div>
-  <div class="scroll-reveal box top">
-    I came from top rotating
-  </div>
-
-  <h1 class="loader">hello</h1>
-
-  <div class="scroll-reveal box bottom">
-    I came from bottom scaled
-  </div>
-</body>
-
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Roboto', sans-serif;
-    padding: 1em;
-  }
-
-  .intro-text {
-    text-align: center;
-    font-size: 3em;
-    width: 0ch;
-    overflow: hidden;
-    margin: 0 auto;
-    white-space: nowrap;
-    background-image: linear-gradient(155deg, #fb7419, #bc1429, #319197);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-
-  .intro-text.active {
-    animation: typeIn 2s steps(28) forwards;
-  }
-
-  @keyframes typeIn {
-    to {
-      width: 28ch;
-    }
-  }
-
-  .box {
-    width: 200px;
-    height: 200px;
-    background-color: #64B6AC;
-    text-align: center;
-    line-height: 200px;
-    margin: 50em 0;
-    margin-left: calc(50% - 100px);
-    transition: transform 0.5s, opacity 0.5s;
-    color: #fff;
-    font-weight: bold;
-  }
-
-  .box.left {
-    transform: translateX(-200px);
-    opacity: 0;
-  }
-
-  .box.right {
-    transform: translateX(200px);
-    opacity: 0;
-    background-color: #473BF0;
-  }
-
-  .box.top {
-    transform: translateY(-200px) rotate(360deg);
-    opacity: 0;
-    background-color: #3D2645;
-  }
-
-  .box.bottom {
-    transform: translateY(200px) scaleX(3);
-    opacity: 0;
-    background: #EDE580;
-  }
-
-  .box.active {
-    transform: translateX(0);
-    opacity: 1;
-  }
-
-  .loader {
-    text-align: center;
-  }
-</style>
-
-<script>
-  function scrollTrigger(selector, options = {}) {
-    let els = document.querySelectorAll(selector)
-    els = Array.from(els)
-    els.forEach(el => {
-      addObserver(el, options)
-    })
-  }
-
-  function addObserver(el, options) {
-    if (!('IntersectionObserver' in window)) {
-      if (options.cb) {
-        options.cb(el)
-      } else {
-        entry.target.classList.add('active')
-      }
-      console.log("intersection tidak ada")
-      return
-    } else {
-      console.log("intersection adA")
-    }
-    let observer = new IntersectionObserver((entries, observer) => { //this takes a callback function which receives two arguments: the elemts list and the observer instance
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (options.cb) {
-            options.cb(el)
-          } else {
-            entry.target.classList.add('active')
-          }
-          observer.unobserve(entry.target)
-        } else { entry.target.classList.remove('active') }
-      })
-    }, options)
-    observer.observe(el)
-  }
-  // Example usages:
-  function scrolling() {
-    scrollTrigger('.intro-text')
-
-    scrollTrigger('.scroll-reveal', {
-      rootMargin: '-200px',
-    })
-
-    scrollTrigger('.loader', {
-      rootMargin: '-200px',
-      cb: function (el) {
-        el.innerText = 'Loading...'
-        setTimeout(() => {
-          el.innerText = 'Task Complete!'
-        }, 1000)
-      }
-    })
-  }
-  window.addEventListener("scroll", scrolling())
-</script> -->
-
-<body>
-  <div class="container">
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-    <section class="demo">
-      <h2>Title</h2>
-    </section>
-
-  </div>
-
-  <div id="revealPoint">Reveal Point</div>
-
-  <style>
-    body {
-      margin: 0;
-      background-color: #d1d1d1;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-        Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      transition: background-color 0.3s ease;
-    }
-
-    .container {
-      width: 100%;
-    }
-
-    section {
-      height: 300px;
-      width: 60%;
-      max-width: 600px;
-      position: relative;
-      top: 20px;
-      background-color: #fff;
-      margin: 45px auto;
-      padding: 10px 30px;
-      text-align: center;
-      border-radius: 6px;
-      text-align: left;
-      color: #333;
-      scale: 0.94;
-      opacity: 0;
-      transition: 0.9s;
-      transition-timing-function: cubic-bezier(0.5, 0, 0, 1);
-    }
-
-    .reveal {
-      opacity: 1;
-      top: 0;
-      scale: 1;
-    }
-
-    #revealPoint {
-      position: fixed;
-      height: 20px;
-      width: 100%;
-      left: 0;
-      bottom: 150px;
-      color: red;
-      padding: 7px;
-      margin: 0;
-      border-bottom: 1px solid red;
-    }
-  </style>
-
-  <script>
-    function scrollReveal() {
-      var revealPoint = 200;
-      var revealElement = document.querySelectorAll(".demo");
-      for (var i = 0; i < revealElement.length; i++) {
-        var windowHeight = window.innerHeight;
-        var revealTop = revealElement[i].getBoundingClientRect().top;
-        if (revealTop < windowHeight - revealPoint) {
-          revealElement[i].classList.add("reveal");
-        } else {
-          revealElement[i].classList.remove("reveal");
-        }
-      }
-    }
-
-    window.addEventListener("scroll", scrollReveal);
-
-  </script>
-</body>
-
-</html>
+<div class="item" data-id="${item.id}">
+    <div><img src="${item.link_cover}" alt=""></div>
+    <h3>${item.title}</h3>
+    <h5>${item.author}</h5>
+    <div>
+        <ul class="">
+            <!-- <li style="width: 33.3333%;"><span><span role="img" aria-label="delete" tabindex="-1" class=""><svg
+                            viewBox="64 64 896 896" focusable="false" data-icon="delete" width="1em" height="1em"
+                            fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z">
+                            </path>
+                        </svg></span></span></li> -->
+                        <li style="width: 33.3333%;" class="button-puttobookshelf" data-id="${item.id}"><span><span role="img" aria-label="delete" tabindex="-1" class=""><svg
+                            width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M15 12H12M12 12H9M12 12V9M12 12V15M17 21H7C4.79086 21 3 19.2091 3 17V7C3 4.79086 4.79086 3 7 3H17C19.2091 3 21 4.79086 21 7V17C21 19.2091 19.2091 21 17 21Z"
+                                stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                        </svg></span></span></li>
+            <li style="width: 33.3333%;"><span><span role="img" aria-label="retweet" tabindex="-1" class=""><svg
+                            viewBox="0 0 1024 1024" focusable="false" data-icon="retweet" width="1em" height="1em"
+                            fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0011.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 00-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 00-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8 4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z">
+                            </path>
+                        </svg></span></span></li>
+            <li style="width: 33.3333%;"><span><span role="img" aria-label="share-alt" tabindex="-1" class=""><svg
+                            viewBox="64 64 896 896" focusable="false" data-icon="share-alt" width="1em" height="1em"
+                            fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z">
+                            </path>
+                        </svg></span></span></li>
+        </ul>
+    </div>
+</div>
