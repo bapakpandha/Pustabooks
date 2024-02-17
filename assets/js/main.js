@@ -134,6 +134,89 @@ function checkWindowWidth() {
     }
 }
 
+function generalConfirmDialogBuilder() {
+    function ConfirmBox(element, params) {
+        this.element = element;
+        this.params = params || {};
+        this.params.ok = params.ok || function () { };
+        this.params.cancel = params.cancel || function () { };
+
+        this.init();
+    }
+
+    ConfirmBox.prototype = {
+        init: function () {
+            this.instance = null;
+            this.create();
+            this.layout();
+            this.actions();
+        },
+        create: function () {
+            if (document.querySelector("#confirm-wrapper") === null) {
+                var wrapper = document.createElement("div");
+                wrapper.id = "confirm-wrapper";
+                var html = "<div id='confirm-box'><h2 id='confirm-header-title'></h2><h2 id='confirm-header'></h2>";
+                html += "<div id='confirm-buttons'><button id='confirm-ok'>OK</button><button type='button' id='confirm-cancel'>Batal</button></div>";
+                html += "</div>";
+
+                wrapper.innerHTML = html;
+                document.body.appendChild(wrapper);
+            }
+
+            this.instance = document.querySelector("#confirm-wrapper");
+        },
+        layout: function () {
+            var wrapper = this.instance;
+            var winHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+            wrapper.style.height = winHeight + "px";
+        },
+        show: function (element) {
+            element.style.display = "flex";
+            element.style.opacity = 1;
+        },
+        hide: function (element) {
+            element.style.opacity = 0;
+            setTimeout(function () {
+                element.remove();
+            }, 1000);
+        },
+        success: function(element) {
+            var element_success = "<div id='confirm-box'><svg class='checkmark' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52' style='margin: 1rem;'><circle class='checkmark__circle2' cx='26' cy='26' r='30' fill='none'></circle><circle class='checkmark__circle' cx='26' cy='26' r='25' fill='none'></circle><path class='checkmark__check' fill='none' d='M14.1 27.2l7.1 7.2 16.7-16.8'></path></svg><h2 id='confirm-header-title' style='font-size: 1.5rem;margin: 1rem;'>Sukses</h2><div id='confirm-buttons'><button id='confirm-ok'>OK</button></div></div>";
+            element.innerHTML = element_success;
+            element.style.opacity = 1;
+            setTimeout(function () {
+                element.remove();
+            }, 2000);
+        },
+        actions: function () {
+            var self = this;
+            console.log("actions button")
+            self.instance.querySelector("#confirm-header").innerHTML = self.element.dataset.question;
+            self.instance.querySelector("#confirm-header-title").innerHTML = self.element.dataset.tooltip;
+            self.show(self.instance);
+
+            self.instance.querySelector("#confirm-ok").
+                addEventListener("click", function () {
+                    self.success(self.instance);
+                    setTimeout(function () {
+                        self.params.ok();
+                    }, 2000);
+                }, false);
+
+            self.instance.querySelector("#confirm-cancel").
+                addEventListener("click", function () {
+                    self.hide(self.instance);
+                    setTimeout(function () {
+                        self.params.cancel();
+                    }, 1000);
+                }, false);
+        }
+    }
+
+    return ConfirmBox;
+}
+
 // ================================================
 // BOOK HANDLER
 // ================================================
@@ -152,7 +235,7 @@ function writeBookData(data) {
     const currentActiveElement = document.querySelector('main .rak_buku.tabs div.active');
     const tabContent = currentActiveElement.textContent.trim();
     var element_books = "";
-    var button_tambahkan = `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 12H12M12 12H9M12 12V9M12 12V15M17 21H7C4.79086 21 3 19.2091 3 17V7C3 4.79086 4.79086 3 7 3H17C19.2091 3 21 4.79086 21 7V17C21 19.2091 19.2091 21 17 21Z" stroke="#000000" stroke-width="2" stroke-linecap="round"/></svg>`;
+    var button_tambahkan = `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 12H12M12 12H9M12 12V9M12 12V15M17 21H7C4.79086 21 3 19.2091 3 17V7C3 4.79086 4.79086 3 7 3H17C19.2091 3 21 4.79086 21 7V17C21 19.2091 19.2091 21 17 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
     var button_markAsRead = `<svg fill="#00000" width="1em" height="1em" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg"><path d="M960 1807.059c-467.125 0-847.059-379.934-847.059-847.059 0-467.125 379.934-847.059 847.059-847.059 467.125 0 847.059 379.934 847.059 847.059 0 467.125-379.934 847.059-847.059 847.059M960 0C430.645 0 0 430.645 0 960s430.645 960 960 960 960-430.645 960-960S1489.355 0 960 0M854.344 1157.975 583.059 886.69l-79.85 79.85 351.135 351.133L1454.4 717.617l-79.85-79.85-520.206 520.208Z" fill-rule="evenodd"/></svg>`
     var button_takeFromBookshelf = `<svg viewBox="64 64 896 896" focusable="false" data-icon="delete" width="1em" height="1em" fill="currentColor" aria-hidden="true"> <path d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"></path> </svg>`
     switch (tabContent) {
@@ -160,7 +243,10 @@ function writeBookData(data) {
             var books = data.main;
             var title_tab = "Cari Buku Yang tersedia";
             var tombol_eksekusi = button_tambahkan;
-            var class_of_tombol_eksekusi = "button-puttobookshelf"
+            var class_of_tombol_eksekusi = "button-puttobookshelf";
+            var data_tooltip = "Tambahkan ke Rak Buku";
+            var data_question = "Apakah anda yakin ingin menambahkan buku ";
+            var data_question2 = " ke dalam Rak Buku?";
             break;
         case 'Sedang dibaca':
             var books = data.main.filter(function (book) {
@@ -169,6 +255,9 @@ function writeBookData(data) {
             var title_tab = "Buku Yang Sedang Dibaca";
             var tombol_eksekusi = button_markAsRead;
             var class_of_tombol_eksekusi = "button-putToComplete"
+            var data_tooltip = "Tandai Sudah Selesai Dibaca";
+            var data_question = "Apakah anda yakin ingin menandai buku ";
+            var data_question2 = " sudah selesai dibaca?";
             break;
         case 'Selesai dibaca':
             var books = data.main.filter(function (book) {
@@ -177,6 +266,9 @@ function writeBookData(data) {
             var title_tab = "Buku Yang Selesai Dibaca";
             var tombol_eksekusi = button_takeFromBookshelf;
             var class_of_tombol_eksekusi = "button-takeFromBookshelf"
+            var data_tooltip = "Hapus dari Rak Buku";
+            var data_question = "Apakah anda yakin ingin menghapus buku ";
+            var data_question2 = " dari Rak Buku?";
             break;
         case 'Riwayat':
             var books = data.main.filter(function (book) {
@@ -185,6 +277,9 @@ function writeBookData(data) {
             var title_tab = "Riwayat Buku Yang DIbaca";
             var tombol_eksekusi = button_takeFromBookshelf;
             var class_of_tombol_eksekusi = "button-markAsUnread"
+            var data_tooltip = "Hapus dari daftar Riwayat";
+            var data_question = "Apakah anda yakin ingin menghapus buku ";
+            var data_question2 = " dari daftar riwayat?";
             break;
         default:
             var books = data.main;
@@ -193,7 +288,7 @@ function writeBookData(data) {
     }
     $.each(books, function (index, item) {
         var element_book = `<div class="item" data-id="${item.id}"> <div><img src="${item.link_cover}" alt=""></div><h3>${item.title}</h3> <h5>${item.author}</h5> <div> <ul class="">
-        <li style="width: 33.3333%;" class="${class_of_tombol_eksekusi}" data-id="${item.id}"><span><span role="img" aria-label="delete" tabindex="-1" class="">${tombol_eksekusi}</span></span></li>
+        <li style="width: 33.3333%;" class="${class_of_tombol_eksekusi} tooltip confirm" data-id="${item.id}" data-tooltip="${data_tooltip}" data-position="top" data-question="${data_question} ${item.title} ${data_question2}"><span><span role="img" aria-label="delete" tabindex="-1" class="">${tombol_eksekusi}</span></span></li>
         <li style="width: 33.3333%;"><span><span role="img" aria-label="retweet" tabindex="-1" class=""><svg viewBox="0 0 1024 1024" focusable="false" data-icon="retweet" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0011.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 00-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 00-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8 4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z"></path></svg></span></span></li>
         <li style="width: 33.3333%;"><span><span role="img" aria-label="share-alt" tabindex="-1" class=""><svg viewBox="64 64 896 896" focusable="false" data-icon="share-alt" width="1em" height="1em" fill="currentColor" aria-hidden="true"> <path d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"> </path></svg></span></span></li>
         </ul></div></div>
@@ -235,7 +330,7 @@ function GeneralLocalStorageHandler() {
         var jsonDataString = JSON.stringify(data);
         localStorage.setItem('book_data', jsonDataString);
         book_data_json = data;
-        console.log("saveDataToStorage: jsonDataString Berhasil Disimpan" );
+        console.log("saveDataToStorage: jsonDataString Berhasil Disimpan");
     }
 
     function loadDataFromStorage() {
@@ -318,7 +413,7 @@ function GeneralLocalStorageHandler() {
 
 function GeneralButtonBookHandler() {
     console.log("generalButtonHandler dieksekusi")
-
+    var ConfirmBox = generalConfirmDialogBuilder();
     function buttonPutToBookshelf() {
         var parentElements = document.querySelectorAll('.button-puttobookshelf');
         if (parentElements.length > 0) {
@@ -326,7 +421,15 @@ function GeneralButtonBookHandler() {
                 parentElement.addEventListener('click', function (event) {
                     if (parentElement.hasAttribute('data-id')) {
                         var book_id = parseInt(this.getAttribute('data-id'));
-                        GeneralLocalStorageHandler.putToBookshelf(book_id);
+                        var confBox = new ConfirmBox(parentElement, {
+                            ok: function () {
+                                console.log('ok')
+                                GeneralLocalStorageHandler.putToBookshelf(book_id);
+                            },
+                            cancel: function () {
+                                console.log('cancel')
+                            }
+                        });
                         console.log("tombol tambah ditekan" + parentElement + " ID: " + book_id);
                     } else {
                         console.log("tombol selain tambah ditekan" + event.target.className)
@@ -344,8 +447,15 @@ function GeneralButtonBookHandler() {
                 parentElement.addEventListener('click', function (event) {
                     if (parentElement.hasAttribute('data-id')) {
                         var book_id = parseInt(this.getAttribute('data-id'));
-                        GeneralLocalStorageHandler.putToComplete(book_id);
-                        console.log("tombol markAsRead ditekan" + parentElement +" ID: "+ book_id);
+                        var confBox = new ConfirmBox(parentElement, {
+                            ok: function () {
+                                GeneralLocalStorageHandler.putToComplete(book_id);
+                            },
+                            cancel: function () {
+                                console.log('cancel')
+                            }
+                        });
+                        console.log("tombol markAsRead ditekan" + parentElement + " ID: " + book_id);
                     } else {
                         console.log("tombol selain markAsRead ditekan" + event.target.className)
                     }
@@ -362,8 +472,14 @@ function GeneralButtonBookHandler() {
                 parentElement.addEventListener('click', function (event) {
                     if (parentElement.hasAttribute('data-id')) {
                         var book_id = parseInt(this.getAttribute('data-id'));
-                        GeneralLocalStorageHandler.takeFromBookShelf(book_id);
-                        console.log("tombol takeFromBookshelf ditekan" + parentElement +" ID: "+ book_id);
+                        var confBox = new ConfirmBox(parentElement, {
+                            ok: function () {
+                                GeneralLocalStorageHandler.takeFromBookShelf(book_id);
+                            },
+                            cancel: function () {
+                            }
+                        });
+                        console.log("tombol takeFromBookshelf ditekan" + parentElement + " ID: " + book_id);
                     } else {
                         console.log("tombol selain takeFromBookshelf ditekan" + event.target.className)
                     }
@@ -380,8 +496,14 @@ function GeneralButtonBookHandler() {
                 parentElement.addEventListener('click', function (event) {
                     if (parentElement.hasAttribute('data-id')) {
                         var book_id = parseInt(this.getAttribute('data-id'));
-                        GeneralLocalStorageHandler.markAsUnread(book_id);
-                        console.log("tombol markAsUnread ditekan" + parentElement +" ID: "+ book_id);
+                        var confBox = new ConfirmBox(parentElement, {
+                            ok: function () {
+                                GeneralLocalStorageHandler.markAsUnread(book_id);
+                            },
+                            cancel: function () {
+                            }
+                        });
+                        console.log("tombol markAsUnread ditekan" + parentElement + " ID: " + book_id);
                     } else {
                         console.log("tombol selain markAsUnread ditekan" + event.target.className)
                     }
@@ -507,7 +629,7 @@ function appHtmlTabsHandler(e) {
     }
 
     e.target.classList.add('active');
-    writeBookData(book_data_json);
+    writeBookDataExec();
     GeneralButtonBookHandler();
 }
 
@@ -539,6 +661,7 @@ $(document).ready(function () {
         checkWindowWidth();
         scroll_Reveal();
         eventListenerRun();
+
     });
 });
 
