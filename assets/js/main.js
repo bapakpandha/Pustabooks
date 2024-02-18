@@ -9,7 +9,7 @@ function fetchDataJson(callback) {
 }
 
 function getHeader() {
-    var headerContent = `<div class="container-logo-header"><img class="logo" src="/assets/img/icon.png" alt=""><div class="logo_title">Pusta<span>books</span></div></div><div class="container-navbar"><nav class="navbar scale_font scale_width"><ul><a href="#beranda"><li>Beranda</li></a><a href="#DaftarBuku"><li>Daftar Buku</li></a><a href="#Kontak"><li>Kontak</li></a><a href="#TentangKami"><li>Tentang Kami</li></a><a class="button" href="#SignIn"><li>Sign In</li></a></ul></nav></div><div class="menu"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></div>
+    var headerContent = `<div class="container-logo-header"><img class="logo" src="/assets/img/icon.png" alt=""><div class="logo_title">Pusta<span>books</span></div></div><div class="container-navbar"><nav class="navbar scale_font scale_width"><ul><a href="index.html"><li>Beranda</li></a><a href="DaftarBuku"><li>Daftar Buku</li></a><a href="#Kontak"><li>Kontak</li></a><a href="#TentangKami"><li>Tentang Kami</li></a><a class="button" href="assets/pages/login.html"><li>Sign In</li></a></ul></nav></div><div class="menu"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></div>
 `;
     $('header').append(headerContent);
 }
@@ -23,7 +23,7 @@ function addHeroElement(data) {
     var heroes = data.hero;
     $.each(heroes, function (index, item) {
         var Element = `
-        <div class="container-greet"><div><h1>${item.title}</h1></div><div><article style="text-align: justify;">${item.subtitle}</article></div><div class="container-greet-button"><a class="button" href="#">Menuju Aplikasi <img src="/assets/icons/arrow-open-right.svg" style="margin-left: 0.5rem; display: inline-block; width: 1rem; color: var(--main-color);" alt=""></a><a style="display: flex; align-items: center; " href="#"> <img src="/assets/icons/play-button.svg" style="margin-right: 0.5rem; display: inline-block; width: 3rem; color: var(--first-color);" alt=""> Apa itu Pustabooks?</a></div></div><div class="container-hero"><img src="/assets/img/Book-lover-bro.svg" alt=""></div>
+        <div class="container-greet"><div><h1>${item.title}</h1></div><div><article style="text-align: justify;">${item.subtitle}</article></div><div class="container-greet-button"><a class="button" href="assets/pages/app.html">Menuju Aplikasi <img src="/assets/icons/arrow-open-right.svg" style="margin-left: 0.5rem; display: inline-block; width: 1rem; color: var(--main-color);" alt=""></a><a style="display: flex; align-items: center; " href="#"> <img src="/assets/icons/play-button.svg" style="margin-right: 0.5rem; display: inline-block; width: 3rem; color: var(--first-color);" alt=""> Apa itu Pustabooks?</a></div></div><div class="container-hero"><img src="/assets/img/Book-lover-bro.svg" alt=""></div>
           `;
         $('.greet .container-service').before(Element);
         // console.log(hero);
@@ -115,14 +115,14 @@ function checkWindowWidth() {
         $('main .container-greet-button').css('font-size', '1rem');
         $('.header .navbar').css('width', '100%');
         $('.list-service .item').css({ 'flex': '0 0 40%', 'margin': '1.5rem' });
-        $('.container-login .login-form').css({'margin':'5rem 0'})
+        $('.container-login .login-form').css({ 'margin': '5rem 0' })
     } else {
         $('.header').css({ 'flex-direction': '' });
         $('.header .container-navbar').css('justify-content', '');
         $('.header .navbar').css('width', '');
         $('main .container-greet-button').css('font-size', '');
         $('.list-service .item').css({ 'flex': '', 'margin': '' })
-        $('.container-login .login-form').css({'margin':''})
+        $('.container-login .login-form').css({ 'margin': '' })
     }
     if (window.matchMedia('(max-width: 992px)').matches) {
         $('.menu').css('display', 'block');
@@ -231,11 +231,11 @@ function generalConfirmDialogBuilder() {
 // BOOK HANDLER
 // ================================================
 
-let book_data_json;
+// let book_data_json;
 
 function fetchBookData(callback) {
     $.getJSON('/assets/json/book_data.json', function (data) {
-        book_data_json = data;
+        // book_data_json = data;
         callback(data);
     });
     console.log("fetchBookData dieksekusi");
@@ -297,7 +297,7 @@ function writeBookData(data) {
             break;
     }
     $.each(books, function (index, item) {
-        var element_book = `<div class="item reveal" data-id="${item.id}"> <div><img src="${item.link_cover}" alt=""></div><h3>${item.title}</h3> <h5>${item.author}</h5> <div> <ul class="">
+        var element_book = `<div class="item" data-id="${item.id}"> <div><img src="${item.link_cover}" alt=""></div><h3>${item.title}</h3> <h5>${item.author}</h5> <div> <ul class="">
         <li style="width: 33.3333%;" class="${class_of_tombol_eksekusi} tooltip confirm" data-id="${item.id}" data-tooltip="${data_tooltip}" data-position="top" data-question="${data_question} ${item.title} ${data_question2}"><span><span role="img" aria-label="delete" tabindex="-1" class="">${tombol_eksekusi}</span></span></li>
         <li style="width: 33.3333%;"><span><span role="img" aria-label="retweet" tabindex="-1" class=""><svg viewBox="0 0 1024 1024" focusable="false" data-icon="retweet" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0011.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 00-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 00-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8 4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z"></path></svg></span></span></li>
         <li style="width: 33.3333%;"><span><span role="img" aria-label="share-alt" tabindex="-1" class=""><svg viewBox="64 64 896 896" focusable="false" data-icon="share-alt" width="1em" height="1em" fill="currentColor" aria-hidden="true"> <path d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"> </path></svg></span></span></li>
@@ -323,7 +323,7 @@ function writeBookDataExec() {
     } else {
         console.log('Local storage dengan key "book_data" sudah ada.');
         var jsonDataString = GeneralLocalStorageHandler.loadDataFromStorage();
-        book_data_json = jsonDataString;
+        // book_data_json = jsonDataString;
         writeBookData(jsonDataString);
     }
 
@@ -339,7 +339,7 @@ function GeneralLocalStorageHandler() {
     function saveDataToStorage(data) {
         var jsonDataString = JSON.stringify(data);
         localStorage.setItem('book_data', jsonDataString);
-        book_data_json = data;
+        // book_data_json = data;
         console.log("saveDataToStorage: jsonDataString Berhasil Disimpan");
     }
 
@@ -615,7 +615,7 @@ function muncul_scroll_start() {
 }
 
 function scroll_Reveal() {
-    var revealPoint = 200;
+    var revealPoint = 150;
     var revealElement = document.querySelectorAll(".reveal");
     for (var i = 0; i < revealElement.length; i++) {
         var windowHeight = window.innerHeight;
@@ -644,9 +644,8 @@ function appHtmlTabsHandler(e) {
 }
 
 function formGroupLabelHandler() {
-    console.log("fungsi berjalan");
+    console.log("formGroupLabelHandler executed");
     document.querySelectorAll('.form-control').forEach(function (input) {
-        console.log(input);
         input.addEventListener('input', function () {
             var field = this.closest('.form-group');
             if (this.value) {
@@ -663,12 +662,14 @@ function formGroupLabelHandler() {
 // ================================================
 
 function eventListenerRun() {
+    console.log("eventListenerRun executed");
     imgTooltip();
     menuNavbarMobileHandler();
     changeFontSizeFunction();
     scrollHeaderSticky();
     $(window).resize(checkWindowWidth);
     window.addEventListener("scroll", scroll_Reveal);
+    routingHandler();
 }
 
 // ================================================
@@ -676,6 +677,7 @@ function eventListenerRun() {
 // ================================================
 
 function homeHandler() {
+    console.log("homeHandler executed")
     fetchDataJson(function (data) {
         getHeader();
         getFooter();
@@ -707,8 +709,100 @@ function appHandler() {
 // ================================================
 
 function loginHandler() {
+    console.log("loginHandler executed")
     formGroupLabelHandler();
     checkWindowWidth();
     scroll_Reveal();
     eventListenerRun();
+}
+
+// ================================================
+// ROUTING HANDLER
+// ================================================
+function routingHandler() {
+
+    function handleLinkClick(event) {
+        event.preventDefault();
+        var element_a = event.target.closest('a');
+        if (element_a) {
+            var url = element_a.getAttribute("href");
+        } else {
+            console.log("tidak ada a")
+        }
+        // console.log(url);
+        // console.log(event.target + "TIPE " + typeof (event));
+        fetch(url)
+            .then(response => response.text())
+            .then(html => {
+                // console.log(html);
+                var newDocument = createNewDocument(html);
+                replaceBodyDocument(newDocument);
+                console.log("replaced")
+                // cloneHead();
+                reloadScripts(newDocument);
+            })
+            .catch(error => console.error('Error loading content:', error));
+    }
+
+    function createNewDocument(content) {
+        var newBody = document.createElement('body');
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(content, 'text/html');
+        const bodyContent = doc.body.innerHTML;
+        newBody.innerHTML = bodyContent;
+        return newBody;
+    }
+
+    function cloneHead() {
+        var currentHead = document.head;
+        var newHead = document.createElement('head');
+        for (var i = 0; i < currentHead.children.length; i++) {
+            var child = currentHead.children[i];
+            var newChild = child.cloneNode(true);
+            newHead.appendChild(newChild);
+        }
+        // console.log(typeof(newHead));
+        // console.log(newHead);
+
+        return newHead;
+    }
+
+    function loadExistingDocumentContent(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                callback(xhr.responseText);
+            }
+        };
+        xhr.open('GET', url, true);
+        xhr.send();
+    }
+
+
+    function reloadScripts(new_Body) {
+        var originalScripts = new_Body.querySelectorAll('script');
+        originalScripts.forEach(function (originalScript) {
+
+            var newScript = document.createElement('script');
+            if (originalScript.src) {
+                newScript.src = originalScript.src;
+            } else {
+                newScript.innerHTML = originalScript.innerHTML;
+            }
+            originalScript.remove();
+            document.body.appendChild(newScript);
+            // return newScript;
+        });
+    }
+
+    function replaceBodyDocument (html) {
+        console.log(typeof(html));
+        console.log(html);
+        var oldBody = document.getElementsByTagName('body')[0];
+        oldBody.replaceWith(html); 
+    }
+
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', handleLinkClick);
+    });
 }
