@@ -1,6 +1,6 @@
-@import url(/assets/css/Import_Font.css);
-@import url(/assets/css/keyframe_animation.css);
-@import url(/assets/css/container.css);
+@import url(../../assets/css/Import_Font.css);
+@import url(../../assets/css/keyframe_animation.css);
+@import url(../../assets/css/container.css);
 
 :root {
     --main-color: #DCF2F1;
@@ -58,7 +58,7 @@ body {
     /* background-color: var(--secondary-color); */
     width: 100%;
     box-sizing: border-box;
-    background-image: url("/assets/img/pattern-bg-white.webp");
+    background-image: url("../../assets/img/pattern-bg-white.webp");
     background-repeat: repeat;
     /* overflow: hidden; */
     /* margin: 0px; */
@@ -72,6 +72,10 @@ body>.container {
 
 main {
     margin-top: 5rem;
+}
+
+.tautan {
+    cursor: pointer !important;
 }
 
 section {

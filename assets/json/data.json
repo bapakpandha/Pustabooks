@@ -7,32 +7,32 @@
   ],
   "layanan": [
     {
-      "logo": "/assets/icons/layanan-article.svg",
+      "logo": "assets/icons/layanan-article.svg",
       "judul": "Artikel",
       "subjudul": "Jelajahi Informasi Menarik Seputar Dunia Buku dan Literasi",
       "linkTitle": "Link Title 1",
-      "linkRef": "#page1"
+      "linkRef": "#"
     },
     {
-      "logo": "/assets/icons/layanan-upload.svg",
+      "logo": "assets/icons/layanan-upload.svg",
       "judul": "Unggah Buku",
       "subjudul": " Bagikan Karya Anda dengan Mengunggah Buku ke Pustabooks",
       "linkTitle": "Link Title 2",
-      "linkRef": "#page2"
+      "linkRef": "#"
     },
     {
-      "logo": "/assets/icons/layanan-books.svg",
+      "logo": "assets/icons/layanan-books.svg",
       "judul": "Buku Cetak",
       "subjudul": "Temukan Koleksi Buku Cetak Terbaru dan Terpopuler",
       "linkTitle": "Link Title 3",
-      "linkRef": "#page3"
+      "linkRef": "#"
     },
     {
-      "logo": "/assets/icons/layanan-kemitraan.svg",
+      "logo": "assets/icons/layanan-kemitraan.svg",
       "judul": "Kemitraan",
       "subjudul": "Bergabunglah dengan Kami untuk Membangun Kemitraan",
       "linkTitle": "Link Title 4",
-      "linkRef": "#page4"
+      "linkRef": "#"
     }
   ],
   "daftar_buku_populer": [
@@ -82,7 +82,7 @@
   "about_us": [
     {
       "title": "Tentang Kami",
-      "img_src": "/assets/img/founder.png",
+      "img_src": "assets/img/founder.png",
       "description": " didirikan oleh Ahmad Rifqi Maulana atau yang akrab disapa Mas Rifqi, merupakan sebuah platform daring yang bertujuan untuk memperluas akses literasi bagi semua orang. Berawal dari semangatnya yang tulus untuk menyediakan akses mudah dan gratis ke buku elektronik berkualitas, Mas Rifqi ingin membantu mengatasi kendala akses terhadap bahan bacaan yang berkualitas, terutama bagi mereka yang kurang mampu secara finansial. Dengan komitmennya untuk mendukung literasi dan pendidikan, Pustabooks berusaha menjadi sumber bacaan yang dapat dinikmati oleh semua kalangan, tanpa memandang latar belakang sosial atau finansial. <br><br>Pustabooks bukan hanya sekadar sebuah platform, tetapi juga sebuah komitmen untuk membuka pintu literasi bagi semua orang. Dengan semangat yang menggebu-gebu, Ahmad Rifqi Maulana dan tim Pustabooks bergerak maju, menjadikan literasi sebagai hak yang dapat dinikmati oleh semua kalangan."
     }
   ]
