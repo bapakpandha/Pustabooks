@@ -1,3 +1,7 @@
+// ================================================
+// HOME HANDLER
+// ================================================
+
 function fetchDataJson(callback) {
     $.getJSON('/assets/json/data.json', function (data) {
         callback(data)
@@ -111,12 +115,14 @@ function checkWindowWidth() {
         $('main .container-greet-button').css('font-size', '1rem');
         $('.header .navbar').css('width', '100%');
         $('.list-service .item').css({ 'flex': '0 0 40%', 'margin': '1.5rem' });
+        $('.container-login .login-form').css({'margin':'5rem 0'})
     } else {
         $('.header').css({ 'flex-direction': '' });
         $('.header .container-navbar').css('justify-content', '');
         $('.header .navbar').css('width', '');
         $('main .container-greet-button').css('font-size', '');
         $('.list-service .item').css({ 'flex': '', 'margin': '' })
+        $('.container-login .login-form').css({'margin':''})
     }
     if (window.matchMedia('(max-width: 992px)').matches) {
         $('.menu').css('display', 'block');
@@ -124,6 +130,8 @@ function checkWindowWidth() {
         $('.greet').addClass('mobile');
         $('.container-about_us').addClass('mobile');
         $('.footer').addClass('mobile');
+        $('.container-login').addClass('mobile');
+        $('.container-login .navigation>a>.content_text').text('');
     }
     else {
         $('.menu').css('display', 'none');
@@ -131,6 +139,8 @@ function checkWindowWidth() {
         $('.greet').removeClass('mobile');
         $('.container-about_us').removeClass('mobile');
         $('.footer').removeClass('mobile');
+        $('.container-login').removeClass('mobile');
+        $('.container-login .navigation>a>.content_text').text('Kembali Ke Beranda');
     }
 }
 
@@ -181,7 +191,7 @@ function generalConfirmDialogBuilder() {
                 element.remove();
             }, 1000);
         },
-        success: function(element) {
+        success: function (element) {
             var element_success = "<div id='confirm-box'><svg class='checkmark' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52' style='margin: 1rem;'><circle class='checkmark__circle2' cx='26' cy='26' r='30' fill='none'></circle><circle class='checkmark__circle' cx='26' cy='26' r='25' fill='none'></circle><path class='checkmark__check' fill='none' d='M14.1 27.2l7.1 7.2 16.7-16.8'></path></svg><h2 id='confirm-header-title' style='font-size: 1.5rem;margin: 1rem;'>Sukses</h2><div id='confirm-buttons'><button id='confirm-ok'>OK</button></div></div>";
             element.innerHTML = element_success;
             element.style.opacity = 1;
@@ -287,7 +297,7 @@ function writeBookData(data) {
             break;
     }
     $.each(books, function (index, item) {
-        var element_book = `<div class="item" data-id="${item.id}"> <div><img src="${item.link_cover}" alt=""></div><h3>${item.title}</h3> <h5>${item.author}</h5> <div> <ul class="">
+        var element_book = `<div class="item reveal" data-id="${item.id}"> <div><img src="${item.link_cover}" alt=""></div><h3>${item.title}</h3> <h5>${item.author}</h5> <div> <ul class="">
         <li style="width: 33.3333%;" class="${class_of_tombol_eksekusi} tooltip confirm" data-id="${item.id}" data-tooltip="${data_tooltip}" data-position="top" data-question="${data_question} ${item.title} ${data_question2}"><span><span role="img" aria-label="delete" tabindex="-1" class="">${tombol_eksekusi}</span></span></li>
         <li style="width: 33.3333%;"><span><span role="img" aria-label="retweet" tabindex="-1" class=""><svg viewBox="0 0 1024 1024" focusable="false" data-icon="retweet" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0011.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 00-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 00-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8 4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z"></path></svg></span></span></li>
         <li style="width: 33.3333%;"><span><span role="img" aria-label="share-alt" tabindex="-1" class=""><svg viewBox="64 64 896 896" focusable="false" data-icon="share-alt" width="1em" height="1em" fill="currentColor" aria-hidden="true"> <path d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"> </path></svg></span></span></li>
@@ -633,6 +643,21 @@ function appHtmlTabsHandler(e) {
     GeneralButtonBookHandler();
 }
 
+function formGroupLabelHandler() {
+    console.log("fungsi berjalan");
+    document.querySelectorAll('.form-control').forEach(function (input) {
+        console.log(input);
+        input.addEventListener('input', function () {
+            var field = this.closest('.form-group');
+            if (this.value) {
+                field.classList.add('field--not-empty');
+            } else {
+                field.classList.remove('field--not-empty');
+            }
+        });
+    });
+}
+
 // ================================================
 // START HERE WERE FUNCTION HAS EVENT LISTENER START
 // ================================================
@@ -647,10 +672,10 @@ function eventListenerRun() {
 }
 
 // ================================================
-// START HERE ALL FUNCTION RUNNING
+// HOME HANDLER
 // ================================================
 
-$(document).ready(function () {
+function homeHandler() {
     fetchDataJson(function (data) {
         getHeader();
         getFooter();
@@ -661,7 +686,29 @@ $(document).ready(function () {
         checkWindowWidth();
         scroll_Reveal();
         eventListenerRun();
-
     });
-});
+}
 
+// ================================================
+// APP HANDLER
+// ================================================
+
+function appHandler() {
+    getHeader();
+    getFooter();
+    writeBookDataExec();
+    checkWindowWidth();
+    scroll_Reveal();
+    eventListenerRun();
+}
+
+// ================================================
+// LOGIN HANDLER
+// ================================================
+
+function loginHandler() {
+    formGroupLabelHandler();
+    checkWindowWidth();
+    scroll_Reveal();
+    eventListenerRun();
+}

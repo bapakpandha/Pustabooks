@@ -53,8 +53,8 @@
     </main>
     <footer>
 
-        <!-- <div style="height: 50vh;"></div> -->
     </footer>
+    <script>window.onload = function(){homeHandler();}</script>
     <div id="infoBox"
         style="position: fixed;top: 0;right: 0;background-color: rgba(0, 0, 0, 0.7);color: white;padding: 0.3rem;border-radius: 5px;font-family: Arial, sans-serif;z-index: 1000;font-size: 0.7rem;">
         <script>document.addEventListener('DOMContentLoaded', function () { const infoBox = document.getElementById('infoBox'); const viewportWidth = document.getElementById('viewportWidth'); const viewportPosition = document.getElementById('viewportPosition'); const mousePosition = document.getElementById('mousePosition'); function updateViewportWidth() { viewportWidth.textContent = window.innerWidth; } updateViewportWidth(); window.addEventListener('resize', updateViewportWidth); window.addEventListener('scroll', function () { viewportPosition.textContent = `(${window.pageXOffset},${window.pageYOffset})`; }); document.addEventListener('mousemove', function (event) { mousePosition.textContent = `(${event.clientX},${event.clientY})`; }); });</script>
