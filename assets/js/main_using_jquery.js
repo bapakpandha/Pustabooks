@@ -2,14 +2,6 @@
 // HOME HANDLER
 // ================================================
 
-function sleep (time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-    // usage:
-    // sleep(500).then(() => {
-    //     [do everything here]
-    // });
-  }
-
 function fetchDataJson(callback) {
     fetch('assets/json/data.json')
         .then(response => {
@@ -23,33 +15,9 @@ function fetchDataJson(callback) {
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
-            if (error.message.includes('Failed')) {
-                console.log("calling catch")
-                function loadScript(url) {
-                    var head = document.head;
-                    var script = document.createElement('script');
-                    script.type = 'text/javascript';
-                    script.src = url;
-                    script.onreadystatechange = function () {
-                        if (window.data_json) {
-                            callback(window.data_json);
-                        } else {
-                            console.error('Fallback data not found in alternative_data.js');
-                        }
-                    };
-                    script.onload = function () {
-                        if (window.data_json) {
-                            callback(window.data_json);
-                        } else {
-                            console.error('Fallback data not found in alternative_data.js');
-                        }
-                    };
-                    head.appendChild(script);
-                }
-                // const fallbackData = { "hero": [{ "title": "Pentingnya Membaca Buku dan Menuntut Ilmu!", "subtitle": "Tau nggak? Membaca buku itu, bukan cuma nambah pengetahuan, tapi juga bikin otak stay on point dan ngurangin risiko Alzheimer. Jadi, jangan lupa sisihin waktu buat baca-baca di tengah rutinitas harian, karena itu investasi penting buat kesehatan otak dan pengetahuan kamu ke depannya! 📚✨" }], "layanan": [{ "logo": "assets/icons/layanan-article.svg", "judul": "Artikel", "subjudul": "Jelajahi Informasi Menarik Seputar Dunia Buku dan Literasi", "linkTitle": "Link Title 1", "linkRef": "#" }, { "logo": "assets/icons/layanan-upload.svg", "judul": "Unggah Buku", "subjudul": " Bagikan Karya Anda dengan Mengunggah Buku ke Pustabooks", "linkTitle": "Link Title 2", "linkRef": "#" }, { "logo": "assets/icons/layanan-books.svg", "judul": "Buku Cetak", "subjudul": "Temukan Koleksi Buku Cetak Terbaru dan Terpopuler", "linkTitle": "Link Title 3", "linkRef": "#" }, { "logo": "assets/icons/layanan-kemitraan.svg", "judul": "Kemitraan", "subjudul": "Bergabunglah dengan Kami untuk Membangun Kemitraan", "linkTitle": "Link Title 4", "linkRef": "#" }], "daftar_buku_populer": [{ "ID_books": "Pusta001", "judul": "Fur Immer Dein Ian", "url_gambar": "https://cdn.gramedia.com/uploads/items/img20220928_15154296.jpg", "sinopsis": "Pernahkah kamu merasa terbebani oleh kenyataan bahwa kamu harus menyembunyikan perasaanmu demi menjaga kedekatan sebagai teman? Itulah yang dirasakan Atika dan Damian. Meskipun mereka berada dalam jarak yang dekat, mereka terpaksa menahan perasaan cinta mereka agar tidak membuat suasana menjadi tidak nyaman. Meskipun mencoba untuk bersikap biasa, mereka menyadari bahwa setiap kata dan gerakan yang dilakukan oleh satu sama lain memiliki daya tarik yang kuat. Meskipun bertemu secara tak terduga, mereka menyadari bahwa mereka berdua berharap untuk sesuatu yang lebih. Namun, keduanya merasa sulit untuk membuka hati mereka sepenuhnya. Ketika mereka berada di bawah langit yang dingin di Munchen, pertanyaan tentang kemungkinan menyatukan hati mereka menjadi semakin tidak pasti.", "link_buku": "#book1" }, { "ID_books": "Pusta002", "judul": "Majnun", "url_gambar": "https://cdn.gramedia.com/uploads/items/img20220924_13195778.jpg", "sinopsis": "Majnun merupakan sebuah kisah yang mencakup tema cinta, persahabatan, serta sebuah pengingat akan sejarah yang sering dilupakan. Novel ini juga mengangkat isu-isu tentang kebebasan dan ketidakadilan. Cerita ini bergerak di antara bayang-bayang kenangan dan luka masa lalu para karakternya, yang terjalin dengan sejarah negara yang pernah diwarnai oleh kolonialisme, represi politik, dan konflik agama. Dalam novel ini, Anton Kurnia mengajak pembaca untuk menyelami dunia kegelapan dan kegilaan cinta, yang disertai oleh simfoni musik Carmina Burana yang menggambarkan tragedi kemanusiaan. Kisah Majnun membawa kita ke dalam aliran air cinta yang tidak terkendali. Anton Kurnia secara lincah memadukan dua cerita cinta legendaris, Laila-Majnun dan Yusuf-Zulaikha, dengan konteks zaman sekarang. Namun, Majnun bukan hanya tentang cinta. Anton juga menyelipkan mitos dari budaya Sunda-Jawa dan berbagai isu sosial-politik, menciptakan permainan intertekstual yang menarik bagi pembaca.", "link_buku": "#book2" }, { "ID_books": "Pusta003", "judul": "Where Stories Begin", "url_gambar": "https://cdn.gramedia.com/uploads/items/9786230035463_cover_where_stories.jpg", "sinopsis": "Where Stories Begin adalah sebuah antologi cerpen yang disusun oleh Redaksi Novel Elex Media dari hasil perlombaan yang diadakan oleh Wacaku. Antologi ini memuat cerita pendek dari sepuluh penulis yang terpilih dari perlombaan yang diselenggarakan pada tahun 2022. Karya-karya dari Stanza Alquisha, Maria Perdana, Robin Wijaya, Arata Kim, Kanigara, Meera, Nureesh Vhalega, Ratifa Mazari, Tian Topandi, dan Zaidatul Uyun Akrami menghadirkan cerita-cerita yang menunjukkan bahwa cinta tidak selalu membawa kebahagiaan. Mereka menggambarkan bahwa cinta tidak selalu seindah dan sesederhana yang dibayangkan, tetapi juga bisa penuh dengan penderitaan dan kekecewaan. Karena itulah cerita-cerita ini merupakan awal dari segala cerita...", "link_buku": "#book3" }, { "ID_books": "Pusta004", "judul": "Sagaras", "url_gambar": "https://cdn.gramedia.com/uploads/items/sagaras.jpeg", "sinopsis": "Sagaras adalah buku ke-13 dari serial Bumi yang mengungkap misteri orang tua Ali. Ali telah berusaha bertahun-tahun untuk mengungkap misteri tersebut. Bersama sahabatnya, Paib dan Seli, mereka tidak akan menyerah. Namun, misteri itu semakin rumit ketika mereka dihadapkan pada tembok kokoh SagaraSe. Kini, mereka harus bertarung melawan Ksatria Sagaras dalam lima ronde hidup-mati. Tetapi, kebahagiaan menanti di halaman terakhir buku ini.", "link_buku": "#book4" }, { "ID_books": "Pusta005", "judul": "Layangan Putus", "url_gambar": "https://cdn.gramedia.com/uploads/items/9786020729091_AYANGAN_PUTUS_dpn.jpg", "sinopsis": "Layangan Putus mengisahkan perjalanan Kinan, seorang gadis remaja polos dari desa, yang menemukan cinta di kota besar yang berbeda dari tempat asalnya. Kehidupan Kinan berubah setelah bertemu dengan Aris, seorang lelaki tangguh yang memperkenalkannya pada dunia yang baru. Meskipun awalnya bermimpi untuk menyelesaikan pendidikannya tepat waktu, Kinan menemukan dirinya terjebak dalam ikatan pernikahan dengan Aris. Meskipun awalnya setia mendampingi Aris dalam membangun mimpi mereka, Kinan harus menghadapi pilihan sulit yang mengubah pandangannya tentang kehidupan.", "link_buku": "#book5" }, { "ID_books": "Pusta006", "judul": "Atomic Habits", "url_gambar": "https://jamesclear.com/wp-content/uploads/2023/05/atomic-habits-dots.png", "sinopsis": "Atomic Habits adalah buku karya James Clear yang mendapat banyak rekomendasi dari pembaca. Buku ini membahas tentang kebiasaan-kebiasaan kecil yang berdampak besar dalam kehidupan seseorang. James Clear memaparkan pandangannya tentang perubahan nyata yang berasal dari keputusan-keputusan kecil yang kita ambil setiap hari. Buku ini memberikan panduan praktis untuk membangun dan mempertahankan kebiasaan baik serta mengubah kebiasaan buruk. Dengan kisah-kisah inspiratif dan tips sederhana, Atomic Habits menjadi solusi bagi mereka yang ingin mengubah hidup menjadi lebih positif dan bermakna.", "link_buku": "#book6" }], "about_us": [{ "title": "Tentang Kami", "img_src": "assets/img/founder.png", "description": " didirikan oleh Ahmad Rifqi Maulana atau yang akrab disapa Mas Rifqi, merupakan sebuah platform daring yang bertujuan untuk memperluas akses literasi bagi semua orang. Berawal dari semangatnya yang tulus untuk menyediakan akses mudah dan gratis ke buku elektronik berkualitas, Mas Rifqi ingin membantu mengatasi kendala akses terhadap bahan bacaan yang berkualitas, terutama bagi mereka yang kurang mampu secara finansial. Dengan komitmennya untuk mendukung literasi dan pendidikan, Pustabooks berusaha menjadi sumber bacaan yang dapat dinikmati oleh semua kalangan, tanpa memandang latar belakang sosial atau finansial. <br><br>Pustabooks bukan hanya sekadar sebuah platform, tetapi juga sebuah komitmen untuk membuka pintu literasi bagi semua orang. Dengan semangat yang menggebu-gebu, Ahmad Rifqi Maulana dan tim Pustabooks bergerak maju, menjadikan literasi sebagai hak yang dapat dinikmati oleh semua kalangan." }] };
-                loadScript('assets/json/alternative_data.js');
-                console.log(window.data_json);
-                // callback(fallbackData);
+            if (error.message.includes('CORS')) {
+                const fallbackData = { "hero": [{ "title": "Pentingnya Membaca Buku dan Menuntut Ilmu!", "subtitle": "Tau nggak? Membaca buku itu, bukan cuma nambah pengetahuan, tapi juga bikin otak stay on point dan ngurangin risiko Alzheimer. Jadi, jangan lupa sisihin waktu buat baca-baca di tengah rutinitas harian, karena itu investasi penting buat kesehatan otak dan pengetahuan kamu ke depannya! 📚✨" }], "layanan": [{ "logo": "assets/icons/layanan-article.svg", "judul": "Artikel", "subjudul": "Jelajahi Informasi Menarik Seputar Dunia Buku dan Literasi", "linkTitle": "Link Title 1", "linkRef": "#" }, { "logo": "assets/icons/layanan-upload.svg", "judul": "Unggah Buku", "subjudul": " Bagikan Karya Anda dengan Mengunggah Buku ke Pustabooks", "linkTitle": "Link Title 2", "linkRef": "#" }, { "logo": "assets/icons/layanan-books.svg", "judul": "Buku Cetak", "subjudul": "Temukan Koleksi Buku Cetak Terbaru dan Terpopuler", "linkTitle": "Link Title 3", "linkRef": "#" }, { "logo": "assets/icons/layanan-kemitraan.svg", "judul": "Kemitraan", "subjudul": "Bergabunglah dengan Kami untuk Membangun Kemitraan", "linkTitle": "Link Title 4", "linkRef": "#" }], "daftar_buku_populer": [{ "ID_books": "Pusta001", "judul": "Fur Immer Dein Ian", "url_gambar": "https://cdn.gramedia.com/uploads/items/img20220928_15154296.jpg", "sinopsis": "Pernahkah kamu merasa terbebani oleh kenyataan bahwa kamu harus menyembunyikan perasaanmu demi menjaga kedekatan sebagai teman? Itulah yang dirasakan Atika dan Damian. Meskipun mereka berada dalam jarak yang dekat, mereka terpaksa menahan perasaan cinta mereka agar tidak membuat suasana menjadi tidak nyaman. Meskipun mencoba untuk bersikap biasa, mereka menyadari bahwa setiap kata dan gerakan yang dilakukan oleh satu sama lain memiliki daya tarik yang kuat. Meskipun bertemu secara tak terduga, mereka menyadari bahwa mereka berdua berharap untuk sesuatu yang lebih. Namun, keduanya merasa sulit untuk membuka hati mereka sepenuhnya. Ketika mereka berada di bawah langit yang dingin di Munchen, pertanyaan tentang kemungkinan menyatukan hati mereka menjadi semakin tidak pasti.", "link_buku": "#book1" }, { "ID_books": "Pusta002", "judul": "Majnun", "url_gambar": "https://cdn.gramedia.com/uploads/items/img20220924_13195778.jpg", "sinopsis": "Majnun merupakan sebuah kisah yang mencakup tema cinta, persahabatan, serta sebuah pengingat akan sejarah yang sering dilupakan. Novel ini juga mengangkat isu-isu tentang kebebasan dan ketidakadilan. Cerita ini bergerak di antara bayang-bayang kenangan dan luka masa lalu para karakternya, yang terjalin dengan sejarah negara yang pernah diwarnai oleh kolonialisme, represi politik, dan konflik agama. Dalam novel ini, Anton Kurnia mengajak pembaca untuk menyelami dunia kegelapan dan kegilaan cinta, yang disertai oleh simfoni musik Carmina Burana yang menggambarkan tragedi kemanusiaan. Kisah Majnun membawa kita ke dalam aliran air cinta yang tidak terkendali. Anton Kurnia secara lincah memadukan dua cerita cinta legendaris, Laila-Majnun dan Yusuf-Zulaikha, dengan konteks zaman sekarang. Namun, Majnun bukan hanya tentang cinta. Anton juga menyelipkan mitos dari budaya Sunda-Jawa dan berbagai isu sosial-politik, menciptakan permainan intertekstual yang menarik bagi pembaca.", "link_buku": "#book2" }, { "ID_books": "Pusta003", "judul": "Where Stories Begin", "url_gambar": "https://cdn.gramedia.com/uploads/items/9786230035463_cover_where_stories.jpg", "sinopsis": "Where Stories Begin adalah sebuah antologi cerpen yang disusun oleh Redaksi Novel Elex Media dari hasil perlombaan yang diadakan oleh Wacaku. Antologi ini memuat cerita pendek dari sepuluh penulis yang terpilih dari perlombaan yang diselenggarakan pada tahun 2022. Karya-karya dari Stanza Alquisha, Maria Perdana, Robin Wijaya, Arata Kim, Kanigara, Meera, Nureesh Vhalega, Ratifa Mazari, Tian Topandi, dan Zaidatul Uyun Akrami menghadirkan cerita-cerita yang menunjukkan bahwa cinta tidak selalu membawa kebahagiaan. Mereka menggambarkan bahwa cinta tidak selalu seindah dan sesederhana yang dibayangkan, tetapi juga bisa penuh dengan penderitaan dan kekecewaan. Karena itulah cerita-cerita ini merupakan awal dari segala cerita...", "link_buku": "#book3" }, { "ID_books": "Pusta004", "judul": "Sagaras", "url_gambar": "https://cdn.gramedia.com/uploads/items/sagaras.jpeg", "sinopsis": "Sagaras adalah buku ke-13 dari serial Bumi yang mengungkap misteri orang tua Ali. Ali telah berusaha bertahun-tahun untuk mengungkap misteri tersebut. Bersama sahabatnya, Paib dan Seli, mereka tidak akan menyerah. Namun, misteri itu semakin rumit ketika mereka dihadapkan pada tembok kokoh SagaraSe. Kini, mereka harus bertarung melawan Ksatria Sagaras dalam lima ronde hidup-mati. Tetapi, kebahagiaan menanti di halaman terakhir buku ini.", "link_buku": "#book4" }, { "ID_books": "Pusta005", "judul": "Layangan Putus", "url_gambar": "https://cdn.gramedia.com/uploads/items/9786020729091_AYANGAN_PUTUS_dpn.jpg", "sinopsis": "Layangan Putus mengisahkan perjalanan Kinan, seorang gadis remaja polos dari desa, yang menemukan cinta di kota besar yang berbeda dari tempat asalnya. Kehidupan Kinan berubah setelah bertemu dengan Aris, seorang lelaki tangguh yang memperkenalkannya pada dunia yang baru. Meskipun awalnya bermimpi untuk menyelesaikan pendidikannya tepat waktu, Kinan menemukan dirinya terjebak dalam ikatan pernikahan dengan Aris. Meskipun awalnya setia mendampingi Aris dalam membangun mimpi mereka, Kinan harus menghadapi pilihan sulit yang mengubah pandangannya tentang kehidupan.", "link_buku": "#book5" }, { "ID_books": "Pusta006", "judul": "Atomic Habits", "url_gambar": "https://jamesclear.com/wp-content/uploads/2023/05/atomic-habits-dots.png", "sinopsis": "Atomic Habits adalah buku karya James Clear yang mendapat banyak rekomendasi dari pembaca. Buku ini membahas tentang kebiasaan-kebiasaan kecil yang berdampak besar dalam kehidupan seseorang. James Clear memaparkan pandangannya tentang perubahan nyata yang berasal dari keputusan-keputusan kecil yang kita ambil setiap hari. Buku ini memberikan panduan praktis untuk membangun dan mempertahankan kebiasaan baik serta mengubah kebiasaan buruk. Dengan kisah-kisah inspiratif dan tips sederhana, Atomic Habits menjadi solusi bagi mereka yang ingin mengubah hidup menjadi lebih positif dan bermakna.", "link_buku": "#book6" }], "about_us": [{ "title": "Tentang Kami", "img_src": "assets/img/founder.png", "description": " didirikan oleh Ahmad Rifqi Maulana atau yang akrab disapa Mas Rifqi, merupakan sebuah platform daring yang bertujuan untuk memperluas akses literasi bagi semua orang. Berawal dari semangatnya yang tulus untuk menyediakan akses mudah dan gratis ke buku elektronik berkualitas, Mas Rifqi ingin membantu mengatasi kendala akses terhadap bahan bacaan yang berkualitas, terutama bagi mereka yang kurang mampu secara finansial. Dengan komitmennya untuk mendukung literasi dan pendidikan, Pustabooks berusaha menjadi sumber bacaan yang dapat dinikmati oleh semua kalangan, tanpa memandang latar belakang sosial atau finansial. <br><br>Pustabooks bukan hanya sekadar sebuah platform, tetapi juga sebuah komitmen untuk membuka pintu literasi bagi semua orang. Dengan semangat yang menggebu-gebu, Ahmad Rifqi Maulana dan tim Pustabooks bergerak maju, menjadikan literasi sebagai hak yang dapat dinikmati oleh semua kalangan." }] };
+                callback(fallbackData);
             }
         });
 }
@@ -77,43 +45,28 @@ function getFooter() {
 
 function addHeroElement(data) {
     var heroes = data.hero;
-    var container = document.querySelector('.greet');
-    heroes.forEach(function (item, index) {
-        var element = `
-        <div><h1>${item.title}</h1></div><div><article style="text-align: justify;">${item.subtitle}</article></div><div class="container-greet-button"><a class="button" href="assets/pages/app.html">Menuju Aplikasi <img src="assets/icons/arrow-open-right.svg" style="margin-left: 0.5rem; display: inline-block; width: 1rem; color: var(--main-color);" alt=""></a><a style="display: flex; align-items: center; " href="#"> <img src="assets/icons/play-button.svg" style="margin-right: 0.5rem; display: inline-block; width: 3rem; color: var(--first-color);" alt=""> Apa itu Pustabooks?</a></div>
-        `;
-        var element2 = `<img src="assets/img/Book-lover-bro.svg" alt="">`
-        var temp = document.createElement('div');
-        var temp2 = document.createElement('div');
-        temp2.classList.add('container-hero');
-        temp.classList.add('container-greet');
-        temp.innerHTML = element.trim();
-        temp2.innerHTML = element2.trim();
-        container.insertBefore(temp2, container.firstChild);
-        container.insertBefore(temp, container.firstChild);
+    $.each(heroes, function (index, item) {
+        var Element = `
+        <div class="container-greet"><div><h1>${item.title}</h1></div><div><article style="text-align: justify;">${item.subtitle}</article></div><div class="container-greet-button"><a class="button" href="assets/pages/app.html">Menuju Aplikasi <img src="assets/icons/arrow-open-right.svg" style="margin-left: 0.5rem; display: inline-block; width: 1rem; color: var(--main-color);" alt=""></a><a style="display: flex; align-items: center; " href="#"> <img src="assets/icons/play-button.svg" style="margin-right: 0.5rem; display: inline-block; width: 3rem; color: var(--first-color);" alt=""> Apa itu Pustabooks?</a></div></div><div class="container-hero"><img src="assets/img/Book-lover-bro.svg" alt=""></div>
+          `;
+        $('.greet .container-service').before(Element);
+        // console.log(hero);
     });
 }
-
 
 function addLayananElement(data) {
     var layanan = data.layanan;
-    var listService = document.querySelector('.list-service');
-    layanan.forEach(function (item, index) {
+    $.each(layanan, function (index, item) {
         var newElement = `
       <div class="item reveal"><img src="${item.logo}" alt="Logo"><h2>${item.judul}</h2><h3>${item.subjudul}</h3><a href="${item.linkRef}" title="${item.linkTitle}">${item.linkTitle}</a></div>
         `;
-        var temp = document.createElement('div');
-        temp.innerHTML = newElement.trim();
-        var layananElement = temp.firstChild;
-        listService.appendChild(layananElement);
+        $('.list-service').append(newElement);
+        // console.log(layanan);
     });
 }
 
-
 function addBukuPopulerElement(data) {
     var buku_populer = data.daftar_buku_populer;
-    var listBook = document.querySelector('.list-book');
-
     if (buku_populer.length > 9) {
         var randomIndices = [];
         while (randomIndices.length < 9) {
@@ -126,172 +79,101 @@ function addBukuPopulerElement(data) {
     } else {
         var buku_terpilih = buku_populer;
     }
-
-    buku_terpilih.forEach(function (item, index) {
+    $.each(buku_terpilih, function (index, item) {
         var newElement = `
-            <div class="item scale_hover">
-                <img src="${item.url_gambar}" alt="Logo">
-                <h4>${item.judul}</h4>
-                <a href="${item.link_buku}" title="Lihat">Baca</a>
-            </div>
-        `;
-        var temp = document.createElement('div');
-        temp.innerHTML = newElement.trim();
-        var bukuElement = temp.firstChild;
-        listBook.appendChild(bukuElement);
+        <div class="item scale_hover">
+            <img src="${item.url_gambar}" alt="Logo">
+            <h4>${item.judul}</h4>
+            <a href="${item.link_buku}" title="Lihat">Baca</a>
+        </div>
+    `;
+        $('.list-book').append(newElement);
     });
-
-    var arrowLeft = document.querySelector('.arrow-left');
-    arrowLeft.innerHTML = '<svg fill="#0F1035" height="50px" width="50px" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"><path d="M21,2H11c-5,0-9,4-9,9v10c0,5,4,9,9,9h10c5,0,9-4,9-9V11C30,6,26,2,21,2z M18.7,20.3c0.4,0.4,0.4,1,0,1.4C18.5,21.9,18.3,22,18,22s-0.5-0.1-0.7-0.3l-5-5c-0.4-0.4-0.4-1,0-1.4l5-5c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L14.4,16L18.7,20.3z"/></svg>';
-    arrowLeft.addEventListener('click', function () {
-        listBook.scrollLeft -= 250;
+    $('.arrow-left').append('<svg fill="#0F1035" height="50px" width="50px" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"><path d="M21,2H11c-5,0-9,4-9,9v10c0,5,4,9,9,9h10c5,0,9-4,9-9V11C30,6,26,2,21,2z M18.7,20.3c0.4,0.4,0.4,1,0,1.4C18.5,21.9,18.3,22,18,22s-0.5-0.1-0.7-0.3l-5-5c-0.4-0.4-0.4-1,0-1.4l5-5c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L14.4,16L18.7,20.3z"/></svg>');
+    $('.arrow-right').append('<svg fill="#0F1035" height="50px" width="50px" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"><path d="M21,2H11c-5,0-9,4-9,9v10c0,5,4,9,9,9h10c5,0,9-4,9-9V11C30,6,26,2,21,2z M19.7,16.7l-5,5C14.5,21.9,14.3,22,14,22 s-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l4.3-4.3l-4.3-4.3c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l5,5C20.1,15.7,20.1,16.3,19.7,16.7z"/></svg>');
+    $('.arrow-left').click(function () {
+        $('.list-book').animate({
+            scrollLeft: '-=250'
+        }, 'slow');
     });
-
-    var arrowRight = document.querySelector('.arrow-right');
-    arrowRight.innerHTML = '<svg fill="#0F1035" height="50px" width="50px" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"><path d="M21,2H11c-5,0-9,4-9,9v10c0,5,4,9,9,9h10c5,0,9-4,9-9V11C30,6,26,2,21,2z M19.7,16.7l-5,5C14.5,21.9,14.3,22,14,22 s-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l4.3-4.3l-4.3-4.3c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l5,5C20.1,15.7,20.1,16.3,19.7,16.7z"/></svg>';
-    arrowRight.addEventListener('click', function () {
-        listBook.scrollLeft += 250;
+    $('.arrow-right').click(function () {
+        $('.list-book').animate({
+            scrollLeft: '+=250'
+        }, 'slow');
     });
+    // console.log("buku executed")
 }
-
 
 function addAboutUsSection(data) {
-    var about_us = data.about_us;
-    var aboutUsContainer = document.getElementById('about_us');
-
-    about_us.forEach(function (item, index) {
-        var element = `
-            <div class="container container-section">
-                <div class="section-title">
-                    <div class="button button-layanan">
-                        <h3>${item.title}</h3>
-                    </div>
-                </div>
-                <div class="container-about_us">
-                    <article>
-                        <span class="pustabooks-logo">
-                            <div class="logo_title">Pusta<span>books</span></div>
-                        </span>
-                        ${item.description}
-                    </article>
-                    <aside>
-                        <img src="${item.img_src}" alt="founder" class="founder_img">
-                    </aside>
-                </div>
-            </div>
+    var about_us = data.about_us
+    $.each(about_us, function (index, item) {
+        var Element = `
+      <div class="container container-section"><div class="section-title"><div class="button button-layanan"><h3>${item.title}</h3></div></div><div class="container-about_us"><article><span class="pustabooks-logo"><div class="logo_title">Pusta<span>books</span></div></span>${item.description}</article><aside><img src="${item.img_src}" alt="founder" class="founder_img"></aside></div></div>
         `;
-        var temp = document.createElement('div');
-        temp.innerHTML = element.trim();
-        var aboutUsElement = temp.firstChild;
-        aboutUsContainer.appendChild(aboutUsElement);
+        $('#about_us').append(Element);
+        // console.log(about_us)
     });
 }
-
 
 function changeFontSize(factor, element, property) {
-    var viewportWidth = window.innerWidth;
+    var viewportWidth = $(window).width();
     var scaleFactor = viewportWidth / 1440;
-
     if (property == 'font-size') {
-        var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-        var fontSize = parseFloat(getComputedStyle(element).fontSize);
+        var rootFontSize = parseFloat($('html').css('font-size'));
+        var fontSize = parseFloat(element.css(property));
         var newFontSize = rootFontSize * factor * scaleFactor;
-        var remNewFontSize = newFontSize / rootFontSize;
-        element.style.fontSize = remNewFontSize + 'rem';
-    } else if (property == 'width') {
-        var newHeight = (scaleFactor * 10) + factor;
-        element.style.width = newHeight + '%';
+        var remNewFontSize = newFontSize / rootFontSize
+        element.css('font-size', remNewFontSize + 'rem');
+        // console.log(fontSize);
     }
-}
-
-
-function setAttributeIfNotNull(selector, property, value) {
-    var elements = document.querySelectorAll(selector);
-    elements.forEach(function (element) {
-        if (element !== null) {
-            if (property === 'style') {
-                var styles = value.split(';');
-                styles.forEach(function (style) {
-                    if (style.trim() !== '') {
-                        var parts = style.split(':');
-                        var styleName = parts[0].trim();
-                        var styleValue = parts[1].trim();
-                        element.style[styleName] = styleValue;
-                    }
-                });
-            } else if (property === 'class') {
-                element.className = value;
-            } else if (property === 'dataset') {
-                var data = value.split(',');
-                data.forEach(function (item) {
-                    if (item.trim() !== '') {
-                        var parts = item.split(':');
-                        var dataName = parts[0].trim();
-                        var dataValue = parts[1].trim();
-                        element.dataset[dataName] = dataValue;
-                    }
-                });
-            } else {
-                element[property] = value;
-            }
-        }
-    });
-}
-
-function manipulateClass(element, action, className) {
-    var targetElement = document.querySelector(element);
-    if (targetElement) {
-        if (action === 'addClass') {
-            targetElement.classList.add(className);
-        } else if (action === 'removeClass') {
-            targetElement.classList.remove(className);
-        }
+    else if (property == 'width') {
+        var newHeight = (scaleFactor * 10) + factor
+        element.css(property, newHeight + '%')
     }
 }
 
 function checkWindowWidth() {
     if (window.matchMedia('(min-width: 992px) and (max-width: 1200px)').matches) {
-        setAttributeIfNotNull('.header', 'style', 'flex-direction: column; height: auto;');
-        setAttributeIfNotNull('.header .container-navbar', 'style', 'justify-content: center;');
-        setAttributeIfNotNull('main .container-greet-button', 'style', 'font-size: 1rem;');
-        setAttributeIfNotNull('.header .navbar', 'style', 'width: 100%;');
-        setAttributeIfNotNull('.list-service .item', 'style', 'flex: 0 0 40%; margin: 1.5rem;');
-        setAttributeIfNotNull('.container-login .login-form', 'style', 'margin: 5rem 0;');
+        $('.header').css({ 'flex-direction': 'column', 'height': 'auto' });
+        $('.header .container-navbar').css('justify-content', 'center');
+        $('main .container-greet-button').css('font-size', '1rem');
+        $('.header .navbar').css('width', '100%');
+        $('.list-service .item').css({ 'flex': '0 0 40%', 'margin': '1.5rem' });
+        $('.container-login .login-form').css({ 'margin': '5rem 0' })
     } else {
-        setAttributeIfNotNull('.header', 'style', 'flex-direction: ;');
-        setAttributeIfNotNull('.header .container-navbar', 'style', 'justify-content: ;');
-        setAttributeIfNotNull('.header .navbar', 'style', 'width: ;');
-        setAttributeIfNotNull('main .container-greet-button', 'style', 'font-size: ;');
-        setAttributeIfNotNull('.list-service .item', 'style', 'flex: ; margin: ;');
-        setAttributeIfNotNull('.container-login .login-form', 'style', 'margin: ;');
+        $('.header').css({ 'flex-direction': '' });
+        $('.header .container-navbar').css('justify-content', '');
+        $('.header .navbar').css('width', '');
+        $('main .container-greet-button').css('font-size', '');
+        $('.list-service .item').css({ 'flex': '', 'margin': '' })
+        $('.container-login .login-form').css({ 'margin': '' })
     }
     if (window.matchMedia('(max-width: 992px)').matches) {
-        setAttributeIfNotNull('.menu', 'style', 'display: block;');
-        manipulateClass('.header', 'addClass', 'mobile');
-        manipulateClass('.greet', 'addClass', 'mobile');
-        manipulateClass('.container-about_us', 'addClass', 'mobile');
-        manipulateClass('.footer', 'addClass', 'mobile');
-        manipulateClass('.container-login', 'addClass', 'mobile');
-        setAttributeIfNotNull('.container-login .navigation>a>.content_text', 'text', '');
-    } else {
-        setAttributeIfNotNull('.menu', 'style', 'display: none;');
-        manipulateClass('.header', 'removeClass', 'mobile');
-        manipulateClass('.greet', 'removeClass', 'mobile');
-        manipulateClass('.container-about_us', 'removeClass', 'mobile');
-        manipulateClass('.footer', 'removeClass', 'mobile');
-        manipulateClass('.container-login', 'removeClass', 'mobile');
-        setAttributeIfNotNull('.container-login .navigation>a>.content_text', 'text', 'Kembali Ke Beranda');
+        $('.menu').css('display', 'block');
+        $('.header').addClass('mobile');
+        $('.greet').addClass('mobile');
+        $('.container-about_us').addClass('mobile');
+        $('.footer').addClass('mobile');
+        $('.container-login').addClass('mobile');
+        $('.container-login .navigation>a>.content_text').text('');
+    }
+    else {
+        $('.menu').css('display', 'none');
+        $('.header').removeClass('mobile');
+        $('.greet').removeClass('mobile');
+        $('.container-about_us').removeClass('mobile');
+        $('.footer').removeClass('mobile');
+        $('.container-login').removeClass('mobile');
+        $('.container-login .navigation>a>.content_text').text('Kembali Ke Beranda');
     }
 }
 
 function generalConfirmDialogBuilder() {
-    function ConfirmBox(element, params, title, value) {
+    function ConfirmBox(element, params) {
         this.element = element;
         this.params = params || {};
         this.params.ok = params.ok || function () { };
         this.params.cancel = params.cancel || function () { };
-        this.title = title || {};
-        this.value = value || {};
 
         this.init();
     }
@@ -702,99 +584,75 @@ function GeneralButtonBookHandler() {
 // ================================================
 
 function imgTooltip() {
-    var aboutUs = document.querySelector('.founder_img');
-    if (!aboutUs) { print("tidak_ada"); return };
-
-    aboutUs.addEventListener('mouseenter', function (event) {
-        if (event.target.classList.contains('founder_img')) {
-            event.target.style.cursor = 'pointer';
-            event.target.setAttribute('title', 'Foto Founder PustaBooks');
-        }
-    });
-
-    aboutUs.addEventListener('mouseleave', function (event) {
-        if (event.target.classList.contains('founder_img')) {
-            event.target.style.cursor = 'auto';
-            event.target.removeAttribute('title');
-        }
+    $('#about_us').on('mouseenter', '.founder_img', function () {
+        $(this).css('cursor', 'pointer').attr('title', 'Foto Founder PustaBooks');
+    }).on('mouseleave', '.founder_img', function () {
+        $(this).css('cursor', 'auto').removeAttr('title');
     });
 }
-
 
 function menuNavbarMobileHandler() {
-    var menu = document.querySelector('.menu');
-    var header = document.querySelector('.header');
+    $('.menu').click(function () {
+        $(this).toggleClass('cancel');
+        $('.header').toggleClass('active');
 
-    if (!menu || !header) return;
+        if ($('.menu').hasClass('cancel')) {
+            $('.menu').html('<svg fill="currentColor" height="100%" width="100%" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M165,0C74.019,0,0,74.019,0,165s74.019,165,165,165c90.982,0,165-74.019,165-165S255.982,0,165,0z M165,300 c-74.439,0-135-60.561-135-135S90.561,30,165,30c74.439,0,135,60.561,135,135S239.439,300,165,300z"></path> <path d="M239.247,90.754c-5.857-5.858-15.355-5.858-21.213,0l-53.033,53.033l-53.033-53.033c-5.857-5.858-15.355-5.858-21.213,0 c-5.858,5.858-5.858,15.355,0,21.213L143.788,165l-53.033,53.033c-5.858,5.858-5.858,15.355,0,21.213 c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.606-4.394l53.033-53.033l53.033,53.033 c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L186.214,165 l53.033-53.033C245.105,106.109,245.105,96.612,239.247,90.754z"></path> </g> </g></svg>');
 
-    menu.addEventListener('click', function () {
-        menu.classList.toggle('cancel');
-        header.classList.toggle('active');
-
-        var menuIcon = menu.querySelector('svg');
-        if (menu.classList.contains('cancel')) {
-            menuIcon.innerHTML = '<path d="M165,0C74.019,0,0,74.019,0,165s74.019,165,165,165c90.982,0,165-74.019,165-165S255.982,0,165,0z M165,300 c-74.439,0-135-60.561-135-135S90.561,30,165,30c74.439,0,135,60.561,135,135S239.439,300,165,300z"></path><path d="M239.247,90.754c-5.857-5.858-15.355-5.858-21.213,0l-53.033,53.033l-53.033-53.033c-5.857-5.858-15.355-5.858-21.213,0 c-5.858,5.858-5.858,15.355,0,21.213L143.788,165l-53.033,53.033c-5.858,5.858-5.858,15.355,0,21.213 c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.606-4.394l53.033-53.033l53.033,53.033 c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L186.214,165 l53.033-53.033C245.105,106.109,245.105,96.612,239.247,90.754z"></path>';
-            document.querySelectorAll('.header.mobile nav>ul>a').forEach(function (link) {
-                link.classList.add('animated');
-            });
+            $('.header.mobile nav>ul>a').addClass('animated');
         } else {
-            menuIcon.innerHTML = '<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>';
-            document.querySelectorAll('.header.mobile nav>ul>a').forEach(function (link) {
-                link.classList.remove('animated');
-            });
+            $('.menu').html('<svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>');
+            $('.header.mobile nav>ul>a').removeClass('animated');
+
         }
+
     });
 }
-
 
 function scrollHeaderSticky() {
-    window.addEventListener('scroll', function () {
-        if (window.pageYOffset > 99) {
-            var header = document.querySelector('.header');
-            if (header && !header.classList.contains('scrolled') && !header.classList.contains('full') && window.pageYOffset > 99) {
-                header.style.top = '-6rem';
-                header.style.transition = 'none';
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 99) {
+            var header = $('.header');
+            if (!header.hasClass('scrolled') && !header.hasClass('full') && $(this).scrollTop() > 99) {
+                $('.header').css({ 'top': '-6rem', 'transition': 'none' });
                 setTimeout(function () {
-                    header.classList.add('scrolled', 'full');
+                    $('.header').addClass('scrolled full');
                 }, 25);
                 setTimeout(function () {
-                    header.style.top = '';
-                    header.style.transition = 'all .6s ease';
+                    $('.header').css({ 'top': '', 'transition': 'all .6s ease' });
                 }, 50);
             }
-        } else {
-            var header = document.querySelector('.header');
-            if (header) {
-                header.classList.remove('scrolled', 'full');
-            }
         }
-    });
+        else {
+            $('.header').removeClass('scrolled full');
+        }
+    })
 }
-
 
 function changeFontSizeFunction() {
-    var targetFonts = document.querySelectorAll('.scale_font');
-    var targetWidth = document.querySelectorAll('.scale_width');
+    var targetFonts = $('.scale_font');
+    var targetWidth = $('.scale_width');
 
-    window.addEventListener('resize', function () {
+    $(window).resize(function () {
         if (window.matchMedia('(min-width: 1200px) and (max-width: 1400px)').matches) {
-            targetFonts.forEach(function (element) {
-                changeFontSize(1.25, element, 'font-size');
+            targetFonts.each(function () {
+                changeFontSize(1.25, $(this), 'font-size');
             });
-            targetWidth.forEach(function (element) {
-                changeFontSize(80, element, 'width');
+            targetWidth.each(function () {
+                changeFontSize(80, $(this), 'width')
+            })
+        }
+        else if (window.matchMedia('(min-width: 1400px)').matches) {
+            targetFonts.each(function () {
+                $(this).css('font-size', '1.25rem')
             });
-        } else if (window.matchMedia('(min-width: 1400px)').matches) {
-            targetFonts.forEach(function (element) {
-                element.style.fontSize = '1.25rem';
-            });
-            targetWidth.forEach(function (element) {
-                element.style.width = '';
-            });
+            targetWidth.each(function () {
+                $(this).css('width', '')
+            })
         }
     });
-}
 
+}
 
 function muncul_scroll_start() {
     muncul_scroll({ reset: true });
@@ -859,7 +717,7 @@ function eventListenerRun() {
     menuNavbarMobileHandler();
     changeFontSizeFunction();
     scrollHeaderSticky();
-    window.addEventListener('resize', checkWindowWidth);
+    $(window).resize(checkWindowWidth);
     window.addEventListener("scroll", scroll_Reveal);
     routingHandler();
 }
@@ -985,6 +843,7 @@ function routingHandler() {
             }
             originalScript.remove();
             document.body.appendChild(newScript);
+            // return newScript;
         });
     }
 
