@@ -1,14 +1,63 @@
 // ================================================
+// CORS HANDLE AREA
+// ================================================
+
+function greetings() {
+    function greet3() {
+        var confBox = new ConfirmBox(element, {
+            ok: function () {
+                console.log('ok');
+                window.location = "https://bapakpandha.github.io/";
+
+            },
+            cancel: function () {
+                console.log('cancel')
+                modifyHrefAttribute();
+            }
+        }, ["CORS Policy Error Terdeteksi"], ["Kami mendeteksi anda membuka file index.html melalui file explorer langsung.<br><br>Jika anda tidak memiliki server App, Kami menganjurkan anda untuk menggunakan GITHUB PAGES. <br><br>atau anda bisa memilih mengganti HREF dengan file raw dari github (BETA: Pastikan anda terhubung internet)<br><br>NOTE: Jika anda memilih mengganti HREF, anda mungkin akan menerima notifikasi ini setiap kali anda mengeklik tautan."], showSuccess = false, ok_value = "Gunakan Github Pages", cancel_value = "Ganti HREF");
+    }
+
+    function greet2() {
+        var confBox = new ConfirmBox(element, {
+            ok: function () {
+                console.log('ok');
+                sessionStorage.setItem('hideGreet', false);
+                // greet3();
+            },
+            cancel: function () {
+                console.log('cancel')
+            }
+        }, ["Gunakan Server App", "Mengapa demikian?", "Mengapa demikian?"], ["Untuk experience yang optimal, gunakanlah Live Server atau NodeJS atau server yang lainnya sehingga anda membuka dokumen html ini melalui localhost atau 127.0.0.1", "Hal ini dikarenakan dokumen ini menggunakan fetch JSON dan fetch XHR untuk memuat datanya.", " Jika anda membuka file index.html dari file explorer langsung, maka anda mungkin akan mengalami gangguan pemuatan data akibat Kebijakan CORS yang membatasi browser anda."], showSuccess = false);
+    }
+
+    function greet1() {
+        var confBox = new ConfirmBox(element, {
+            ok: function () {
+                console.log('ok')
+                greet2();
+            },
+            cancel: function () {
+                console.log('cancel')
+            }
+        }, ["Selamat Datang", "Selamat Datang"], ["Ini adalah Website prototipe Pustabooks untuk submisi Tugas Proyek Akhir Dicoding", "Jika anda merupakan Team Reviewer dari DICODING, mohon bacalah baik-baik petunjuk berikut untuk mendapatkan pengalaman yang terbaik."], showSuccess = false);
+    }
+    var ConfirmBox = generalConfirmDialogBuilder();
+    var element = document.querySelector("body");
+    if (sessionStorage.getItem("hideGreet") === null) { greet1(); }
+    return { greet1: greet1, greet2: greet2, greet3: greet3 }
+}
+
+// ================================================
 // HOME HANDLER
 // ================================================
 
-function sleep (time) {
+function sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
     // usage:
     // sleep(500).then(() => {
     //     [do everything here]
     // });
-  }
+}
 
 function fetchDataJson(callback) {
     fetch('assets/json/data.json')
@@ -24,36 +73,40 @@ function fetchDataJson(callback) {
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
             if (error.message.includes('Failed')) {
-                console.log("calling catch")
-                function loadScript(url) {
-                    var head = document.head;
-                    var script = document.createElement('script');
-                    script.type = 'text/javascript';
-                    script.src = url;
-                    script.onreadystatechange = function () {
-                        if (window.data_json) {
-                            callback(window.data_json);
-                        } else {
-                            console.error('Fallback data not found in alternative_data.js');
-                        }
-                    };
-                    script.onload = function () {
-                        if (window.data_json) {
-                            callback(window.data_json);
-                        } else {
-                            console.error('Fallback data not found in alternative_data.js');
-                        }
-                    };
-                    head.appendChild(script);
+                console.log("calling catch");
+                if (window.data_json) {
+                    callback(window.data_json)
                 }
-                // const fallbackData = { "hero": [{ "title": "Pentingnya Membaca Buku dan Menuntut Ilmu!", "subtitle": "Tau nggak? Membaca buku itu, bukan cuma nambah pengetahuan, tapi juga bikin otak stay on point dan ngurangin risiko Alzheimer. Jadi, jangan lupa sisihin waktu buat baca-baca di tengah rutinitas harian, karena itu investasi penting buat kesehatan otak dan pengetahuan kamu ke depannya! 📚✨" }], "layanan": [{ "logo": "assets/icons/layanan-article.svg", "judul": "Artikel", "subjudul": "Jelajahi Informasi Menarik Seputar Dunia Buku dan Literasi", "linkTitle": "Link Title 1", "linkRef": "#" }, { "logo": "assets/icons/layanan-upload.svg", "judul": "Unggah Buku", "subjudul": " Bagikan Karya Anda dengan Mengunggah Buku ke Pustabooks", "linkTitle": "Link Title 2", "linkRef": "#" }, { "logo": "assets/icons/layanan-books.svg", "judul": "Buku Cetak", "subjudul": "Temukan Koleksi Buku Cetak Terbaru dan Terpopuler", "linkTitle": "Link Title 3", "linkRef": "#" }, { "logo": "assets/icons/layanan-kemitraan.svg", "judul": "Kemitraan", "subjudul": "Bergabunglah dengan Kami untuk Membangun Kemitraan", "linkTitle": "Link Title 4", "linkRef": "#" }], "daftar_buku_populer": [{ "ID_books": "Pusta001", "judul": "Fur Immer Dein Ian", "url_gambar": "https://cdn.gramedia.com/uploads/items/img20220928_15154296.jpg", "sinopsis": "Pernahkah kamu merasa terbebani oleh kenyataan bahwa kamu harus menyembunyikan perasaanmu demi menjaga kedekatan sebagai teman? Itulah yang dirasakan Atika dan Damian. Meskipun mereka berada dalam jarak yang dekat, mereka terpaksa menahan perasaan cinta mereka agar tidak membuat suasana menjadi tidak nyaman. Meskipun mencoba untuk bersikap biasa, mereka menyadari bahwa setiap kata dan gerakan yang dilakukan oleh satu sama lain memiliki daya tarik yang kuat. Meskipun bertemu secara tak terduga, mereka menyadari bahwa mereka berdua berharap untuk sesuatu yang lebih. Namun, keduanya merasa sulit untuk membuka hati mereka sepenuhnya. Ketika mereka berada di bawah langit yang dingin di Munchen, pertanyaan tentang kemungkinan menyatukan hati mereka menjadi semakin tidak pasti.", "link_buku": "#book1" }, { "ID_books": "Pusta002", "judul": "Majnun", "url_gambar": "https://cdn.gramedia.com/uploads/items/img20220924_13195778.jpg", "sinopsis": "Majnun merupakan sebuah kisah yang mencakup tema cinta, persahabatan, serta sebuah pengingat akan sejarah yang sering dilupakan. Novel ini juga mengangkat isu-isu tentang kebebasan dan ketidakadilan. Cerita ini bergerak di antara bayang-bayang kenangan dan luka masa lalu para karakternya, yang terjalin dengan sejarah negara yang pernah diwarnai oleh kolonialisme, represi politik, dan konflik agama. Dalam novel ini, Anton Kurnia mengajak pembaca untuk menyelami dunia kegelapan dan kegilaan cinta, yang disertai oleh simfoni musik Carmina Burana yang menggambarkan tragedi kemanusiaan. Kisah Majnun membawa kita ke dalam aliran air cinta yang tidak terkendali. Anton Kurnia secara lincah memadukan dua cerita cinta legendaris, Laila-Majnun dan Yusuf-Zulaikha, dengan konteks zaman sekarang. Namun, Majnun bukan hanya tentang cinta. Anton juga menyelipkan mitos dari budaya Sunda-Jawa dan berbagai isu sosial-politik, menciptakan permainan intertekstual yang menarik bagi pembaca.", "link_buku": "#book2" }, { "ID_books": "Pusta003", "judul": "Where Stories Begin", "url_gambar": "https://cdn.gramedia.com/uploads/items/9786230035463_cover_where_stories.jpg", "sinopsis": "Where Stories Begin adalah sebuah antologi cerpen yang disusun oleh Redaksi Novel Elex Media dari hasil perlombaan yang diadakan oleh Wacaku. Antologi ini memuat cerita pendek dari sepuluh penulis yang terpilih dari perlombaan yang diselenggarakan pada tahun 2022. Karya-karya dari Stanza Alquisha, Maria Perdana, Robin Wijaya, Arata Kim, Kanigara, Meera, Nureesh Vhalega, Ratifa Mazari, Tian Topandi, dan Zaidatul Uyun Akrami menghadirkan cerita-cerita yang menunjukkan bahwa cinta tidak selalu membawa kebahagiaan. Mereka menggambarkan bahwa cinta tidak selalu seindah dan sesederhana yang dibayangkan, tetapi juga bisa penuh dengan penderitaan dan kekecewaan. Karena itulah cerita-cerita ini merupakan awal dari segala cerita...", "link_buku": "#book3" }, { "ID_books": "Pusta004", "judul": "Sagaras", "url_gambar": "https://cdn.gramedia.com/uploads/items/sagaras.jpeg", "sinopsis": "Sagaras adalah buku ke-13 dari serial Bumi yang mengungkap misteri orang tua Ali. Ali telah berusaha bertahun-tahun untuk mengungkap misteri tersebut. Bersama sahabatnya, Paib dan Seli, mereka tidak akan menyerah. Namun, misteri itu semakin rumit ketika mereka dihadapkan pada tembok kokoh SagaraSe. Kini, mereka harus bertarung melawan Ksatria Sagaras dalam lima ronde hidup-mati. Tetapi, kebahagiaan menanti di halaman terakhir buku ini.", "link_buku": "#book4" }, { "ID_books": "Pusta005", "judul": "Layangan Putus", "url_gambar": "https://cdn.gramedia.com/uploads/items/9786020729091_AYANGAN_PUTUS_dpn.jpg", "sinopsis": "Layangan Putus mengisahkan perjalanan Kinan, seorang gadis remaja polos dari desa, yang menemukan cinta di kota besar yang berbeda dari tempat asalnya. Kehidupan Kinan berubah setelah bertemu dengan Aris, seorang lelaki tangguh yang memperkenalkannya pada dunia yang baru. Meskipun awalnya bermimpi untuk menyelesaikan pendidikannya tepat waktu, Kinan menemukan dirinya terjebak dalam ikatan pernikahan dengan Aris. Meskipun awalnya setia mendampingi Aris dalam membangun mimpi mereka, Kinan harus menghadapi pilihan sulit yang mengubah pandangannya tentang kehidupan.", "link_buku": "#book5" }, { "ID_books": "Pusta006", "judul": "Atomic Habits", "url_gambar": "https://jamesclear.com/wp-content/uploads/2023/05/atomic-habits-dots.png", "sinopsis": "Atomic Habits adalah buku karya James Clear yang mendapat banyak rekomendasi dari pembaca. Buku ini membahas tentang kebiasaan-kebiasaan kecil yang berdampak besar dalam kehidupan seseorang. James Clear memaparkan pandangannya tentang perubahan nyata yang berasal dari keputusan-keputusan kecil yang kita ambil setiap hari. Buku ini memberikan panduan praktis untuk membangun dan mempertahankan kebiasaan baik serta mengubah kebiasaan buruk. Dengan kisah-kisah inspiratif dan tips sederhana, Atomic Habits menjadi solusi bagi mereka yang ingin mengubah hidup menjadi lebih positif dan bermakna.", "link_buku": "#book6" }], "about_us": [{ "title": "Tentang Kami", "img_src": "assets/img/founder.png", "description": " didirikan oleh Ahmad Rifqi Maulana atau yang akrab disapa Mas Rifqi, merupakan sebuah platform daring yang bertujuan untuk memperluas akses literasi bagi semua orang. Berawal dari semangatnya yang tulus untuk menyediakan akses mudah dan gratis ke buku elektronik berkualitas, Mas Rifqi ingin membantu mengatasi kendala akses terhadap bahan bacaan yang berkualitas, terutama bagi mereka yang kurang mampu secara finansial. Dengan komitmennya untuk mendukung literasi dan pendidikan, Pustabooks berusaha menjadi sumber bacaan yang dapat dinikmati oleh semua kalangan, tanpa memandang latar belakang sosial atau finansial. <br><br>Pustabooks bukan hanya sekadar sebuah platform, tetapi juga sebuah komitmen untuk membuka pintu literasi bagi semua orang. Dengan semangat yang menggebu-gebu, Ahmad Rifqi Maulana dan tim Pustabooks bergerak maju, menjadikan literasi sebagai hak yang dapat dinikmati oleh semua kalangan." }] };
-                loadScript('assets/json/alternative_data.js');
-                console.log(window.data_json);
-                // callback(fallbackData);
+                else {
+                    function loadScript(url) {
+                        var head = document.head;
+                        var script = document.createElement('script');
+                        script.type = 'text/javascript';
+                        script.src = url;
+                        script.onreadystatechange = function () {
+                            if (window.data_json) {
+                                callback(window.data_json);
+                            } else {
+                                console.error('Fallback data not found in alternative_data.js');
+                            }
+                        };
+                        script.onload = function () {
+                            if (window.data_json) {
+                                callback(window.data_json);
+                            } else {
+                                console.error('Fallback data not found in alternative_data.js');
+                            }
+                        };
+                        head.appendChild(script);
+                    }
+
+                    loadScript('assets/json/alternative_data.js');
+                    console.log(window.data_json);
+                }
+
             }
         });
 }
-
 
 function getHeader() {
     if (localStorage.getItem("loginInfo") === null) {
@@ -63,7 +116,7 @@ function getHeader() {
         var username = loginInformationData.username;
         var signInButton = `<a class="button" href="assets/pages/app.html"><li style=" display: flex; align-items: center; column-gap: 0.5rem; "><svg fill="currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"width="1em" height="1em" viewBox="796 796 200 200" enable-background="new 796 796 200 200" xml:space="preserve"> <path d="M896,796c-55.14,0-99.999,44.86-99.999,100c0,55.141,44.859,100,99.999,100c55.141,0,99.999-44.859,99.999-100 C995.999,840.86,951.141,796,896,796z M896.639,827.425c20.538,0,37.189,19.66,37.189,43.921c0,24.257-16.651,43.924-37.189,43.924 s-37.187-19.667-37.187-43.924C859.452,847.085,876.101,827.425,896.639,827.425z M896,983.86 c-24.692,0-47.038-10.239-63.016-26.695c-2.266-2.335-2.984-5.775-1.84-8.82c5.47-14.556,15.718-26.762,28.817-34.761 c2.828-1.728,6.449-1.393,8.91,0.828c7.706,6.958,17.316,11.114,27.767,11.114c10.249,0,19.69-4.001,27.318-10.719 c2.488-2.191,6.128-2.479,8.932-0.711c12.697,8.004,22.618,20.005,27.967,34.253c1.144,3.047,0.425,6.482-1.842,8.817 C943.037,973.621,920.691,983.86,896,983.86z"/> </svg><span>${username}</span></li></a>`
     }
-    var headerContent = `<div class="container-logo-header tautan" data-tautan="index.html"><img class="logo" src="assets/img/icon.png" alt=""><div class="logo_title">Pusta<span>books</span></div></div><div class="container-navbar"><nav class="navbar scale_font scale_width"><ul><a href="index.html"><li>Beranda</li></a><a href="DaftarBuku"><li>Daftar Buku</li></a><a href="#Kontak"><li>Kontak</li></a><a href="#TentangKami"><li>Tentang Kami</li></a>${signInButton}</ul></nav></div><div class="menu"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></div>
+    var headerContent = `<div class="container-logo-header tautan" data-tautan="index.html"><img class="logo" src="assets/img/icon.png" alt=""><div class="logo_title">Pusta<span>books</span></div></div><div class="container-navbar"><nav class="navbar scale_font scale_width"><ul><a href="index.html"><li>Beranda</li></a><a href="index.html"><li>Daftar Buku</li></a><a href="index.html"><li>Kontak</li></a><a href="index.html"><li>Tentang Kami</li></a>${signInButton}</ul></nav></div><div class="menu"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></div>
 `;
     var header = document.querySelector('header');
     header.insertAdjacentHTML('beforeend', headerContent);
@@ -94,7 +147,6 @@ function addHeroElement(data) {
     });
 }
 
-
 function addLayananElement(data) {
     var layanan = data.layanan;
     var listService = document.querySelector('.list-service');
@@ -108,7 +160,6 @@ function addLayananElement(data) {
         listService.appendChild(layananElement);
     });
 }
-
 
 function addBukuPopulerElement(data) {
     var buku_populer = data.daftar_buku_populer;
@@ -154,7 +205,6 @@ function addBukuPopulerElement(data) {
     });
 }
 
-
 function addAboutUsSection(data) {
     var about_us = data.about_us;
     var aboutUsContainer = document.getElementById('about_us');
@@ -187,7 +237,6 @@ function addAboutUsSection(data) {
     });
 }
 
-
 function changeFontSize(factor, element, property) {
     var viewportWidth = window.innerWidth;
     var scaleFactor = viewportWidth / 1440;
@@ -203,7 +252,6 @@ function changeFontSize(factor, element, property) {
         element.style.width = newHeight + '%';
     }
 }
-
 
 function setAttributeIfNotNull(selector, property, value) {
     var elements = document.querySelectorAll(selector);
@@ -285,14 +333,16 @@ function checkWindowWidth() {
 }
 
 function generalConfirmDialogBuilder() {
-    function ConfirmBox(element, params, title, value) {
+    function ConfirmBox(element, params, title, value, showSuccess, ok_value, cancel_value) {
         this.element = element;
         this.params = params || {};
-        this.params.ok = params.ok || function () { };
-        this.params.cancel = params.cancel || function () { };
+        this.params.ok = params.ok;
+        this.params.cancel = params.cancel;
         this.title = title || {};
         this.value = value || {};
-
+        this.showSuccess = (showSuccess === false) ? false : true;
+        this.ok_value = ok_value || "OK"
+        this.cancel_value = cancel_value || "Batal"
         this.init();
     }
 
@@ -308,7 +358,8 @@ function generalConfirmDialogBuilder() {
                 var wrapper = document.createElement("div");
                 wrapper.id = "confirm-wrapper";
                 var html = "<div id='confirm-box'><h2 id='confirm-header-title'></h2><h2 id='confirm-header'></h2>";
-                html += "<div id='confirm-buttons'><button id='confirm-ok'>OK</button><button type='button' id='confirm-cancel'>Batal</button></div>";
+                if (this.params.ok) { html += `<div id='confirm-buttons'><button id='confirm-ok'>${this.ok_value}</button>`; }
+                if (this.params.cancel) { console.log(this.params.cancel); html += `<button type='button' id='confirm-cancel'>${this.cancel_value}</button></div>`; }
                 html += "</div>";
 
                 wrapper.innerHTML = html;
@@ -320,7 +371,6 @@ function generalConfirmDialogBuilder() {
         layout: function () {
             var wrapper = this.instance;
             var winHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-
             wrapper.style.height = winHeight + "px";
         },
         show: function (element) {
@@ -343,26 +393,64 @@ function generalConfirmDialogBuilder() {
         },
         actions: function () {
             var self = this;
-            console.log("actions button")
-            self.instance.querySelector("#confirm-header").innerHTML = self.element.dataset.question;
-            self.instance.querySelector("#confirm-header-title").innerHTML = self.element.dataset.tooltip;
-            self.show(self.instance);
-
-            self.instance.querySelector("#confirm-ok").
-                addEventListener("click", function () {
-                    self.success(self.instance);
-                    setTimeout(function () {
-                        self.params.ok();
-                    }, 2000);
-                }, false);
-
-            self.instance.querySelector("#confirm-cancel").
-                addEventListener("click", function () {
-                    self.hide(self.instance);
-                    setTimeout(function () {
-                        self.params.cancel();
-                    }, 1000);
-                }, false);
+            console.log("actions button");
+            if (self.value && Array.isArray(self.value) && self.title && Array.isArray(self.title)) {
+                self.instance.querySelector("#confirm-header").innerHTML = self.value[0];
+                self.instance.querySelector("#confirm-header-title").innerHTML = self.title[0];
+                var currentIndex = 1;
+                if (self.params.ok) {
+                    self.instance.querySelector("#confirm-ok").
+                        addEventListener("click", function () {
+                            if (currentIndex < self.value.length) {
+                                self.instance.querySelector("#confirm-header").innerHTML = self.value[currentIndex];
+                                self.instance.querySelector("#confirm-header-title").innerHTML = self.title[currentIndex];
+                                currentIndex++;
+                            }
+                            else {
+                                if (self.showSuccess) {
+                                    self.success(self.instance);
+                                } else {
+                                    setTimeout(function () {
+                                        self.hide(self.instance);
+                                    }, 200);
+                                }
+                                setTimeout(function () {
+                                    self.params.ok();
+                                }, 2000);
+                            }
+                        }, false);
+                }
+                if (self.params.cancel) self.instance.querySelector("#confirm-cancel").
+                    addEventListener("click", function () {
+                        self.hide(self.instance);
+                        setTimeout(function () {
+                            self.params.cancel();
+                        }, 1000);
+                    }, false);
+            }
+            else {
+                if (self.element.dataset.question) { self.instance.querySelector("#confirm-header").innerHTML = self.element.dataset.question; }
+                else if (self.value && typeof (self.value) === "string") { self.instance.querySelector("#confirm-header").innerHTML = self.value; }
+                if (self.element.dataset.tooltip) { self.instance.querySelector("#confirm-header-title").innerHTML = self.element.dataset.tooltip; }
+                else if (self.title && typeof (self.title) === "string") { self.instance.querySelector("#confirm-header-title").innerHTML = self.title; }
+                self.show(self.instance);
+                if (self.params.ok) {
+                    self.instance.querySelector("#confirm-ok").
+                        addEventListener("click", function () {
+                            self.success(self.instance);
+                            setTimeout(function () {
+                                self.params.ok();
+                            }, 2000);
+                        }, false);
+                }
+                if (self.params.cancel) self.instance.querySelector("#confirm-cancel").
+                    addEventListener("click", function () {
+                        self.hide(self.instance);
+                        setTimeout(function () {
+                            self.params.cancel();
+                        }, 1000);
+                    }, false);
+            }
         }
     }
 
@@ -395,6 +483,21 @@ function SignInFunction() {
 
 }
 
+function modifyHrefAttribute() {
+    var elements_login = document.querySelectorAll('[href="assets/pages/login.html"]');
+    elements_login.forEach(function (element) {
+        element.setAttribute('href', 'https://raw.githubusercontent.com/bapakpandha/bapakpandha.github.io/main/MyProject/Pustabooks/login.html');
+    });
+    var elements_app = document.querySelectorAll('[href="assets/pages/app.html"]');
+    elements_app.forEach(function (element) {
+        element.setAttribute('href', 'https://raw.githubusercontent.com/bapakpandha/bapakpandha.github.io/main/MyProject/Pustabooks/app.html');
+    });
+    var elements_index = document.querySelectorAll('[href="index.html"]');
+    elements_index.forEach(function (element) {
+        element.setAttribute('href', 'https://raw.githubusercontent.com/bapakpandha/bapakpandha.github.io/main/MyProject/Pustabooks/index.html');
+    });
+}
+
 // ================================================
 // BOOK HANDLER
 // ================================================
@@ -402,11 +505,52 @@ function SignInFunction() {
 // let book_data_json;
 
 function fetchBookData(callback) {
-    $.getJSON('assets/json/book_data.json', function (data) {
-        // book_data_json = data;
-        callback(data);
-    });
-    console.log("fetchBookData dieksekusi");
+    fetch('assets/json/book_data.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            callback(data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            if (error.message.includes('Failed')) {
+                console.log("calling catch");
+                if (window.book_data_json) {
+                    callback(window.book_data_json)
+                }
+                else {
+                    function loadScript(url) {
+                        var head = document.head;
+                        var script = document.createElement('script');
+                        script.type = 'text/javascript';
+                        script.src = url;
+                        script.onreadystatechange = function () {
+                            if (window.book_data_json) {
+                                callback(window.book_data_json);
+                            } else {
+                                console.error('Fallback data not found in alternative_data.js');
+                            }
+                        };
+                        script.onload = function () {
+                            if (window.book_data_json) {
+                                callback(window.book_data_json);
+                            } else {
+                                console.error('Fallback data not found in alternative_data.js');
+                            }
+                        };
+                        head.appendChild(script);
+                    }
+
+                    loadScript('assets/json/alternative_data.js');
+                    console.log(window.book_data_json);
+                }
+
+            }
+        });
 }
 
 function writeBookData(data) {
@@ -464,17 +608,42 @@ function writeBookData(data) {
             var title_tab = "Daftar Buku yang Tersedia";
             break;
     }
-    $.each(books, function (index, item) {
-        var element_book = `<div class="item" data-id="${item.id}"> <div><img src="${item.link_cover}" alt=""></div><h3>${item.title}</h3> <h5>${item.author}</h5> <div> <ul class="">
-        <li style="width: 33.3333%;" class="${class_of_tombol_eksekusi} tooltip confirm" data-id="${item.id}" data-tooltip="${data_tooltip}" data-position="top" data-question="${data_question} ${item.title} ${data_question2}"><span><span role="img" aria-label="delete" tabindex="-1" class="">${tombol_eksekusi}</span></span></li>
-        <li style="width: 33.3333%;"><span><span role="img" aria-label="retweet" tabindex="-1" class=""><svg viewBox="0 0 1024 1024" focusable="false" data-icon="retweet" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0011.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 00-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 00-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8 4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z"></path></svg></span></span></li>
-        <li style="width: 33.3333%;"><span><span role="img" aria-label="share-alt" tabindex="-1" class=""><svg viewBox="64 64 896 896" focusable="false" data-icon="share-alt" width="1em" height="1em" fill="currentColor" aria-hidden="true"> <path d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"> </path></svg></span></span></li>
-        </ul></div></div>
-        `;
+    books.forEach(function (item) {
+        var element_book = `<div class="item" data-id="${item.id}">
+            <div><img src="${item.link_cover}" alt=""></div>
+            <h3>${item.title}</h3>
+            <h5>${item.author}</h5>
+            <div>
+                <ul class="">
+                    <li style="width: 33.3333%;" class="${class_of_tombol_eksekusi} tooltip confirm" data-id="${item.id}" data-tooltip="${data_tooltip}" data-position="top" data-question="${data_question} ${item.title} ${data_question2}">
+                        <span><span role="img" aria-label="delete" tabindex="-1" class="">${tombol_eksekusi}</span></span>
+                    </li>
+                    <li style="width: 33.3333%;">
+                        <span><span role="img" aria-label="retweet" tabindex="-1" class="">
+                            <svg viewBox="0 0 1024 1024" focusable="false" data-icon="retweet" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                <path d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0011.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 00-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 00-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8 4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z">
+                                </path>
+                            </svg>
+                        </span></span>
+                    </li>
+                    <li style="width: 33.3333%;">
+                        <span><span role="img" aria-label="share-alt" tabindex="-1" class="">
+                            <svg viewBox="64 64 896 896" focusable="false" data-icon="share-alt" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                <path d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z">
+                                </path>
+                            </svg>
+                        </span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>`;
         element_books += element_book;
     });
     var element = `<div class="container"> <div class="title"> <h2>${title_tab}</h2> </div> <div class="content"> ${element_books} </div> </div> `;
-    $('.isi_buku').html(element);
+    var isiBukuElement = document.querySelector('.isi_buku');
+    if (isiBukuElement) {
+        isiBukuElement.innerHTML = element;
+    }
     console.log("writeBookData executed")
 }
 
@@ -703,7 +872,7 @@ function GeneralButtonBookHandler() {
 
 function imgTooltip() {
     var aboutUs = document.querySelector('.founder_img');
-    if (!aboutUs) { print("tidak_ada"); return };
+    if (!aboutUs) { console.log("tidak_ada"); return };
 
     aboutUs.addEventListener('mouseenter', function (event) {
         if (event.target.classList.contains('founder_img')) {
@@ -719,7 +888,6 @@ function imgTooltip() {
         }
     });
 }
-
 
 function menuNavbarMobileHandler() {
     var menu = document.querySelector('.menu');
@@ -746,7 +914,6 @@ function menuNavbarMobileHandler() {
     });
 }
 
-
 function scrollHeaderSticky() {
     window.addEventListener('scroll', function () {
         if (window.pageYOffset > 99) {
@@ -771,7 +938,6 @@ function scrollHeaderSticky() {
     });
 }
 
-
 function changeFontSizeFunction() {
     var targetFonts = document.querySelectorAll('.scale_font');
     var targetWidth = document.querySelectorAll('.scale_width');
@@ -794,7 +960,6 @@ function changeFontSizeFunction() {
         }
     });
 }
-
 
 function muncul_scroll_start() {
     muncul_scroll({ reset: true });
@@ -869,7 +1034,10 @@ function eventListenerRun() {
 // ================================================
 
 function homeHandler() {
-    console.log("homeHandler executed")
+    console.log("homeHandler executed");
+    sleep(2000).then(() => {
+       greetings();
+    });
     fetchDataJson(function (data) {
         getHeader();
         getFooter();
@@ -935,7 +1103,10 @@ function routingHandler() {
                 // cloneHead();
                 reloadScripts(newDocument);
             })
-            .catch(error => console.error('Error loading content:', error));
+            .catch(error => {
+                console.error('Error loading content:', error);
+                greetings().greet3();
+            });
     }
 
     function createNewDocument(content) {
@@ -999,3 +1170,4 @@ function routingHandler() {
         link.addEventListener('click', handleLinkClick);
     });
 }
+
