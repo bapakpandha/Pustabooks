@@ -8,23 +8,9 @@
 
 @font-face {
     font-family: 'Poppins';
-    font-weight: 900;
-    font-style: italic;
-    src: url('../../assets/fonts/Poppins/Poppins-BlackItalic.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Poppins';
     font-weight: 700;
     font-style: normal;
     src: url('../../assets/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-weight: 700;
-    font-style: italic;
-    src: url('../../assets/fonts/Poppins/Poppins-BoldItalic.ttf') format('truetype');
 }
 
 @font-face {
