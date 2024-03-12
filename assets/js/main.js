@@ -39,7 +39,7 @@ function greetings() {
             cancel: function () {
                 console.log('cancel')
             }
-        }, ["Selamat Datang", "Selamat Datang"], ["Ini adalah Website prototipe Pustabooks untuk submisi Tugas Proyek Akhir Dicoding", "Jika anda merupakan Team Reviewer dari DICODING, mohon bacalah baik-baik petunjuk berikut untuk mendapatkan pengalaman yang terbaik."], showSuccess = false);
+        }, ["Selamat Datang", "Selamat Datang"], ["Ini adalah Website prototipe Pustabooks untuk submisi Tugas Proyek Akhir Dicoding", "Jika anda merupakan Team Reviewer dari DICODING, mohon bacalah baik-baik petunjuk berikut untuk mendapatkan pengalaman yang terbaik.", `Halaman Pentunjuk fitur-fitur dan Kriteria pengumpulan dapat anda lihat melalui <span style="color:blue;cursor:pointer;" onclick="window.open('readme.html', '_blank');">tautan ini</span>`], showSuccess = false);
     }
     var ConfirmBox = generalConfirmDialogBuilder();
     var element = document.querySelector("body");
@@ -1180,8 +1180,8 @@ function routingHandler() {
     }
 
     function replaceBodyDocument(html) {
-        console.log(typeof (html));
-        console.log(html);
+        // console.log(typeof (html));
+        // console.log(html);
         var oldBody = document.getElementsByTagName('body')[0];
         oldBody.replaceWith(html);
     }
