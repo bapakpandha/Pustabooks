@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTML Table Generator</title> 
+	<style>
+		table {
+			border:1px solid #b3adad;
+			border-collapse:collapse;
+			padding:5px;
+		}
+		table th {
+			border:1px solid #b3adad;
+			padding:5px;
+			background: #f0f0f0;
+			color: #313030;
+		}
+		table td {
+			border:1px solid #b3adad;
+			text-align:center;
+			padding:5px;
+			background: #ffffff;
+			color: #313030;
+            max-width: 450px;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th style="width: 30px;">No</th>
+				<th>Kriteria Dasar</th>
+				<th>Terpenuhi?</th>
+			</tr>
+		</thead>
+		<tbody>
+            <tr>
+				<td>1.</td>
+				<td>Masing-masing elemen wajib berisi konten yang peruntukkannya sesuai dengan elemen tersebut</td>
+				<td>&#9989;</td>
+			</tr>
+			<tr>
+				<td>2.</td>
+				<td>Masing-masing elemen wajib berisi konten yang peruntukkannya sesuai dengan elemen tersebut</td>
+				<td>&#9989;</td>
+			</tr>
+			<tr>
+				<td>3.</td>
+				<td>Tidak terdapat duplikasi elemen &lt;main&gt;</td>
+				<td>&#9989;</td>
+			</tr>
+			<tr>
+				<td>4.</td>
+				<td>Elemen &lt;main&gt; harus berada diantara &lt;header&gt; dan &lt;footer&gt;</td>
+				<td>&#9989;</td>
+			</tr>
+			<tr>
+				<td>5.</td>
+				<td><font color="#313030">Harus terdapat elemen &lt;header&gt; sebelum &lt;main&gt; dan &lt;footer&gt; sesudah &lt;main&gt;</font><br></td>
+				<td>&#9989;</td>
+			</tr>
+			<tr>
+				<td>6.</td>
+				<td>Jika terdapat elemen &lt;header&gt; atau &lt;footer&gt; di dalam elemen &lt;article&gt; atau &lt;aside&gt;, maka hal tersebut diperbolehkan</td>
+				<td>&#9989;</td>
+			</tr>
+			<tr>
+				<td>7.</td>
+				<td>Wajib menampilkan menampilkan foto di elemen &lt;aside&gt;</td>
+				<td>&#9989;</td>
+			</tr>
+			<tr>
+				<td>8.</td>
+				<td>Menyusun layout menggunakan flexbox, bukan float</td>
+				<td>&#9989;</td>
+			</tr>
+			<tr>
+				<td>9.</td>
+				<td><font color="#313030">Tema yang ditampilkan bebas, kecuali tema Bandung</font><br></td>
+				<td>&#9989;</td>
+			</tr>
+		</tbody>
+	</table>
+    <br><br><br>
+    <table>
+		<thead>
+			<tr>
+				<th style="width: 30px;">No</th>
+				<th>Penilaian Tambahan</th>
+				<th>Terpenuhi?</th>
+                <th style="max-width: 30px;">Catatan</th>
+			</tr>
+		</thead>
+		<tbody>
+            <tr>
+				<td>1.</td>
+				<td>Menerapkan tampilan aplikasi yang menarik</td>
+				<td>&#9989;</td>
+                <td>Menurut kami, aplikasi web ini sudah dibuat semenarik mungkin, seperti warna tema yang sesuai, tidak ada konten bertumpuk, font yang tepat, dan padding-margin yang tepat</td>
+			</tr>
+			<tr>
+				<td>2.</td>
+				<td>Menerapkan layout yang responsif</td>
+				<td>&#9989;</td>
+                <td>Penerapan layout yang responsif dan menyesuaikan lebar viewport. Adapun tingkat responsif yang optimal dapat dicapai pada viewport minimal 525px dan maksimal 2560px (Jika diluar range ini, mungkin tampilan website agak sedikit berantakan meskipun masih sangat readable)</td>
+			</tr>
+			<tr>
+				<td>3.</td>
+				<td>Terdapat penerapan JavaScript dalam memanipulasi DOM</td>
+				<td>&#9989;</td>
+                <td>Website ini berbasis JavaScript yang mana terdapat banyak sekali fitur yang bisa anda eksplorasi sendiri</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

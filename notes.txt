@@ -1,3 +1,37 @@
-1. Aside dan article diletakkan di About us mengacu pada ppsmb 2022
-2. Gunakan SPA (single Page Aplication) berbasis javascript (lihat chat gpt)
-3. Explore --> Tambahkan ke rak buku
+PUSTABOOKS V0.2.20 NEW RELEASE BETA (Submission: Tugas Akhir Membuat Website)
+
+FITUR-FITUR TAMBAHAN:
+
+--FETCH DATA--
+1. Fetch data dari lokal JSON
+2. Fallback fetch data dari konten github raw data jika gagal mengambil file JSON akibat kebijakan CORS.
+3. Fallback fetch data dari file alternative_data.js dengan cara mengambil variabel global di file alternative_data.js
+
+--DIALOG MODAL--
+4. Custom Confirmation Dialog Modal yang dibuat murni dari javascript tanpa library
+5. Ucapan greetings modal di awal data sebagai sambutan pengunjung saat pertama kali berkunjung ke Website
+
+--DOM & STYLE MANIPULATION--
+6. Pembuatan Header yang dinamis dengan manipulasi DOM sehingga efisien (hanya cukup satu fungsi kode untuk menampilkan header di seluruh halaman, tanpa harus menulis elemen header di setiap halaman web)
+7. Penerapan Footer yang dinamis dengan manipulasi DOM sehingga efisien
+8. Penerapan Loop pada elemen Item Buku Populer dengan memanipulasi DOM melalui javascript
+9. Penerapan Loop pada elemen Layanan dengan memanipulasi DOM melalui javascript
+10. Manipulasi DOM pada pemuatan data about_us
+11. Penerapan ukuran font yang dinamis pada elemen tertentu mengacu pada viewport pengguna
+12. Manipulasi CSS dan class CSS dengan javascript untuk kebutuhan user interact dan responsif
+13. Halaman SIGN IN yang mewajibkan user untuk memasukkan data sesuai dengan ketentuan
+14. Menu Navbar yang menyesuaikan device user (responsif)
+15. Scroll Header yang bersifat dinamis ketika discroll
+16. Animasi SCROLL yang dibuat murni dengan javascript vanilla tanpa library apapun
+
+--LOCALSTORAGE & SESSIONSTORAGE--
+17. Penerapan Local Storage dalam menyimpan data buku user
+18. Penerapan sessionStorage dalam membedakan user interact
+
+--ROUTING HANDLER & JAVASCRIPT BASED WEB--
+19. Setiap Halaman akan dimuat sebagai DOM tanpa harus berpindah window.location Sehingga tidak ada reload dan url hanya tertuju pada satu halaman saja
+
+20. Dan masih banyak fitur yang lainnya yang bisa anda eksplorasi sendiri
+
+NOTE: Web ini dibuat tanpa menggunakan library apapun (Murni vanilla), hanya berbasis javascript.
+Semua fitur bisa anda analisis pada file "assets/js/main.js" yang sudah saya beri sedikit komentar untuk memahami struktur fungsi web.
