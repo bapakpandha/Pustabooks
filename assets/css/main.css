@@ -1339,3 +1339,5 @@ main .rak_buku.tabs>div.active {
 main:has(>.container>.container-login) {
     margin-bottom: 5rem;
 }
+
+#tambahBuku:hover{transform: scale(1.1);cursor: pointer;}

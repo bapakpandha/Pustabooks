@@ -43,7 +43,7 @@ function greetings() {
     }
     var ConfirmBox = generalConfirmDialogBuilder();
     var element = document.querySelector("body");
-    if (sessionStorage.getItem("hideGreet") === null) { greet1(); }
+    // if (sessionStorage.getItem("hideGreet") === null) { greet1(); }
     return { greet1: greet1, greet2: greet2, greet3: greet3 }
 }
 
@@ -681,9 +681,10 @@ function writeBookData(data) {
     }
     books.forEach(function (item) {
         var element_book = `<div class="item" data-id="${item.id}">
-            <div><img src="${item.link_cover}" alt=""></div>
+            <div><img src="${item.link_cover}" alt="cover" onerror="this.onerror=null; this.src='assets/img/Default_cover_image.jpg'"></div>
             <h3>${item.title}</h3>
             <h5>${item.author}</h5>
+            <h5>${item.year}</h5>
             <div>
                 <ul class="">
                     <li style="width: 33.3333%;" class="${class_of_tombol_eksekusi} tooltip confirm" data-id="${item.id}" data-tooltip="${data_tooltip}" data-position="top" data-question="${data_question} ${item.title} ${data_question2}">
@@ -710,7 +711,10 @@ function writeBookData(data) {
         </div>`;
         element_books += element_book;
     });
+    var addNewBook = `<div class=item data-id=12 id="tambahBuku" onclick="addNewBookHandler().showModal()"><div style="border:5px dotted;height:90%;display:flex;align-items:center;justify-content:center"><svg height=50% viewBox="0 0 24 24"width=50% xmlns=http://www.w3.org/2000/svg><title></title><g id=Complete><g id=add-2 data-name=add><g><line fill=none stroke=#000000 stroke-linecap=round stroke-linejoin=round stroke-width=2 x1=12 x2=12 y1=19 y2=5></line><line fill=none stroke=#000000 stroke-linecap=round stroke-linejoin=round stroke-width=2 x1=5 x2=19 y1=12 y2=12></line></g></g></g></svg></div><h3 style=text-align:center>Tambahkan Buku Baru Custom</h3></div>`;
+    element_books += addNewBook;
     var element = `<div class="container"> <div class="title"> <h2>${title_tab}</h2> </div> <div class="content"> ${element_books} </div> </div> `;
+
     var isiBukuElement = document.querySelector('.isi_buku');
     if (isiBukuElement) {
         isiBukuElement.innerHTML = element;
@@ -736,6 +740,276 @@ function writeBookDataExec() {
     }
 
     GeneralButtonBookHandler();
+}
+
+function addNewBookHandler() {
+    function showModal() {
+        if (document.querySelector(".addNewBook") === null) {
+            var doc = document.createElement('div');
+            doc.classList.add("addNewBook");
+            var element = `
+        <div class="demo-page">
+            <main class="demo-page-content">
+                <section>
+                    <h1>
+                        <svg class="feather feather-align-justify" style="display: block;margin:auto;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect width="24" height="24" fill="white"></rect> <path d="M12 6.90909C10.8999 5.50893 9.20406 4.10877 5.00119 4.00602C4.72513 3.99928 4.5 4.22351 4.5 4.49965C4.5 6.54813 4.5 14.3034 4.5 16.597C4.5 16.8731 4.72515 17.09 5.00114 17.099C9.20405 17.2364 10.8999 19.0998 12 20.5M12 6.90909C13.1001 5.50893 14.7959 4.10877 18.9988 4.00602C19.2749 3.99928 19.5 4.21847 19.5 4.49461C19.5 6.78447 19.5 14.3064 19.5 16.5963C19.5 16.8724 19.2749 17.09 18.9989 17.099C14.796 17.2364 13.1001 19.0998 12 20.5M12 6.90909L12 20.5" stroke="#000000" stroke-linejoin="round"></path> <path d="M19.2353 6H21.5C21.7761 6 22 6.22386 22 6.5V19.539C22 19.9436 21.5233 20.2124 21.1535 20.0481C20.3584 19.6948 19.0315 19.2632 17.2941 19.2632C14.3529 19.2632 12 21 12 21C12 21 9.64706 19.2632 6.70588 19.2632C4.96845 19.2632 3.64156 19.6948 2.84647 20.0481C2.47668 20.2124 2 19.9436 2 19.539V6.5C2 6.22386 2.22386 6 2.5 6H4.76471" stroke="#000000" stroke-linejoin="round"></path> </g></svg>
+                        Tambahkan Buku Baru
+                    </h1>
+                    <p>Masukkan Detail Buku dibawah</p>
+    
+                    <div class="nice-form-group">
+                        <label>Judul Buku</label>
+                        <input type="text" id="title" placeholder="Contoh: The Da Vinci Code" value="">
+                    </div>
+    
+                    <div class="nice-form-group">
+                        <label>Penulis/Author</label>
+                        <input type="text" id="author" placeholder="Contoh: Dan Brown" value="">
+                    </div>
+    
+                    <div class="nice-form-group">
+                        <label>Tahun Terbit</label>
+                        <input type="number" id="year" min="1900" max="2099" step="1" value="2016" placeholder="Contoh: 2016" />
+                    </div>
+    
+                    <div class="nice-form-group">
+                        <label>Tautan Gambar Cover (Opsional)</label>
+                        <input style="text-transform: lowercase;" type="url" id="url_cover" placeholder="Contoh: https://i.imgur.com/kTw4qFq.jpeg" value="">
+                    </div>
+       
+                    <div class="nice-form-group">
+                        <label>Deskripsi Buku (Opsional)</label>
+                        <!-- <input type="search" placeholder="" value=""> -->
+                        <textarea name="Text1" id="book_summary" cols="10" rows="3"></textarea>
+                    </div>
+                    <div class="addNewBookWrapper">
+                        <div class="addNewBook_Button" id="submitAddNewBook" onclick="addNewBookHandler().submitBook()">
+                        Tambahkan Buku
+                        </div>
+                        <div onclick="addNewBookHandler().hideModal()" class="addNewBook_Button red">
+                        Cancel
+                        </div>
+                    </div>
+
+                </section>
+            </main>
+        </div>
+        <style>
+            .addNewBook {
+                width: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 1000000;
+                background: rgba(204, 204, 204, 0.6);
+                /* display: none; */
+                transition: opacity .5s ease-in;
+                /* height: 1378px; */
+                opacity: 1;
+                height: 100%;
+                text-transform: none;
+            }
+            .addNewBook main, .addNewBook section {
+                margin-top: 0;
+            }
+            .addNewBookWrapper {
+                    display: flex;
+                    justify-content: space-between;
+            }
+            .addNewBook .demo-page {
+                margin: 0 auto;
+                display: -webkit-flex;
+                display: flex;
+                max-width: 55em;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
+            .addNewBook .demo-page .demo-page-content {
+                width: calc(100% - 5em);
+            }
+            .addNewBook .demo-page .demo-page-content {
+                padding: 2em 1em;
+                max-width: 100%;
+            }
+            .addNewBook section {
+                background: #fff;
+                padding: 2em;
+                border-radius: 0.75rem;
+                line-height: 1.6;
+                overflow: hidden;
+                margin-bottom: 2rem;
+                position: relative;
+                font-size: 0.875rem;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05);
+            }
+            .addNewBook section h1 {
+                font-weight: 500;
+                font-size: 1.25rem;
+                color: #000;
+                margin-bottom: 0.75rem;
+                text-align: center;
+            }
+            .addNewBook section p {
+                margin: 0.5rem 0 1.5rem;
+            }
+            .addNewBook .nice-form-group {
+                --nf-input-size: 1rem;
+                --nf-input-font-size: calc(var(--nf-input-size)*0.875);
+                --nf-small-font-size: calc(var(--nf-input-size)*0.875);
+                --nf-input-font-family: inherit;
+                --nf-label-font-family: inherit;
+                --nf-input-color: #20242f;
+                --nf-input-border-radius: 0.25rem;
+                --nf-input-placeholder-color: #929292;
+                --nf-input-border-color: #c0c4c9;
+                --nf-input-border-width: 1px;
+                --nf-input-border-style: solid;
+                --nf-input-border-bottom-width: 2px;
+                --nf-input-focus-border-color: #3b4ce2;
+                --nf-input-background-color: #f9fafb;
+                --nf-invalid-input-border-color: var(--nf-input-border-color);
+                --nf-invalid-input-background-color: var(--nf-input-background-color);
+                --nf-invalid-input-color: var(--nf-input-color);
+                --nf-valid-input-border-color: var(--nf-input-border-color);
+                --nf-valid-input-background-color: var(--nf-input-background-color);
+                --nf-valid-input-color: inherit;
+                --nf-invalid-input-border-bottom-color: red;
+                --nf-valid-input-border-bottom-color: green;
+                --nf-label-font-size: var(--nf-small-font-size);
+                --nf-label-color: #374151;
+                --nf-label-font-weight: 500;
+                --nf-slider-track-background: #dfdfdf;
+                --nf-slider-track-height: 0.25rem;
+                --nf-slider-thumb-size: calc(var(--nf-slider-track-height)*4);
+                --nf-slider-track-border-radius: var(--nf-slider-track-height);
+                --nf-slider-thumb-border-width: 2px;
+                --nf-slider-thumb-border-focus-width: 1px;
+                --nf-slider-thumb-border-color: #fff;
+                --nf-slider-thumb-background: var(--nf-input-focus-border-color);
+                display: block;
+                margin-top: calc(var(--nf-input-size)*1.5);
+                line-height: 1;
+                white-space: nowrap;
+                --switch-orb-size: var(--nf-input-size);
+                --switch-orb-offset: calc(var(--nf-input-border-width)*2);
+                --switch-width: calc(var(--nf-input-size)*2.5);
+                --switch-height: calc(var(--nf-input-size)*1.25 + var(--switch-orb-offset));
+            }
+            .addNewBook .nice-form-group>label {
+                font-weight: var(--nf-label-font-weight);
+                display: block;
+                color: var(--nf-label-color);
+                font-size: var(--nf-label-font-size);
+                font-family: var(--nf-label-font-family);
+                margin-bottom: calc(var(--nf-input-size)/2);
+                white-space: normal;
+            }
+            .addNewBook .nice-form-group>input[type=checkbox], .nice-form-group>input[type=date], .nice-form-group>input[type=email], .nice-form-group>input[type=month], .nice-form-group>input[type=number], .nice-form-group>input[type=password], .nice-form-group>input[type=radio], .nice-form-group>input[type=search], .nice-form-group>input[type=tel], .nice-form-group>input[type=text], .nice-form-group>input[type=time], .nice-form-group>input[type=url], .nice-form-group>input[type=week], .nice-form-group>select, .nice-form-group>textarea {
+                background: var(--nf-input-background-color);
+                font-family: inherit;
+                font-size: var(--nf-input-font-size);
+                border-bottom-width: var(--nf-input-border-width);
+                font-family: var(--nf-input-font-family);
+                box-shadow: none;
+                border-radius: var(--nf-input-border-radius);
+                border: var(--nf-input-border-width) var(--nf-input-border-style) var(--nf-input-border-color);
+                border-bottom: var(--nf-input-border-bottom-width) var(--nf-input-border-style) var(--nf-input-border-color);
+                color: var(--nf-input-color);
+                width: 100%;
+                padding: calc(var(--nf-input-size)*0.75);
+                height: calc(var(--nf-input-size)*2.75);
+                line-height: normal;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                transition: all 0.15s ease-out;
+                --icon-padding: calc(var(--nf-input-size)*2.25);
+                --icon-background-offset: calc(var(--nf-input-size)*0.75);
+            }
+            .addNewBook .addNewBook_Button {
+                margin-top: 2rem;
+                display: inline-block;
+                padding: 0.5em 1em;
+                border-radius: 5px;
+                font-size: 0.875rem;
+                background: var(--third-color);
+                top: 1em;
+                right: 1em;
+                color: #fff;
+                font-weight: 500;
+                -webkit-user-select: none;
+                user-select: none;
+                cursor: pointer;
+            }
+            .addNewBook .addNewBook_Button.red{
+                background:red;
+            }
+            </style>
+        `;
+            doc.innerHTML = element;
+            document.body.appendChild(doc);
+        }
+    }
+
+    function hideModal() {
+        const modal = document.querySelector(".addNewBook");
+        if (modal) {
+            modal.remove();
+        }
+    }
+
+    function submitBook() {
+        const modal = document.querySelector('.addNewBook');
+        const title = modal.querySelector('#title').value;
+        const author = modal.querySelector('#author').value;
+        const year = modal.querySelector('#year').value;
+        const link_cover = modal.querySelector('#url_cover').value;
+        const summary = modal.querySelector('#book_summary').value;
+
+        if (!title || !author || !year) {
+            var ConfirmBox = generalConfirmDialogBuilder();
+            var confBox = new ConfirmBox(document.body, {
+                ok: function () {
+                    return
+                }
+            }, [`Data Buku Tidak Lengkap!`], [`Mohon tambahkan setidaknya Judul, Nama Penulis, dan Tahun terbit!`], showSuccess = false, ok_value = "Ok");
+        } else {
+
+            let bookData = JSON.parse(localStorage.getItem("book_data"));
+            if (!bookData) {
+                bookData = { main: [] };
+            }
+            let nextId = 1;
+            if (bookData.main.length > 0) {
+                nextId = bookData.main[bookData.main.length - 1].id + 1;
+            }
+
+            const book_data = {
+                "id": nextId,
+                "title": title,
+                "author": author,
+                "year": Number(year),
+                "isComplete": false,
+                "link_cover": link_cover,
+                "isInBookshelf": false,
+                "summary": summary
+            }
+            var ConfirmBox = generalConfirmDialogBuilder();
+            var confBox = new ConfirmBox(modal, {
+                ok: function () {
+                    bookData.main.push(book_data);
+                    localStorage.setItem("book_data", JSON.stringify(bookData));
+                    hideModal();
+                    writeBookDataExec();
+                },
+                cancel: function () {
+                    console.log('cancel');
+                }
+            }, [`Tambahkan Buku?`], [`Apakah Anda yakin ingin menambahkan buku ${title} ke dalam katalog Buku?`], showSuccess = true, ok_value = "Ok", cancel_value = "Cancel");
+        }
+    }
+    return { showModal: showModal, hideModal: hideModal, submitBook: submitBook }
 }
 
 // ================================================
@@ -972,14 +1246,14 @@ function menuNavbarMobileHandler() {
 
         var menuIcon = menu.querySelector('svg');
         if (menu.classList.contains('cancel')) {
-            menuIcon.setAttribute("viewBox","0,0,330,330");
+            menuIcon.setAttribute("viewBox", "0,0,330,330");
             menuIcon.innerHTML = '<path d="M165,0C74.019,0,0,74.019,0,165s74.019,165,165,165c90.982,0,165-74.019,165-165S255.982,0,165,0z M165,300 c-74.439,0-135-60.561-135-135S90.561,30,165,30c74.439,0,135,60.561,135,135S239.439,300,165,300z"></path><path d="M239.247,90.754c-5.857-5.858-15.355-5.858-21.213,0l-53.033,53.033l-53.033-53.033c-5.857-5.858-15.355-5.858-21.213,0 c-5.858,5.858-5.858,15.355,0,21.213L143.788,165l-53.033,53.033c-5.858,5.858-5.858,15.355,0,21.213 c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.606-4.394l53.033-53.033l53.033,53.033 c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L186.214,165 l53.033-53.033C245.105,106.109,245.105,96.612,239.247,90.754z"></path>';
             document.querySelectorAll('.header.mobile nav>ul>a').forEach(function (link) {
                 link.classList.add('animated');
             });
         } else {
             menuIcon.innerHTML = '<path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>';
-            menuIcon.setAttribute("viewBox","0,0,24,24")
+            menuIcon.setAttribute("viewBox", "0,0,24,24")
             document.querySelectorAll('.header.mobile nav>ul>a').forEach(function (link) {
                 link.classList.remove('animated');
             });
