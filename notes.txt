@@ -35,3 +35,5 @@ FITUR-FITUR TAMBAHAN:
 
 NOTE: Web ini dibuat tanpa menggunakan library apapun (Murni vanilla), hanya berbasis javascript.
 Semua fitur bisa anda analisis pada file "assets/js/main.js" yang sudah saya beri sedikit komentar untuk memahami struktur fungsi web.
+
+FITUR HAPUS + EDIT + PENCARIAN

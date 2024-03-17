@@ -3,6 +3,14 @@
 // ================================================
 
 function greetings() {
+    function greet4() {
+        var confBox = new ConfirmBox(element, {
+            ok: function () {
+                console.log('ok');
+                sessionStorage.setItem('hideGreet', false);
+            }
+        }, ["SELAMAT DATANG"], [`Jika anda Dicoding Reviewer untuk Submission Aplikasi Pengelolaan Data Menggunakan DOM dan Web Storage, ikuti petunjuk berikut:<br><br><span style='text-align:left;'> 1. Klik tombol SIGN IN di bagian Header navigasi<br><br>2. Masuk menggunakan username='dicoding', password='dicoding'<br><br>3. Klik tombol dicoding pada navigasi di Header untuk menuju ke RAK BUKU</span>`], showSuccess = false, ok_value = "OK");
+    }
     function greet3() {
         var confBox = new ConfirmBox(element, {
             ok: function () {
@@ -43,7 +51,7 @@ function greetings() {
     }
     var ConfirmBox = generalConfirmDialogBuilder();
     var element = document.querySelector("body");
-    // if (sessionStorage.getItem("hideGreet") === null) { greet1(); }
+    if (sessionStorage.getItem("hideGreet") === null) { greet4(); }
     return { greet1: greet1, greet2: greet2, greet3: greet3 }
 }
 
@@ -624,7 +632,7 @@ function fetchBookData(callback) {
         });
 }
 
-function writeBookData(data) {
+function convertDataToElement(data) {
     const currentActiveElement = document.querySelector('main .rak_buku.tabs div.active');
     const tabContent = currentActiveElement.textContent.trim();
     var element_books = "";
@@ -691,19 +699,16 @@ function writeBookData(data) {
                         <span><span role="img" aria-label="delete" tabindex="-1" class="">${tombol_eksekusi}</span></span>
                     </li>
                     <li style="width: 33.3333%;">
-                        <span><span role="img" aria-label="retweet" tabindex="-1" class="">
+                        <span><span role="img" aria-label="retweet" tabindex="-1">
                             <svg viewBox="0 0 1024 1024" focusable="false" data-icon="retweet" width="1em" height="1em" fill="currentColor" aria-hidden="true">
                                 <path d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0011.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 00-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 00-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8 4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z">
                                 </path>
                             </svg>
                         </span></span>
                     </li>
-                    <li style="width: 33.3333%;">
+                    <li style="width: 33.3333%;" data-tooltip="Hapus Buku Dari Database Pustabooks" data-position="top" class="button-deleteBook tooltip confirm" data-id="${item.id}" data-question="Apakah Anda yakin ingin menghapus buku ${item.title} dari database Pustabooks? Buku yang sudah dihapus tidak dapat dikembalikan kecuali anda menambahkannya ulang.">
                         <span><span role="img" aria-label="share-alt" tabindex="-1" class="">
-                            <svg viewBox="64 64 896 896" focusable="false" data-icon="share-alt" width="1em" height="1em" fill="currentColor" aria-hidden="true">
-                                <path d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8a160.68 160.68 0 000-57.6l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120zm0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88zm440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z">
-                                </path>
-                            </svg>
+                            <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M6.30958 3.54424C7.06741 2.56989 8.23263 2 9.46699 2H20.9997C21.8359 2 22.6103 2.37473 23.1614 2.99465C23.709 3.61073 23.9997 4.42358 23.9997 5.25V18.75C23.9997 19.5764 23.709 20.3893 23.1614 21.0054C22.6103 21.6253 21.8359 22 20.9997 22H9.46699C8.23263 22 7.06741 21.4301 6.30958 20.4558L0.687897 13.2279C0.126171 12.5057 0.126169 11.4943 0.687897 10.7721L6.30958 3.54424ZM10.2498 7.04289C10.6403 6.65237 11.2734 6.65237 11.664 7.04289L14.4924 9.87132L17.3208 7.04289C17.7113 6.65237 18.3445 6.65237 18.735 7.04289L19.4421 7.75C19.8327 8.14052 19.8327 8.77369 19.4421 9.16421L16.6137 11.9926L19.4421 14.8211C19.8327 15.2116 19.8327 15.8448 19.4421 16.2353L18.735 16.9424C18.3445 17.3329 17.7113 17.3329 17.3208 16.9424L14.4924 14.114L11.664 16.9424C11.2734 17.3329 10.6403 17.3329 10.2498 16.9424L9.54265 16.2353C9.15212 15.8448 9.15212 15.2116 9.54265 14.8211L12.3711 11.9926L9.54265 9.16421C9.15212 8.77369 9.15212 8.14052 9.54265 7.75L10.2498 7.04289Z" fill="#000000"></path> </g></svg>
                         </span></span>
                     </li>
                 </ul>
@@ -711,15 +716,40 @@ function writeBookData(data) {
         </div>`;
         element_books += element_book;
     });
+    var obj = { title_tab: title_tab, element_books: element_books };
+    return obj
+}
+
+function writeBookData(data) {
+    var convertedData = convertDataToElement(data);
     var addNewBook = `<div class=item data-id=12 id="tambahBuku" onclick="addNewBookHandler().showModal()"><div style="border:5px dotted;height:90%;display:flex;align-items:center;justify-content:center"><svg height=50% viewBox="0 0 24 24"width=50% xmlns=http://www.w3.org/2000/svg><title></title><g id=Complete><g id=add-2 data-name=add><g><line fill=none stroke=#000000 stroke-linecap=round stroke-linejoin=round stroke-width=2 x1=12 x2=12 y1=19 y2=5></line><line fill=none stroke=#000000 stroke-linecap=round stroke-linejoin=round stroke-width=2 x1=5 x2=19 y1=12 y2=12></line></g></g></g></svg></div><h3 style=text-align:center>Tambahkan Buku Baru Custom</h3></div>`;
+    var element_books = convertedData.element_books;
+    var title_tab = convertedData.title_tab;
     element_books += addNewBook;
-    var element = `<div class="container"> <div class="title"> <h2>${title_tab}</h2> </div> <div class="content"> ${element_books} </div> </div> `;
+    var element = `<div class="container"> <div class="title"> <h2>${title_tab}</h2> </div> <div id="search">
+
+    <form action="javascript:void(0);">
+
+        <fieldset class="clearfix" style="
+display: flex;
+flex-direction: row;
+">
+            <input type="search" name="search" value="Cari Buku disini" onblur="if(this.value=='')this.value='Cari Buku disini'" onfocus="if(this.value=='Cari Buku disini')this.value='' "> <!-- JS because of IE support; better: placeholder="Cari Buku disini" -->
+            <input name="search_submit" type="submit" value="Search" class="button">
+            <input type="submit" value="Reset" class="button" onclick="writeBookDataExec()">
+        </fieldset>
+
+    </form>
+
+</div>  <div class="content"> ${element_books} </div> </div>
+`;
 
     var isiBukuElement = document.querySelector('.isi_buku');
     if (isiBukuElement) {
         isiBukuElement.innerHTML = element;
     }
-    console.log("writeBookData executed")
+    console.log("writeBookData executed");
+    generalSearchHandler();
 }
 
 function writeBookDataExec() {
@@ -1012,6 +1042,57 @@ function addNewBookHandler() {
     return { showModal: showModal, hideModal: hideModal, submitBook: submitBook }
 }
 
+function generalSearchHandler() {
+    // const searchBar = document.querySelector('input[type="search"][name="search"]');
+    // let timeoutId;
+    // searchBar.addEventListener("keyup", e => {
+    //   clearTimeout(timeoutId); 
+    //   timeoutId = setTimeout(() => {
+    //     var searchString = e.target.value;
+    //     var jsonDataString = GeneralLocalStorageHandler.loadDataFromStorage();
+    //     let filteredBookName = jsonDataString.main.filter(book =>book.title.toLowerCase().includes(searchString.toLowerCase()));
+    //     var newBookData = {"main":filteredBookName};
+    //     var elements_books = convertDataToElement(newBookData).element_books;
+    //     let konten = document.querySelector('.isi_buku .content');
+    //     if(konten){
+    //         konten.innerHTML = elements_books;
+    //     }
+    //   }, 100);
+    // });
+
+    function handleSearch(searchString) {
+        var jsonDataString = GeneralLocalStorageHandler.loadDataFromStorage();
+        let filteredBookName = jsonDataString.main.filter(book => book.title.toLowerCase().includes(searchString.toLowerCase()));
+        var newBookData = { "main": filteredBookName };
+        var elements_books = convertDataToElement(newBookData).element_books;
+        let konten = document.querySelector('.isi_buku .content');
+        if (konten) {
+            konten.innerHTML = elements_books;
+        }
+    }
+
+    function searchHandler() {
+        const searchBar = document.querySelector('input[type="search"][name="search"]');
+        let timeoutId;
+        searchBar.addEventListener("keyup", e => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                var searchString = e.target.value;
+                handleSearch(searchString);
+            }, 100);
+        });
+    }
+
+    function searchButtonClickHandler() {
+        const searchBar = document.querySelector('input[type="search"][name="search"]');
+        const searchString = searchBar.value;
+        handleSearch(searchString);
+    }
+    const searchButton = document.querySelector('input[name="search_submit"]');
+    searchButton.addEventListener("click", searchButtonClickHandler);
+    searchHandler();
+}
+
 // ================================================
 // BOOK HANDLER LOCAL STORAGE
 // ================================================
@@ -1095,12 +1176,23 @@ function GeneralLocalStorageHandler() {
         writeBookDataExec();
     }
 
+    function deleteBook(book_id) {
+        var jsonDataString = loadDataFromStorage();
+        const index = jsonDataString.main.findIndex(item => item.id === book_id);
+        if (index !== -1) {
+            jsonDataString.main.splice(index, 1);
+            saveDataToStorage(jsonDataString);
+        }
+        writeBookDataExec();
+    }
+
     GeneralLocalStorageHandler.loadDataFromStorage = loadDataFromStorage;
     GeneralLocalStorageHandler.putToBookshelf = putToBookshelf;
     GeneralLocalStorageHandler.saveDataToStorage = saveDataToStorage;
     GeneralLocalStorageHandler.putToComplete = putToComplete;
     GeneralLocalStorageHandler.takeFromBookShelf = takeFromBookShelf;
     GeneralLocalStorageHandler.markAsUnread = markAsUnread;
+    GeneralLocalStorageHandler.deleteBook = deleteBook;
 }
 
 function GeneralButtonBookHandler() {
@@ -1205,10 +1297,36 @@ function GeneralButtonBookHandler() {
             console.log("parentElement markAsUnread kosong")
         }
     }
+    function buttonDeleteBook() {
+        var parentElements = document.querySelectorAll('.button-deleteBook');
+        if (parentElements.length > 0) {
+            parentElements.forEach(function (parentElement) {
+                parentElement.addEventListener('click', function (event) {
+                    if (parentElement.hasAttribute('data-id')) {
+                        var book_id = parseInt(this.getAttribute('data-id'));
+                        var confBox = new ConfirmBox(parentElement, {
+                            ok: function () {
+                                GeneralLocalStorageHandler.deleteBook(book_id);
+
+                            },
+                            cancel: function () {
+                            }
+                        });
+                        console.log("tombol deleteBook ditekan" + parentElement + " ID: " + book_id);
+                    } else {
+                        console.log("tombol selain deleteBook ditekan" + event.target.className)
+                    }
+                });
+            });
+        } else {
+            console.log("parentElement markAsUnread kosong")
+        }
+    }
     buttonPutToBookshelf();
     buttonPutToComplete();
     buttonTakeFromBookshelf();
     buttonMarkAsUnread();
+    buttonDeleteBook();
 }
 
 // ================================================
