@@ -1,0 +1,44 @@
+<div class="item" data-id="${item.id}">
+    <div><img src="${item.link_cover}" alt="cover"
+            onerror="this.onerror=null; this.src='assets/img/Default_cover_image.jpg'"></div>
+    <h3>${item.title}</h3>
+    <h5>${item.author}</h5>
+    <h5>${item.year}</h5>
+    <div>
+        <ul class="">
+            <li style="width: 33.3333%;" class="${class_of_tombol_eksekusi} tooltip confirm" data-id="${item.id}"
+                data-tooltip="${data_tooltip}" data-position="top"
+                data-question="${data_question} ${item.title} ${data_question2}">
+                <span><span role="img" aria-label="delete" tabindex="-1" class="">${tombol_eksekusi}</span></span>
+            </li>
+            <li style="width: 33.3333%;" class="${class_of_tombol_eksekusi} tooltip confirm" data-id="${item.id}"
+            data-tooltip="${data_tooltip}" data-position="top"
+            data-question="${data_question} ${item.title} ${data_question2}">
+                <span><span role="img" aria-label="retweet" tabindex="-1">
+                        <svg viewBox="0 0 1024 1024" focusable="false" data-icon="retweet" width="1em" height="1em"
+                            fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0011.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 00-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 00-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8 4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z">
+                            </path>
+                        </svg>
+                    </span></span>
+            </li>
+            <li style="width: 33.3333%;" data-tooltip="Hapus Buku Dari Database Pustabooks" data-position="top"
+                class="button-deleteBook tooltip confirm" data-id="${item.id}"
+                data-question="Apakah Anda yakin ingin menghapus buku ${item.title} dari database Pustabooks? Buku yang sudah dihapus tidak dapat dikembalikan kecuali anda menambahkannya ulang.">
+                <span><span role="img" aria-label="share-alt" tabindex="-1" class="">
+                        <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M6.30958 3.54424C7.06741 2.56989 8.23263 2 9.46699 2H20.9997C21.8359 2 22.6103 2.37473 23.1614 2.99465C23.709 3.61073 23.9997 4.42358 23.9997 5.25V18.75C23.9997 19.5764 23.709 20.3893 23.1614 21.0054C22.6103 21.6253 21.8359 22 20.9997 22H9.46699C8.23263 22 7.06741 21.4301 6.30958 20.4558L0.687897 13.2279C0.126171 12.5057 0.126169 11.4943 0.687897 10.7721L6.30958 3.54424ZM10.2498 7.04289C10.6403 6.65237 11.2734 6.65237 11.664 7.04289L14.4924 9.87132L17.3208 7.04289C17.7113 6.65237 18.3445 6.65237 18.735 7.04289L19.4421 7.75C19.8327 8.14052 19.8327 8.77369 19.4421 9.16421L16.6137 11.9926L19.4421 14.8211C19.8327 15.2116 19.8327 15.8448 19.4421 16.2353L18.735 16.9424C18.3445 17.3329 17.7113 17.3329 17.3208 16.9424L14.4924 14.114L11.664 16.9424C11.2734 17.3329 10.6403 17.3329 10.2498 16.9424L9.54265 16.2353C9.15212 15.8448 9.15212 15.2116 9.54265 14.8211L12.3711 11.9926L9.54265 9.16421C9.15212 8.77369 9.15212 8.14052 9.54265 7.75L10.2498 7.04289Z"
+                                    fill="#000000"></path>
+                            </g>
+                        </svg>
+                    </span></span>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -492,15 +492,23 @@ function convertDataToElement(data) {
     var button_tambahkan = `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 12H12M12 12H9M12 12V9M12 12V15M17 21H7C4.79086 21 3 19.2091 3 17V7C3 4.79086 4.79086 3 7 3H17C19.2091 3 21 4.79086 21 7V17C21 19.2091 19.2091 21 17 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
     var button_markAsRead = `<svg fill="#00000" width="1em" height="1em" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg"><path d="M960 1807.059c-467.125 0-847.059-379.934-847.059-847.059 0-467.125 379.934-847.059 847.059-847.059 467.125 0 847.059 379.934 847.059 847.059 0 467.125-379.934 847.059-847.059 847.059M960 0C430.645 0 0 430.645 0 960s430.645 960 960 960 960-430.645 960-960S1489.355 0 960 0M854.344 1157.975 583.059 886.69l-79.85 79.85 351.135 351.133L1454.4 717.617l-79.85-79.85-520.206 520.208Z" fill-rule="evenodd"/></svg>`
     var button_takeFromBookshelf = `<svg viewBox="64 64 896 896" focusable="false" data-icon="delete" width="1em" height="1em" fill="currentColor" aria-hidden="true"> <path d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"></path> </svg>`
+    var button_markAsUnread = `<svg width="1em" height="1em" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools --> <title>ic_fluent_book_formula_logical_24_filled</title> <desc>Created with Sketch.</desc> <g id="🔍-System-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="ic_fluent_book_formula_logical_24_filled" fill="#212121" fill-rule="nonzero"> <path d="M18,2 C19.3807,2 20.5,3.11929 20.5,4.5 L20.5,18.75 C20.5,19.1642 20.1642,19.5 19.75,19.5 L5.5,19.5 C5.5,20.0523 5.94772,20.5 6.5,20.5 L19.75,20.5 C20.1642,20.5 20.5,20.8358 20.5,21.25 C20.5,21.6642 20.1642,22 19.75,22 L6.5,22 C5.11929,22 4,20.8807 4,19.5 L4,4.5 C4,3.11929 5.11929,2 6.5,2 L18,2 Z M12.25,13.5 C11.6977,13.5 11.25,13.9477 11.25,14.5 C11.25,15.0523 11.6977,15.5 12.25,15.5 C12.8023,15.5 13.25,15.0523 13.25,14.5 C13.25,13.9477 12.8023,13.5 12.25,13.5 Z M12.513,5.7501 C11.1982,5.72727 10.3825,6.17582 9.92848,6.78906 C9.71565,7.07652 9.60973,7.36492 9.55665,7.58186 C9.52996,7.69092 9.51591,7.78477 9.50846,7.8559 C9.50473,7.89159 9.50262,7.92198 9.50144,7.94618 C9.50072,7.96084 9.50032,7.9755 9.50006,7.99017 L9.50018311,8.00733509 C9.50292969,8.0898523 9.546875,8.74999 10.25,8.74999 C10.6584,8.74999 10.9905,8.42363 10.9998,8.01752 L10.9998,8.01752 C11.0017,7.99908 11.0052,7.973 11.0137,7.93838 C11.0309,7.86797 11.0656,7.77404 11.134,7.68162 C11.2425,7.53509 11.5518,7.23364 12.487,7.24988 C13.0371,7.25943 13.4439,7.48604 13.6659,7.76153 C13.8789,8.02596 13.9483,8.35977 13.8036,8.72145 C13.6868,9.01346 13.4292,9.16137 12.8875,9.40049 L12.8875,9.40049 L12.8491,9.4174 C12.6276,9.51483 12.3134,9.65303 12.0633,9.85345 C11.752,10.1029 11.5,10.4769 11.5,11 L11.5,11 L11.5,11.7501 C11.5001,12.1643 11.8359,12.5 12.2501,12.5 C12.6643,12.4999 13.0001,12.1634 13,11.7492 L13,11.7492 L13,11.0251 C13.0813,10.9599 13.2147,10.8957 13.4932,10.7728 L13.4932,10.7728 L13.5442,10.7503 C14.0149,10.5437 14.8342,10.1839 15.1964,9.27853 C15.5517,8.3902 15.371,7.48704 14.834,6.82047 C14.3059,6.16497 13.4627,5.76659 12.513,5.7501 Z" id="🎨-Color"> </path> </g> </g> </g></svg>`
+    var button_middleDefault = `<svg viewBox="0 0 1024 1024" focusable="false" data-icon="retweet" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0011.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 00-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 00-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8 4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z"></path></svg>`
+    var button_history = `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5.01112 11.5747L6.29288 10.2929C6.68341 9.90236 7.31657 9.90236 7.7071 10.2929C8.09762 10.6834 8.09762 11.3166 7.7071 11.7071L4.7071 14.7071C4.51956 14.8946 4.26521 15 3.99999 15C3.73477 15 3.48042 14.8946 3.29288 14.7071L0.292884 11.7071C-0.0976406 11.3166 -0.0976406 10.6834 0.292884 10.2929C0.683408 9.90236 1.31657 9.90236 1.7071 10.2929L3.0081 11.5939C3.22117 6.25933 7.61317 2 13 2C18.5229 2 23 6.47715 23 12C23 17.5228 18.5229 22 13 22C9.85817 22 7.05429 20.5499 5.22263 18.2864C4.87522 17.8571 4.94163 17.2274 5.37096 16.88C5.80028 16.5326 6.42996 16.599 6.77737 17.0283C8.24562 18.8427 10.4873 20 13 20C17.4183 20 21 16.4183 21 12C21 7.58172 17.4183 4 13 4C8.72441 4 5.23221 7.35412 5.01112 11.5747ZM13 5C13.5523 5 14 5.44772 14 6V11.5858L16.7071 14.2929C17.0976 14.6834 17.0976 15.3166 16.7071 15.7071C16.3166 16.0976 15.6834 16.0976 15.2929 15.7071L12.2929 12.7071C12.1054 12.5196 12 12.2652 12 12V6C12 5.44772 12.4477 5 13 5Z" fill="#000000"></path> </g></svg>`
     switch (tabContent) {
         case 'Eksplor':
             var books = data.main;
             var title_tab = "Cari Buku Yang tersedia";
             var tombol_eksekusi = button_tambahkan;
+            var tombol_eksekusi2 = button_history;
             var class_of_tombol_eksekusi = "button-puttobookshelf";
-            var data_tooltip = "Tambahkan ke Rak Buku";
+            var class_of_tombol_eksekusi2 = "disabled";
+            var data_tooltip = "Tambahkan ke Rak Sedang dibaca";
+            var data_tooltip2 = "Masukkan ke Rak Riwayat&#13;&#10;(Untuk sementara fitur ini belum tersedia)";
             var data_question = "Apakah anda yakin ingin menambahkan buku ";
-            var data_question2 = " ke dalam Rak Buku?";
+            var data_question2 = " ke dalam Rak Buku Sedang Dibaca?";
+            var data_question3 = "Apakah anda yakin ingin menambahkan buku ";
+            var data_question4 = " ke dalam Rak Riwayat?";
             break;
         case 'Sedang dibaca':
             var books = data.main.filter(function (book) {
@@ -508,21 +516,31 @@ function convertDataToElement(data) {
             });
             var title_tab = "Buku Yang Sedang Dibaca";
             var tombol_eksekusi = button_markAsRead;
+            var tombol_eksekusi2 = button_middleDefault;
             var class_of_tombol_eksekusi = "button-putToComplete"
             var data_tooltip = "Tandai Sudah Selesai Dibaca";
             var data_question = "Apakah anda yakin ingin menandai buku ";
             var data_question2 = " sudah selesai dibaca?";
+            var class_of_tombol_eksekusi2 = "button-takeFromBookshelf";
+            var data_tooltip2 = "Kembalikan buku ke Rak Eksplor";
+            var data_question3 = " Apakah anda yakin ingin membatalkan buku ";
+            var data_question4 = " dari rak buku Sedang dibaca?<br><br>Setelah ini buku akan kembali ke dalam rak <strong>Eksplor</strong>";
             break;
         case 'Selesai dibaca':
             var books = data.main.filter(function (book) {
                 return book.isComplete === true && book.isInBookshelf === true;
             });
             var title_tab = "Buku Yang Selesai Dibaca";
-            var tombol_eksekusi = button_takeFromBookshelf;
+            var tombol_eksekusi = button_history;
+            var tombol_eksekusi2 = button_markAsUnread;
             var class_of_tombol_eksekusi = "button-takeFromBookshelf"
-            var data_tooltip = "Hapus dari Rak Buku";
+            var data_tooltip = "Masukkan buku ke rak Riwayat";
             var data_question = "Apakah anda yakin ingin menghapus buku ";
-            var data_question2 = " dari Rak Buku?";
+            var data_question2 = " dari Rak Buku Selesai dibaca?<br><br>Setelah ini buku akan masuk ke dalam rak <strong>Riwayat</strong>";
+            var class_of_tombol_eksekusi2 = "button-markAsUnread";
+            var data_tooltip2 = "Tandai Buku belum selesai dibaca";
+            var data_question3 = " Apakah anda yakin menandai buku ";
+            var data_question4 = " belum selesai dibaca?<br><br>Setelah ini buku akan kembali ke dalam rak <strong>Sedang Dibaca</strong>";
             break;
         case 'Riwayat':
             var books = data.main.filter(function (book) {
@@ -530,10 +548,15 @@ function convertDataToElement(data) {
             });
             var title_tab = "Riwayat Buku Yang DIbaca";
             var tombol_eksekusi = button_takeFromBookshelf;
+            var tombol_eksekusi2 = button_markAsRead;
             var class_of_tombol_eksekusi = "button-markAsUnread"
             var data_tooltip = "Hapus dari daftar Riwayat";
             var data_question = "Apakah anda yakin ingin menghapus buku ";
             var data_question2 = " dari daftar riwayat?";
+            var class_of_tombol_eksekusi2 = "button-puttobookshelf";
+            var data_tooltip2 = "Kembalikan buku ke rak Selesai Dibaca";
+            var data_question3 = " Apakah anda yakin mengembalikan buku ";
+            var data_question4 = " pada rak selesai dibaca?<br><br>Setelah ini buku akan kembali ke dalam rak <strong>Selesai Dibaca</strong>";
             break;
         default:
             var books = data.main;
@@ -541,7 +564,7 @@ function convertDataToElement(data) {
             break;
     }
     books.forEach(function (item) {
-        var element_book = `<div class=item data-id=${item.id}><div><img alt=cover onerror='this.onerror=null,this.src="assets/img/Default_cover_image.jpg"'src=${item.link_cover}></div><h3>${item.title}</h3><h5>${item.author}</h5><h5>${item.year}</h5><div><ul><li style=width:33.3333% class="confirm tooltip ${class_of_tombol_eksekusi}"data-id=${item.id} data-position=top data-question="${data_question} ${item.title} ${data_question2}" data-tooltip="${data_tooltip}"><span><span aria-label=delete role=img tabindex=-1>${tombol_eksekusi}</span></span><li style=width:33.3333%><span><span aria-label=retweet role=img tabindex=-1><svg fill=currentColor height=1em viewBox="0 0 1024 1024"width=1em aria-hidden=true data-icon=retweet focusable=false><path d="M136 552h63.6c4.4 0 8-3.6 8-8V288.7h528.6v72.6c0 1.9.6 3.7 1.8 5.2a8.3 8.3 0 0011.7 1.4L893 255.4c4.3-5 3.6-10.3 0-13.2L749.7 129.8a8.22 8.22 0 00-5.2-1.8c-4.6 0-8.4 3.8-8.4 8.4V209H199.7c-39.5 0-71.7 32.2-71.7 71.8V544c0 4.4 3.6 8 8 8zm752-80h-63.6c-4.4 0-8 3.6-8 8v255.3H287.8v-72.6c0-1.9-.6-3.7-1.8-5.2a8.3 8.3 0 00-11.7-1.4L131 768.6c-4.3 5-3.6 10.3 0 13.2l143.3 112.4c1.5 1.2 3.3 1.8 5.2 1.8 4.6 0 8.4-3.8 8.4-8.4V815h536.6c39.5 0 71.7-32.2 71.7-71.8V480c-.2-4.4-3.8-8-8.2-8z"></path></svg></span></span><li style=width:33.3333% class="confirm tooltip button-deleteBook"data-id=${item.id} data-position=top data-question="Apakah Anda yakin ingin menghapus buku ${item.title} dari database Pustabooks? Buku yang sudah dihapus tidak dapat dikembalikan kecuali anda menambahkannya ulang."data-tooltip="Hapus Buku Dari Database Pustabooks"><span><span aria-label=share-alt role=img tabindex=-1><svg fill=none height=1em viewBox="0 0 24 24"width=1em xmlns=http://www.w3.org/2000/svg><g id=SVGRepo_bgCarrier stroke-width=0></g><g id=SVGRepo_tracerCarrier stroke-linecap=round stroke-linejoin=round></g><g id=SVGRepo_iconCarrier><path d="M6.30958 3.54424C7.06741 2.56989 8.23263 2 9.46699 2H20.9997C21.8359 2 22.6103 2.37473 23.1614 2.99465C23.709 3.61073 23.9997 4.42358 23.9997 5.25V18.75C23.9997 19.5764 23.709 20.3893 23.1614 21.0054C22.6103 21.6253 21.8359 22 20.9997 22H9.46699C8.23263 22 7.06741 21.4301 6.30958 20.4558L0.687897 13.2279C0.126171 12.5057 0.126169 11.4943 0.687897 10.7721L6.30958 3.54424ZM10.2498 7.04289C10.6403 6.65237 11.2734 6.65237 11.664 7.04289L14.4924 9.87132L17.3208 7.04289C17.7113 6.65237 18.3445 6.65237 18.735 7.04289L19.4421 7.75C19.8327 8.14052 19.8327 8.77369 19.4421 9.16421L16.6137 11.9926L19.4421 14.8211C19.8327 15.2116 19.8327 15.8448 19.4421 16.2353L18.735 16.9424C18.3445 17.3329 17.7113 17.3329 17.3208 16.9424L14.4924 14.114L11.664 16.9424C11.2734 17.3329 10.6403 17.3329 10.2498 16.9424L9.54265 16.2353C9.15212 15.8448 9.15212 15.2116 9.54265 14.8211L12.3711 11.9926L9.54265 9.16421C9.15212 8.77369 9.15212 8.14052 9.54265 7.75L10.2498 7.04289Z"clip-rule=evenodd fill=#000000 fill-rule=evenodd></path></g></svg></span></span></ul></div></div>`;
+        var element_book = ` <div class="item" data-id="${item.id}"> <div><img src="${item.link_cover}" alt="cover" onerror="this.onerror=null; this.src='assets/img/Default_cover_image.jpg'"></div> <h3>${item.title}</h3> <h5>${item.author}</h5> <h5>${item.year}</h5> <div> <ul class=""> <li style="width: 33.3333%;" class="${class_of_tombol_eksekusi} tooltip confirm" data-id="${item.id}" data-tooltip="${data_tooltip}" data-position="top" data-question="${data_question} ${item.title} ${data_question2}"> <span><span role="img" aria-label="delete" tabindex="-1" class="">${tombol_eksekusi}</span></span> </li> <li style="width: 33.3333%;" class="${class_of_tombol_eksekusi2} tooltip confirm" data-id="${item.id}" data-tooltip="${data_tooltip2}" data-position="top" data-question="${data_question3} ${item.title} ${data_question4}"> <span><span role="img" aria-label="retweet" tabindex="-1">${tombol_eksekusi2}</span></span> </li> <li style="width: 33.3333%;" data-tooltip="Hapus Buku Dari Database Pustabooks" data-position="top" class="button-deleteBook tooltip confirm" data-id="${item.id}" data-question="Apakah Anda yakin ingin menghapus buku ${item.title} dari database Pustabooks? Buku yang sudah dihapus tidak dapat dikembalikan kecuali anda menambahkannya ulang."> <span><span role="img" aria-label="share-alt" tabindex="-1" class=""> <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" xmlns="http://www.w3.org/2000/svg"> <g id="SVGRepo_bgCarrier" stroke-width="0"></g> <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g> <g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M6.30958 3.54424C7.06741 2.56989 8.23263 2 9.46699 2H20.9997C21.8359 2 22.6103 2.37473 23.1614 2.99465C23.709 3.61073 23.9997 4.42358 23.9997 5.25V18.75C23.9997 19.5764 23.709 20.3893 23.1614 21.0054C22.6103 21.6253 21.8359 22 20.9997 22H9.46699C8.23263 22 7.06741 21.4301 6.30958 20.4558L0.687897 13.2279C0.126171 12.5057 0.126169 11.4943 0.687897 10.7721L6.30958 3.54424ZM10.2498 7.04289C10.6403 6.65237 11.2734 6.65237 11.664 7.04289L14.4924 9.87132L17.3208 7.04289C17.7113 6.65237 18.3445 6.65237 18.735 7.04289L19.4421 7.75C19.8327 8.14052 19.8327 8.77369 19.4421 9.16421L16.6137 11.9926L19.4421 14.8211C19.8327 15.2116 19.8327 15.8448 19.4421 16.2353L18.735 16.9424C18.3445 17.3329 17.7113 17.3329 17.3208 16.9424L14.4924 14.114L11.664 16.9424C11.2734 17.3329 10.6403 17.3329 10.2498 16.9424L9.54265 16.2353C9.15212 15.8448 9.15212 15.2116 9.54265 14.8211L12.3711 11.9926L9.54265 9.16421C9.15212 8.77369 9.15212 8.14052 9.54265 7.75L10.2498 7.04289Z" fill="#000000"></path> </g> </svg> </span></span> </li> </ul> </div></div> `;
         element_books += element_book;
     });
     var obj = { title_tab: title_tab, element_books: element_books };
@@ -686,8 +709,6 @@ function GeneralLocalStorageHandler() {
         if (book && book.isInBookshelf === false) {
             book.isInBookshelf = true;
             saveDataToStorage(jsonDataString);
-        } else {
-            console.error('Buku dengan ID ' + book_id + ' tidak ditemukan.');
         }
         writeBookDataExec();
     }
@@ -699,8 +720,6 @@ function GeneralLocalStorageHandler() {
         if (book && book.isComplete === false) {
             book.isComplete = true;
             saveDataToStorage(jsonDataString);
-        } else {
-            console.error('Buku dengan ID ' + book_id + ' tidak ditemukan.');
         }
         writeBookDataExec();
     }
@@ -712,8 +731,6 @@ function GeneralLocalStorageHandler() {
         if (book && book.isInBookshelf === true) {
             book.isInBookshelf = false;
             saveDataToStorage(jsonDataString);
-        } else {
-            console.error('Buku dengan ID ' + book_id + ' tidak ditemukan.');
         }
         writeBookDataExec();
     }
@@ -725,8 +742,6 @@ function GeneralLocalStorageHandler() {
         if (book && book.isComplete === true) {
             book.isComplete = false;
             saveDataToStorage(jsonDataString);
-        } else {
-            console.error('Buku dengan ID ' + book_id + ' tidak ditemukan.');
         }
         writeBookDataExec();
     }
